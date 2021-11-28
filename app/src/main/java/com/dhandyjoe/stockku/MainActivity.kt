@@ -5,10 +5,11 @@ import android.os.Bundle
 import com.dhandyjoe.stockku.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private var binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

@@ -8,10 +8,11 @@ import android.os.Looper
 import com.dhandyjoe.stockku.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
-    private var binding: ActivitySplashBinding = ActivitySplashBinding.inflate(layoutInflater)
+    private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val handler = Looper.myLooper()?.let { Handler(it) }
