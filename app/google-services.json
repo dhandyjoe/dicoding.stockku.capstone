@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "450186089048",
+    "project_id": "capstone-dicoding-stocku",
+    "storage_bucket": "capstone-dicoding-stocku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450186089048:android:009ff34f208d60afa4302d",
+        "android_client_info": {
+          "package_name": "com.dhandyjoe.stockku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450186089048-67tr1a1hpase8mf5eo1l3endoqqad2qe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dhandyjoe.stockku",
+            "certificate_hash": "575e2871abd0c697b7acfac7c701658a100c016c"
+          }
+        },
+        {
+          "client_id": "450186089048-53thb8fj8e6jj2tsot22d2n2eh948tnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQOGrCA-d1aZrMPuFzVXGpBJ2C57VBIjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450186089048-53thb8fj8e6jj2tsot22d2n2eh948tnk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
