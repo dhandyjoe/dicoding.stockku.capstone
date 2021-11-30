@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Stockku">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.AddItemActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
