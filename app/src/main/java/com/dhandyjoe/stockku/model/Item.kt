@@ -1,9 +1,9 @@
 package com.dhandyjoe.stockku.model
 
-data class Item (
+data class Item(
     val id: String,
     val name: String,
-    val size: Int,
-    val price: Int,
+    val size: String,
+    val price: String,
     val stock: Int
 )

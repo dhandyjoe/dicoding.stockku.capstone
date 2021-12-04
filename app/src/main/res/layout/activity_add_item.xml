@@ -84,6 +84,7 @@
             android:id="@+id/et_stock_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Stok barang"
             tools:layout_editor_absoluteX="11dp"
             tools:layout_editor_absoluteY="301dp" />
@@ -106,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Harga barang"
+            android:inputType="number"
             tools:layout_editor_absoluteX="11dp"
             tools:layout_editor_absoluteY="301dp" />
 
