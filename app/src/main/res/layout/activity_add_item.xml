@@ -62,6 +62,7 @@
             android:id="@+id/et_size_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Ukuran"
             tools:layout_editor_absoluteX="11dp"
             tools:layout_editor_absoluteY="301dp" />

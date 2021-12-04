@@ -11,7 +11,6 @@ import com.google.type.DateTime
 
 class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
-    private var firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseDB = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +19,6 @@ class AddItemActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSave.setOnClickListener { saveItem() }
-
     }
 
     fun saveItem() {

@@ -32,10 +32,10 @@
 
             <TextView
                 android:id="@+id/tv_size"
-                android:layout_below="@id/tv_name_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ukuran : "/>
+                android:layout_below="@id/tv_name_item"
+                android:text="Ukuran : " />
 
             <TextView
                 android:id="@+id/tv_size_item"
@@ -47,11 +47,11 @@
 
             <TextView
                 android:id="@+id/tv_stock"
-                android:layout_below="@id/tv_size_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_size_item"
                 android:layout_marginTop="10dp"
-                android:text="Stok : "/>
+                android:text="Stok : " />
 
             <TextView
                 android:id="@+id/tv_stock_item"
@@ -64,12 +64,12 @@
 
             <TextView
                 android:id="@+id/tv_price_item"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20000"/>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="20000"
+                android:textSize="20sp" />
 
 
         </RelativeLayout>
