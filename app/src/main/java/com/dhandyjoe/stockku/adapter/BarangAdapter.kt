@@ -18,7 +18,7 @@ class BarangAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<Rec
 
         if (holder is MyViewHolder) {
             holder.binding.tvNameItem.text = model.name
-            holder.binding.tvSize.text = model.size
+            holder.binding.tvSizeItem.text = model.size
             holder.binding.tvStockItem.text = model.stock.toString()
             holder.binding.tvPriceItem.text = model.price
             holder.itemView.setOnClickListener {

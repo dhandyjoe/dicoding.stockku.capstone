@@ -43,6 +43,15 @@ class MainActivity : AppCompatActivity() {
             binding.rvListItem.layoutManager = LinearLayoutManager(this)
             val data = BarangAdapter(user)
             binding.rvListItem.adapter = data
+
+            data.setOnItemClickCallback(object : BarangAdapter.OnItemClickCallback{
+                override fun onItemClicked(data: Item) {
+                    val intent = Intent(this@MainActivity, EditItemActivity::class.java)
+                    intent.putExtra(EditItemActivity.EXTRA_BARANG, data)
+                    startActivity(intent)
+                }
+            })
+
             binding.rvListItem.visibility = View.VISIBLE
         }
     }
