@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +24,10 @@ class EditItemActivity : AppCompatActivity() {
         binding.etEditPriceItem.setText(data?.price)
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)
+        }
+
+        binding.btnDelete.setOnClickListener {
+            deleteItem(data!!)
         }
     }
 
@@ -62,6 +67,19 @@ class EditItemActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Toast.makeText(this, "Update Failed", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    fun deleteItem(item: Item) {
+        AlertDialog.Builder(this)
+            .setTitle("Hapus barang")
+            .setMessage("Ini akan menghapus barang anda. Apakah anda yakin?")
+            .setPositiveButton("Ya") { dialog, which ->
+                Toast.makeText(this, "Barang dihapus", Toast.LENGTH_SHORT).show()
+                firebaseDB.collection("barang").document(item.id).delete()
+                onBackPressed()
+            }
+            .setNegativeButton("Tidak") {dialog, which -> }
+            .show()
     }
 
     companion object {
