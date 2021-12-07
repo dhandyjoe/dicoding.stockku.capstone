@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Stockku">
         <activity
+            android:name=".activity.TransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.EditItemActivity"
             android:exported="false" />
         <activity

@@ -3,14 +3,14 @@ package com.dhandyjoe.stockku.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dhandyjoe.stockku.databinding.ItemListBinding
+import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Item
 
-class BarangAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    class MyViewHolder(val binding: ItemListBinding): RecyclerView.ViewHolder(binding.root)
+class StockAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    class MyViewHolder(val binding: ItemListStockBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return MyViewHolder(ItemListStockBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
