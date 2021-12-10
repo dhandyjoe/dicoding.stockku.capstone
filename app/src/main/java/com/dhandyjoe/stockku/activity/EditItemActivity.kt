@@ -21,7 +21,7 @@ class EditItemActivity : AppCompatActivity() {
 
         binding.etEditNameItem.setText(data?.name)
         binding.etEditSizeItem.setText(data?.size)
-        binding.etEditPriceItem.setText(data?.price)
+        binding.etEditPriceItem.setText(data!!.price)
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)
         }

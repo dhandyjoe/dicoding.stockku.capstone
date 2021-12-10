@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.dhandyjoe.stockku.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -31,10 +32,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signInEmail(email: String, password: String) {
+        binding.pbLogin.visibility = View.VISIBLE
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+                    binding.pbLogin.visibility = View.GONE
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
