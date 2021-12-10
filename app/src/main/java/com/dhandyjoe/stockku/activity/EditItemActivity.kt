@@ -54,8 +54,8 @@ class EditItemActivity : AppCompatActivity() {
 
         val map = HashMap<String, Any>()
         map["name"] = nameItem
-        map["size"] = sizeItem
         map["price"] = priceItem
+        map["size"] = sizeItem
 
         firebaseDB.collection("barang")
             .document(item.id)

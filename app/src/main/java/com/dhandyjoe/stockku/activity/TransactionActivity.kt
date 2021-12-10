@@ -22,7 +22,6 @@ class TransactionActivity : AppCompatActivity() {
 
         getBarangList()
 
-        binding
     }
 
     fun getBarangList() {

@@ -17,6 +17,14 @@
         app:layout_constraintTop_toTopOf="parent" >
 
         <ImageView
+            android:id="@+id/fab_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logout"
+            android:layout_gravity="right"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageView
             android:id="@+id/fab_addItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

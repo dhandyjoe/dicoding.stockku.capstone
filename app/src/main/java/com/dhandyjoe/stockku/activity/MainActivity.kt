@@ -1,17 +1,23 @@
 package com.dhandyjoe.stockku.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.StockAdapter
 import com.dhandyjoe.stockku.databinding.ActivityMainBinding
 import com.dhandyjoe.stockku.model.Item
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val userUid = FirebaseAuth.getInstance().currentUser?.uid
     private val firebaseDB = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +25,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (userUid == "b2Nqs4mPXJUqimRmpSpFAiw0GXG3") {
+            binding.fabAddItem.visibility = View.GONE
+        }
+
         binding.toolbarMain.title = "Stock item"
 
         binding.fabAddItem.setOnClickListener {
             val intent = Intent(this, AddItemActivity::class.java)
             startActivity(intent);
+        }
+
+        binding.fabLogout.setOnClickListener {
+            showAlertLogout()
         }
 
         binding.favAddTransaction.setOnClickListener {
@@ -62,5 +76,21 @@ class MainActivity : AppCompatActivity() {
                 binding.rvListItem.visibility = View.GONE
             }
         }
+    }
+
+    private fun showAlertLogout() {
+        val alert = AlertDialog.Builder(this)
+        alert.setTitle("Logout")
+        alert.setMessage("Apakah anda yakin ingin keluar?")
+        alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+            auth.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        })
+
+        alert.setNegativeButton("No") { dialog, which ->
+
+        }
+        alert.show()
     }
 }

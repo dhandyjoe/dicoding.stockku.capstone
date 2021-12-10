@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.dhandyjoe.stockku.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -38,6 +39,9 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
             }
     }
 }
