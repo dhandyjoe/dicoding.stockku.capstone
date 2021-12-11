@@ -51,17 +51,9 @@ class TransactionActivity : AppCompatActivity() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.tvStatusNoData.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
-        val data = StockAdapter(data)
+        val data = TransactionAdapter(data)
         binding.rvTransactionItem.adapter = data
         binding.rvTransactionItem.visibility = View.VISIBLE
-
-        data.setOnItemClickCallback(object : StockAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: Item) {
-                val intent = Intent(this@TransactionActivity, EditItemActivity::class.java)
-                intent.putExtra(EditItemActivity.EXTRA_BARANG, data)
-                startActivity(intent)
-            }
-        })
     }
 
     private fun searchItem(data: ArrayList<Item>) {
@@ -69,7 +61,7 @@ class TransactionActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()
                 data.forEach {
-                    if (it.name.toLowerCase().contains(query!!.toLowerCase())) {
+                    if (it.name.lowercase().contains(query!!.lowercase())) {
                         listItemSearch.add(it)
                         showRecycleView(listItemSearch)
                     }
@@ -80,7 +72,7 @@ class TransactionActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 listItemSearch.clear()
                 data.forEach {
-                    if (it.name.toLowerCase().contains(newText!!.toLowerCase())) {
+                    if (it.name.lowercase().contains(newText!!.lowercase())) {
                         listItemSearch!!.add(it)
                         showRecycleView(listItemSearch)
                     }

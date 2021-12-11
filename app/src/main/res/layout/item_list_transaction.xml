@@ -71,7 +71,7 @@
                 app:tint="@color/black"/>
 
             <TextView
-                android:id="@+id/tv_indicatorItme"
+                android:id="@+id/tv_indicatorItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="0"
