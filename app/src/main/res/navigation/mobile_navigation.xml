@@ -9,17 +9,17 @@
         android:id="@+id/navigation_transaction"
         android:name="com.dhandyjoe.stockku.fragment.HomeFragment"
         android:label="@string/title_transaction"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_transaction" />
 
     <fragment
         android:id="@+id/navigation_item"
         android:name="com.dhandyjoe.stockku.fragment.DashboardFragment"
         android:label= "@string/title_item"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_item" />
 
     <fragment
-        android:id="@+id/navigation_user"
+        android:id="@+id/navigation_profile"
         android:name="com.dhandyjoe.stockku.fragment.FragmentNotification"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

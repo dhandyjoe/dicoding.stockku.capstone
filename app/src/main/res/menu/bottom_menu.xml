@@ -10,7 +10,7 @@
         android:icon="@drawable/boxes"
         android:title="@string/title_item" />
     <item
-        android:id="@+id/navigation_user"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/profile_user"
         android:title="@string/title_profile" />
 

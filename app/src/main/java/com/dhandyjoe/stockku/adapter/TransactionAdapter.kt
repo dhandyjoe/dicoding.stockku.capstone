@@ -23,21 +23,21 @@ class TransactionAdapter(private val data: ArrayList<Item>): RecyclerView.Adapte
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvPriceItem.text = model.price
-            holder.binding.tvIndicatorItem.text = totalItem.totalItem.toString()
-
-            holder.binding.ivMinus.setOnClickListener {
-                if (totalItem.totalItem > 0) {
-                    totalItem.totalItem--
-                    holder.binding.tvIndicatorItem.text = totalItem.totalItem.toString()
-                }
-            }
-
-            holder.binding.ivPlus.setOnClickListener {
-                totalItem.totalItem++
-                holder.binding.tvIndicatorItem.text = totalItem.totalItem.toString()
+            holder.itemView.setOnClickListener {
+                onItemClickCallback.onItemClicked(data[holder.adapterPosition])
             }
         }
     }
 
     override fun getItemCount(): Int = data.size
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Item)
+    }
 }
