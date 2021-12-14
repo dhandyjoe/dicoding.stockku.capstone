@@ -15,7 +15,7 @@
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.TransactionActivity"
+            android:name=".activity.AddItemTransactionActivity"
             android:exported="false" />
         <activity
             android:name=".activity.EditItemActivity"

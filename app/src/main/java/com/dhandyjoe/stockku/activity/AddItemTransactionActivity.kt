@@ -6,23 +6,22 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.adapter.StockAdapter
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
-import com.dhandyjoe.stockku.databinding.ActivityTransactionBinding
+import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FirebaseFirestore
 
-class TransactionActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityTransactionBinding
+class AddItemTransactionActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddItemTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val listItemSearch = ArrayList<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTransactionBinding.inflate(layoutInflater)
+        binding = ActivityAddItemTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbarMain.title = "Transaksi"
+        binding.toolbarMain.title = "Pilih item"
 
         getBarangList()
 
@@ -54,6 +53,14 @@ class TransactionActivity : AppCompatActivity() {
         val data = TransactionAdapter(data)
         binding.rvTransactionItem.adapter = data
         binding.rvTransactionItem.visibility = View.VISIBLE
+
+        data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Item) {
+                val intent = Intent(this@AddItemTransactionActivity, CartActivity::class.java)
+                intent.putExtra(CartActivity.EXTRA_ITEM, data)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun searchItem(data: ArrayList<Item>) {
