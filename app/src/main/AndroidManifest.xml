@@ -15,10 +15,6 @@
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.PrimaryActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Stockku2" />
-        <activity
             android:name=".activity.TransactionActivity"
             android:exported="false" />
         <activity
@@ -32,7 +28,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Stockku2"/>
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">

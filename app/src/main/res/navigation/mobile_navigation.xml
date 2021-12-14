@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_transaction"
-        android:name="com.dhandyjoe.stockku.fragment.HomeFragment"
+        android:name="com.dhandyjoe.stockku.fragment.ListTransactionFragment"
         android:label="@string/title_transaction"
-        tools:layout="@layout/fragment_transaction" />
+        tools:layout="@layout/fragment_list_transaction" />
 
     <fragment
         android:id="@+id/navigation_item"

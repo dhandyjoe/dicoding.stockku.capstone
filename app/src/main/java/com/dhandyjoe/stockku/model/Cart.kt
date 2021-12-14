@@ -1,6 +1,5 @@
 package com.dhandyjoe.stockku.model
 
-data class Order (
+data class Cart (
     var id: String = "",
-    var totalItem: Int = 0
 )

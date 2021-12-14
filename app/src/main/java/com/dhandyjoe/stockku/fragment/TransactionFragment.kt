@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.ActivityTransactionBinding
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
+import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
+import com.google.android.gms.common.util.ArrayUtils
 import com.google.firebase.firestore.FirebaseFirestore
 
 private const val ARG_PARAM1 = "param1"
@@ -75,7 +78,6 @@ class HomeFragment : Fragment() {
             override fun onItemClicked(data: Item) {
 
             }
-
         })
     }
 
@@ -104,4 +106,31 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
+//    fun addCart() {
+//        var cartItem = firebaseDB.collection("transaksi").document()
+//
+//        val cart = Cart(cartItem.id)
+//
+//        cartItem.set(cart)
+//            .addOnSuccessListener {
+//                Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(context, "gagal", Toast.LENGTH_SHORT).show()
+//            }
+//    }
+//
+//    fun getCart() {
+//        var doc = firebaseDB.collection("transaksi")
+//        doc.addSnapshotListener { snapshot, _ ->
+//            val user = ArrayList<Item>()
+//
+//            for(docItem in snapshot!!) {
+//                user.add(docItem.toObject(Item::class.java))
+//            }
+//
+//            binding.totalCartItem.text = user.size.toString()
+//        }
+//    }
 }

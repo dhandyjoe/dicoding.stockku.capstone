@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListTransactionBinding
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.model.Order
+import com.dhandyjoe.stockku.model.Cart
 
 class TransactionAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListTransactionBinding): RecyclerView.ViewHolder(binding.root)
@@ -16,7 +16,7 @@ class TransactionAdapter(private val data: ArrayList<Item>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = data[position]
-        val totalItem = Order()
+        val totalItem = Cart()
 
         if (holder is MyViewHolder) {
             totalItem.id = model.id
