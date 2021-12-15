@@ -28,8 +28,6 @@ class AddItemTransactionActivity : AppCompatActivity() {
         binding.toolbarMain.title = "Pilih item"
 
         getBarangList()
-
-        binding.debug.text = viewModel.data.size.toString()
     }
 
     fun getBarangList() {
@@ -64,9 +62,10 @@ class AddItemTransactionActivity : AppCompatActivity() {
 //                viewModel.addItem(data)
 //                binding.debug.text = viewModel.data.size.toString()
 
-                val intent = Intent(this@AddItemTransactionActivity, CartActivity::class.java)
-                intent.putExtra(CartActivity.EXTRA_ITEM, data)
-                startActivity(intent)
+                val resultIntent = Intent()
+                resultIntent.putExtra(EXTRA_SELECTED_VALUE, data)
+                setResult(RESULT_CODE, resultIntent)
+                finish()
             }
         })
     }
@@ -95,5 +94,10 @@ class AddItemTransactionActivity : AppCompatActivity() {
                 return false
             }
         })
+    }
+
+    companion object {
+        const val EXTRA_SELECTED_VALUE = "extra_selected_value"
+        const val RESULT_CODE = 110
     }
 }
