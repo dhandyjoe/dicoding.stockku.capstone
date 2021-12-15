@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +47,10 @@ class CartActivity : AppCompatActivity() {
         binding.favAddItemTransaction.setOnClickListener {
             val moveForResultIntent = Intent(this, AddItemTransactionActivity::class.java)
             resultLauncher.launch(moveForResultIntent)
+        }
+
+        binding.button2.setOnClickListener {
+            Toast.makeText(this, "size: ${listItemCart.size}", Toast.LENGTH_SHORT).show()
         }
     }
 
