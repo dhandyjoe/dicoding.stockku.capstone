@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
+import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.ui.CartViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val listItemSearch = ArrayList<Item>()
+    private val viewModel: CartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
 
         getBarangList()
 
+        binding.debug.text = viewModel.data.size.toString()
     }
 
     fun getBarangList() {
@@ -56,6 +61,9 @@ class AddItemTransactionActivity : AppCompatActivity() {
 
         data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Item) {
+//                viewModel.addItem(data)
+//                binding.debug.text = viewModel.data.size.toString()
+
                 val intent = Intent(this@AddItemTransactionActivity, CartActivity::class.java)
                 intent.putExtra(CartActivity.EXTRA_ITEM, data)
                 startActivity(intent)
