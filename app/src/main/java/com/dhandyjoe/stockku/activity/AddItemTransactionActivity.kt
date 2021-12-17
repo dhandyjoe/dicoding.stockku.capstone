@@ -38,7 +38,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
             if (user.size > 0) {
                 showRecycleView(user)
             } else {
-                binding.tvStatusNoData.visibility = View.VISIBLE
+                binding.animationView.visibility = View.VISIBLE
                 binding.rvTransactionItem.visibility = View.GONE
             }
 
@@ -47,7 +47,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
     }
 
     private fun showRecycleView(data: ArrayList<Item>) {
-        binding.tvStatusNoData.visibility = View.GONE
+        binding.animationView.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
         val data = ItemAdapter(data)
         binding.rvTransactionItem.adapter = data
@@ -74,6 +74,9 @@ class AddItemTransactionActivity : AppCompatActivity() {
                     if (it.name.lowercase().contains(query!!.lowercase())) {
                         listItemSearch.add(it)
                         showRecycleView(listItemSearch)
+                    } else {
+                        showRecycleView(listItemSearch)
+                        binding.animationView.visibility = View.VISIBLE
                     }
                 }
                 return false
@@ -85,6 +88,9 @@ class AddItemTransactionActivity : AppCompatActivity() {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
                         listItemSearch!!.add(it)
                         showRecycleView(listItemSearch)
+                    } else {
+                        showRecycleView(listItemSearch)
+                        binding.animationView.visibility = View.VISIBLE
                     }
                 }
                 return false
