@@ -1,6 +1,5 @@
 package com.dhandyjoe.stockku.fragment
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.activity.AddItemActivity
 import com.dhandyjoe.stockku.activity.EditItemActivity
-import com.dhandyjoe.stockku.activity.LoginActivity
-import com.dhandyjoe.stockku.adapter.StockAdapter
+import com.dhandyjoe.stockku.adapter.ItemAdapter
 import com.dhandyjoe.stockku.databinding.FragmentItemBinding
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.auth.FirebaseAuth
@@ -81,11 +77,11 @@ class DashboardFragment : Fragment() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.tvStatusNoData.visibility = View.GONE
         binding.rvListItem.layoutManager = LinearLayoutManager(context)
-        val data = StockAdapter(data)
+        val data = ItemAdapter(data)
         binding.rvListItem.adapter = data
         binding.rvListItem.visibility = View.VISIBLE
 
-        data.setOnItemClickCallback(object : StockAdapter.OnItemClickCallback{
+        data.setOnItemClickCallback(object : ItemAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Item) {
                 val intent = Intent(activity, EditItemActivity::class.java)
                 intent.putExtra(EditItemActivity.EXTRA_BARANG, data)

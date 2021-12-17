@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import com.dhandyjoe.stockku.databinding.ActivitySplashBinding
 
-class SplashActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

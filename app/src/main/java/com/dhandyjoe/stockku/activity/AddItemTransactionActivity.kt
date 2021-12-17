@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.adapter.StockAdapter
+import com.dhandyjoe.stockku.adapter.ItemAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FirebaseFirestore
@@ -50,11 +49,11 @@ class AddItemTransactionActivity : AppCompatActivity() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.tvStatusNoData.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
-        val data = StockAdapter(data)
+        val data = ItemAdapter(data)
         binding.rvTransactionItem.adapter = data
         binding.rvTransactionItem.visibility = View.VISIBLE
 
-        data.setOnItemClickCallback(object : StockAdapter.OnItemClickCallback{
+        data.setOnItemClickCallback(object : ItemAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Item) {
 //                viewModel.addItem(data)
 //                binding.debug.text = viewModel.data.size.toString()

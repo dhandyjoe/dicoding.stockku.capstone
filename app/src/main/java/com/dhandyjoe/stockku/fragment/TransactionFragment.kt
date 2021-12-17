@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.activity.CartActivity
+import com.dhandyjoe.stockku.activity.DetailCartActivity
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
 import com.dhandyjoe.stockku.model.Cart
@@ -77,12 +78,12 @@ class TransactionFragment : Fragment() {
         binding.rvListTransaction.adapter = data
         binding.rvListTransaction.visibility = View.VISIBLE
 
-//        data.setOnItemClickCallback(object : ListTransactionAdapter.OnItemClickCallback{
-//            override fun onItemClicked(data: Cart) {
-//                val intent = Intent(activity, EditItemActivity::class.java)
-//                startActivity(intent)
-//            }
-//        })
+        data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Cart) {
+                val intent = Intent(activity, DetailCartActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun searchItem(data: ArrayList<Cart>) {
