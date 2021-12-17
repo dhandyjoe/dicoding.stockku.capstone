@@ -2,6 +2,7 @@ package com.dhandyjoe.stockku.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
@@ -34,7 +35,6 @@ class CartAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<Recyc
                     holder.binding.tvIndicatorItem.text = statusIndicator.toString()
                 }
             }
-
         }
     }
 

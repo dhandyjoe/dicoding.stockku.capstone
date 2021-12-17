@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,11 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.adapter.StockAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
+import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.ui.CartViewModel
+import com.dhandyjoe.stockku.util.Database
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
+    private val database = Database()
+    private val firebaseDB = FirebaseFirestore.getInstance()
     private var listItemCart = ArrayList<Item>()
 
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -50,7 +56,8 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.button2.setOnClickListener {
-            Toast.makeText(this, "size: ${listItemCart.size}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Sukses: ${listItemCart.size}", Toast.LENGTH_SHORT).show()
+            saveTransaction(listItemCart)
         }
     }
 
@@ -58,5 +65,15 @@ class CartActivity : AppCompatActivity() {
         binding.rvListItemCart.layoutManager = LinearLayoutManager(this)
         val data = CartAdapter(data)
         binding.rvListItemCart.adapter = data
+    }
+
+    fun saveTransaction(dataitem: ArrayList<Item>) {
+        var docTransaction = firebaseDB.collection("transaksi").document()
+        val item = Cart(docTransaction.id, "transaksi1")
+        docTransaction.set(item)
+
+        for (i in dataitem.indices) {
+            database.saveItemTransaction(dataitem[i], docTransaction.id)
+        }
     }
 }
