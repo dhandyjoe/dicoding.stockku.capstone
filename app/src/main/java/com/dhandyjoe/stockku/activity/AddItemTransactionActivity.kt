@@ -7,18 +7,15 @@ import android.view.View
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.adapter.TransactionAdapter
+import com.dhandyjoe.stockku.adapter.StockAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
-import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.ui.CartViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val listItemSearch = ArrayList<Item>()
-    private val viewModel: CartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +50,11 @@ class AddItemTransactionActivity : AppCompatActivity() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.tvStatusNoData.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
-        val data = TransactionAdapter(data)
+        val data = StockAdapter(data)
         binding.rvTransactionItem.adapter = data
         binding.rvTransactionItem.visibility = View.VISIBLE
 
-        data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
+        data.setOnItemClickCallback(object : StockAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Item) {
 //                viewModel.addItem(data)
 //                binding.debug.text = viewModel.data.size.toString()

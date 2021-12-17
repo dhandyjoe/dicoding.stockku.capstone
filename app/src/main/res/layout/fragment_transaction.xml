@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listItem"
+        android:id="@+id/rv_listTransaction"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"

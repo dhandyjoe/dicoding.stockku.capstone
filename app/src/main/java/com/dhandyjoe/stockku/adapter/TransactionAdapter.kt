@@ -3,11 +3,12 @@ package com.dhandyjoe.stockku.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.databinding.ItemListTransactionBinding
-import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.model.Cart
+import com.dhandyjoe.stockku.model.Item
 
-class TransactionAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TransactionAdapter(private val data: ArrayList<Cart>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListTransactionBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -16,13 +17,9 @@ class TransactionAdapter(private val data: ArrayList<Item>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = data[position]
-        val totalItem = Cart()
 
         if (holder is MyViewHolder) {
-            totalItem.id = model.id
-            holder.binding.tvNameItem.text = model.name
-            holder.binding.tvSizeItem.text = model.size
-            holder.binding.tvPriceItem.text = model.price
+            holder.binding.tvNameTransaction.text = model.name
             holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data[holder.adapterPosition])
             }
@@ -38,6 +35,7 @@ class TransactionAdapter(private val data: ArrayList<Item>): RecyclerView.Adapte
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Item)
+        fun onItemClicked(data: Cart)
     }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.type.DateTime
@@ -12,6 +13,7 @@ import com.google.type.DateTime
 class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
+    private val database = Database()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,22 +24,11 @@ class AddItemActivity : AppCompatActivity() {
     }
 
     fun saveItem() {
-        var docBarang = firebaseDB.collection("barang").document()
-
         val nameItem = binding.etNameItem.text.toString()
         val sizeItem = binding.etSizeItem.text.toString()
         val priceItem = binding.etPriceItem.text.toString()
         val stockItem = binding.etStockItem.text.toString()
 
-        val item = Item(docBarang.id, nameItem, sizeItem, priceItem, Integer.parseInt(stockItem))
-
-        docBarang.set(item)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Sukses", Toast.LENGTH_SHORT).show()
-                onBackPressed()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
-            }
+        database.addItem(nameItem, sizeItem, priceItem, stockItem.toInt())
     }
 }

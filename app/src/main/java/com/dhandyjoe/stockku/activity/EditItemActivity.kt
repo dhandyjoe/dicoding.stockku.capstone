@@ -6,11 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.firestore.FirebaseFirestore
 
 class EditItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
     private var firebaseDB = FirebaseFirestore.getInstance()
+    private val database = Database()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +23,10 @@ class EditItemActivity : AppCompatActivity() {
 
         binding.etEditNameItem.setText(data?.name)
         binding.etEditSizeItem.setText(data?.size)
-        binding.etEditPriceItem.setText(data!!.price)
+        binding.etEditPriceItem.setText(data?.price)
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)
+            finish()
         }
 
         binding.btnDelete.setOnClickListener {
@@ -52,21 +55,7 @@ class EditItemActivity : AppCompatActivity() {
         val sizeItem = binding.etEditSizeItem.text.toString()
         val priceItem = binding.etEditPriceItem.text.toString()
 
-        val map = HashMap<String, Any>()
-        map["name"] = nameItem
-        map["price"] = priceItem
-        map["size"] = sizeItem
-
-        firebaseDB.collection("barang")
-            .document(item.id)
-            .update(map)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Update Succesful", Toast.LENGTH_SHORT).show()
-                onBackPressed()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Update Failed", Toast.LENGTH_SHORT).show()
-            }
+        database.editItem(item.id, nameItem, sizeItem, priceItem)
     }
 
     fun deleteItem(item: Item) {
@@ -75,8 +64,8 @@ class EditItemActivity : AppCompatActivity() {
             .setMessage("Ini akan menghapus barang anda. Apakah anda yakin?")
             .setPositiveButton("Ya") { dialog, which ->
                 Toast.makeText(this, "Barang dihapus", Toast.LENGTH_SHORT).show()
-                firebaseDB.collection("barang").document(item.id).delete()
-                onBackPressed()
+                database.deleteItem(item.id)
+                finish()
             }
             .setNegativeButton("Tidak") {dialog, which -> }
             .show()

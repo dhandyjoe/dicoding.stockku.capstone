@@ -1,3 +1,5 @@
 package com.dhandyjoe.stockku.util
 
-val COLLECTION_ITEM = "Items";
+const val COLLECTION_ITEM = "barang";
+const val COLLECTION_TRANSACTION = "transaksi";
+
