@@ -22,7 +22,7 @@
             android:layout_height="30dp"
             android:layout_marginHorizontal="20dp"
             android:layout_gravity="right|center_vertical"
-            android:src="@drawable/ic_plus"/>
+            android:src="@drawable/ic_plus_white"/>
 
     </androidx.appcompat.widget.Toolbar>
 

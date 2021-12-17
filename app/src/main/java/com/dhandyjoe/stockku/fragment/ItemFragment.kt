@@ -2,6 +2,7 @@ package com.dhandyjoe.stockku.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -65,7 +66,7 @@ class DashboardFragment : Fragment() {
             if (user.size > 0) {
                 showRecycleView(user)
             } else {
-                binding.tvStatusNoData.visibility = View.VISIBLE
+                binding.animationView.visibility = View.VISIBLE
                 binding.rvListItem.visibility = View.GONE
             }
 
@@ -75,7 +76,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun showRecycleView(data: ArrayList<Item>) {
-        binding.tvStatusNoData.visibility = View.GONE
+        binding.animationView.visibility = View.GONE
         binding.rvListItem.layoutManager = LinearLayoutManager(context)
         val data = ItemAdapter(data)
         binding.rvListItem.adapter = data
@@ -95,7 +96,7 @@ class DashboardFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()
                 data.forEach {
-                    if (it.name.toLowerCase().contains(query!!.toLowerCase())) {
+                    if (it.name.lowercase().contains(query!!.lowercase())) {
                         listItemSearch.add(it)
                         showRecycleView(listItemSearch)
                     }
@@ -106,7 +107,7 @@ class DashboardFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 listItemSearch.clear()
                 data.forEach {
-                    if (it.name.toLowerCase().contains(newText!!.toLowerCase())) {
+                    if (it.name.lowercase().contains(newText!!.lowercase())) {
                         listItemSearch!!.add(it)
                         showRecycleView(listItemSearch)
                     }

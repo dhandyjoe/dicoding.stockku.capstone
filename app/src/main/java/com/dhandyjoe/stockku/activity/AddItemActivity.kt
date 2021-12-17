@@ -12,13 +12,14 @@ import com.google.type.DateTime
 
 class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
-    private val firebaseDB = FirebaseFirestore.getInstance()
     private val database = Database()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.toolbar.title = "Tambah barang"
 
         binding.btnSave.setOnClickListener { saveItem() }
     }

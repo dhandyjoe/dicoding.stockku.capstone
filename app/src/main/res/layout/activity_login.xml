@@ -18,10 +18,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="50dp"
-            android:text="Sign In"
-            android:textSize="25sp"
+            android:layout_marginStart="16dp"
+            android:text="Selamta datang,"
+            android:textColor="@color/second"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="60dp"
+            android:text="Sign In!"
+            android:textColor="@color/primary"
+            android:textSize="33sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -29,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            app:boxStrokeColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_addItem">
@@ -49,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="16dp"
+            app:boxStrokeColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_addItem">
@@ -69,9 +81,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:textColor="@color/primary"
             android:layout_gravity="right"
             android:layout_marginTop="20dp"
-            android:text="SIGN IN" />
+            android:text="Login" />
     </LinearLayout>
 
     <ProgressBar

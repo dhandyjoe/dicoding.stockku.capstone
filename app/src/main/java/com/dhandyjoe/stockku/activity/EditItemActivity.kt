@@ -19,6 +19,8 @@ class EditItemActivity : AppCompatActivity() {
         binding = ActivityEditItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbar.title = "Edit barang"
+
         val data = intent.getParcelableExtra<Item>(EXTRA_BARANG)
 
         binding.etEditNameItem.setText(data?.name)

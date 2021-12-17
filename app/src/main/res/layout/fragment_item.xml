@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_statusNoData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tidak ada data"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_fmieo0wt.json" />
 
     <SearchView
         android:id="@+id/sv_item"
@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
+        android:animateLayoutChanges="true"
         android:queryHint="Cari item"
         android:queryBackground="@android:color/transparent"
         app:iconifiedByDefault="false"
@@ -49,8 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_plus"
-        android:tint="@color/white"
+        android:src="@drawable/ic_plus_white"
+        android:backgroundTint="@color/primary"
+        app:tint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
