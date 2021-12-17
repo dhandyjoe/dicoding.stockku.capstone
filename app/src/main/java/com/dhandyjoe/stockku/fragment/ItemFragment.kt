@@ -79,7 +79,7 @@ class DashboardFragment : Fragment() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.animationView.visibility = View.GONE
         binding.rvListItem.layoutManager = GridLayoutManager(context, 2)
-        val data = ItemAdapter(data)
+        val data = ItemAdapter(data, requireContext())
         binding.rvListItem.adapter = data
         binding.rvListItem.visibility = View.VISIBLE
 

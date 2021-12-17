@@ -16,16 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_addItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/iv_addImageItem"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        android:text="Tambah barang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til1"
@@ -36,7 +34,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_addItem">
+        app:layout_constraintTop_toBottomOf="@id/iv_addImageItem">
 
         <EditText
             android:id="@+id/et_name_item"

@@ -9,5 +9,6 @@ data class Item(
     val name: String = "",
     val size: String = "",
     val price: String = "",
+    val imageUrl: String = "",
     val stock: Int = 0
 ): Parcelable

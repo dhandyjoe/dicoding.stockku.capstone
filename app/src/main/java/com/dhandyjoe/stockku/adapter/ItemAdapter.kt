@@ -1,12 +1,16 @@
 package com.dhandyjoe.stockku.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Item
 
-class ItemAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemAdapter(private val data: ArrayList<Item>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListStockBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -21,6 +25,10 @@ class ItemAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<Recyc
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvStockItem.text = model.stock.toString()
             holder.binding.tvPriceItem.text = model.price
+            Glide.with(context)
+                .load(model.imageUrl)
+                .into(holder.binding.ivItem)
+
             holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data[holder.adapterPosition])
             }
@@ -38,5 +46,4 @@ class ItemAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<Recyc
     interface OnItemClickCallback {
         fun onItemClicked(data: Item)
     }
-
 }

@@ -8,9 +8,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 class Database {
     private val firebaseDB = FirebaseFirestore.getInstance()
 
-    fun addItem(nameItem: String, sizeItem: String, priceItem: String, stockItem: Int) {
+    fun addItem(nameItem: String, sizeItem: String, priceItem: String, imageUrl: String, stockItem: Int) {
         val docBarang = firebaseDB.collection(COLLECTION_ITEM).document()
-        val item = Item(docBarang.id, nameItem, sizeItem, priceItem, stockItem)
+        val item = Item(docBarang.id, nameItem, sizeItem, priceItem, imageUrl, stockItem)
 
         docBarang.set(item)
     }
