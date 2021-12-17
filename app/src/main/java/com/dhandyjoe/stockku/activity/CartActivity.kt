@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
@@ -28,11 +29,13 @@ class CartActivity : AppCompatActivity() {
         }
 
         if (listItemCart.isNotEmpty()) {
-            binding.statusItem.visibility = View.GONE
+            binding.animationView.visibility = View.GONE
+            binding.btnSaveTransaction.visibility = View.VISIBLE
             showRecycleView(listItemCart)
             binding.rvListItemCart.visibility = View.VISIBLE
         } else {
-            binding.statusItem.visibility = View.VISIBLE
+            binding.animationView.visibility = View.VISIBLE
+            binding.btnSaveTransaction.visibility = View.GONE
             binding.rvListItemCart.visibility = View.GONE
         }
     }
@@ -44,13 +47,12 @@ class CartActivity : AppCompatActivity() {
 
         binding.toolbar.title = "Keranjang"
 
-        binding.favAddItemTransaction.setOnClickListener {
+        binding.ivAddItemTransaction.setOnClickListener {
             val moveForResultIntent = Intent(this, AddItemTransactionActivity::class.java)
             resultLauncher.launch(moveForResultIntent)
         }
 
-        binding.button2.setOnClickListener {
-//            Toast.makeText(this, "Sukses: ${listItemCart.size}", Toast.LENGTH_SHORT).show()
+        binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(listItemCart)
         }
     }

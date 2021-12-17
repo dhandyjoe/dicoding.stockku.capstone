@@ -63,7 +63,7 @@ class TransactionFragment : Fragment() {
             if (user.size > 0) {
                 showRecycleView(user)
             } else {
-                binding.tvStatusNoData.visibility = View.VISIBLE
+                binding.animationView.visibility = View.VISIBLE
                 binding.rvListTransaction.visibility = View.GONE
             }
 
@@ -72,7 +72,7 @@ class TransactionFragment : Fragment() {
     }
 
     private fun showRecycleView(data: ArrayList<Cart>) {
-        binding.tvStatusNoData.visibility = View.GONE
+        binding.animationView.visibility = View.GONE
         binding.rvListTransaction.layoutManager = LinearLayoutManager(context)
         val data = TransactionAdapter(data)
         binding.rvListTransaction.adapter = data
