@@ -54,6 +54,7 @@ class CartActivity : AppCompatActivity() {
 
         binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(listItemCart)
+            finish()
         }
     }
 
@@ -65,7 +66,7 @@ class CartActivity : AppCompatActivity() {
 
     fun saveTransaction(dataitem: ArrayList<Item>) {
         var docTransaction = firebaseDB.collection("transaksi").document()
-        val item = Cart(docTransaction.id, "transaksi1")
+        val item = Cart(docTransaction.id, "transaksi1 - debug")
         docTransaction.set(item)
 
         for (i in dataitem.indices) {
