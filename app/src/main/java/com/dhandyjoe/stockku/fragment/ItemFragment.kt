@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.activity.AddItemActivity
 import com.dhandyjoe.stockku.activity.EditItemActivity
@@ -77,7 +78,7 @@ class DashboardFragment : Fragment() {
 
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.animationView.visibility = View.GONE
-        binding.rvListItem.layoutManager = LinearLayoutManager(context)
+        binding.rvListItem.layoutManager = GridLayoutManager(context, 2)
         val data = ItemAdapter(data)
         binding.rvListItem.adapter = data
         binding.rvListItem.visibility = View.VISIBLE
