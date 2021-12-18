@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
+import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
@@ -53,8 +54,10 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTransaction.setOnClickListener {
-            saveTransaction(listItemCart)
-            finish()
+            Toast.makeText(this, listItemCart[0].totalTransaction.toString(), Toast.LENGTH_SHORT).show()
+
+//            saveTransaction(listItemCart)
+//            finish()
         }
     }
 

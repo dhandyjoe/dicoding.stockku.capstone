@@ -32,7 +32,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
         android:visibility="gone"
-        tools:listitem="@layout/item_list_cart"
+        tools:listitem="@layout/item_list_Item_cart"
         app:layout_constraintBottom_toTopOf="@+id/btn_saveTransaction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
