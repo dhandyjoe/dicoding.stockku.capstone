@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.activity.CartActivity
-import com.dhandyjoe.stockku.activity.DetailCartActivity
+import com.dhandyjoe.stockku.activity.DetailTransactionActivity
+import com.dhandyjoe.stockku.activity.EditItemActivity
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
 import com.dhandyjoe.stockku.model.Cart
@@ -80,7 +81,8 @@ class TransactionFragment : Fragment() {
 
         data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Cart) {
-                val intent = Intent(activity, DetailCartActivity::class.java)
+                val intent = Intent(activity, DetailTransactionActivity::class.java)
+                intent.putExtra(DetailTransactionActivity.EXTRA_DATA, data)
                 startActivity(intent)
             }
         })
