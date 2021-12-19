@@ -19,7 +19,6 @@ class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private var listItemCart = ArrayList<Item>()
     private val adapter = CartAdapter()
 
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -47,7 +46,7 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTransaction.setOnClickListener {
-            saveTransaction(listItemCart)
+            saveTransaction(adapter.listItemCart)
             finish()
             Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
         }
@@ -65,6 +64,7 @@ class CartActivity : AppCompatActivity() {
 
         for (i in dataitem.indices) {
             database.addItemTransaction(dataitem[i], docTransaction.id)
+            database.updateStockItem(dataitem[i])
         }
     }
 

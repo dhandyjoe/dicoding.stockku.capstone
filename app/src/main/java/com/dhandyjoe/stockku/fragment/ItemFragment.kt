@@ -1,5 +1,6 @@
 package com.dhandyjoe.stockku.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -26,6 +27,7 @@ class DashboardFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentItemBinding
+    private lateinit var thisContext: Context
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val userUid = FirebaseAuth.getInstance().currentUser?.uid
     private val firebaseDB = FirebaseFirestore.getInstance()
@@ -43,6 +45,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        thisContext = container!!.context
         binding = FragmentItemBinding.inflate(inflater, container, false)
 
         binding.favAddTransaction.setOnClickListener {
@@ -79,7 +82,7 @@ class DashboardFragment : Fragment() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.animationView.visibility = View.GONE
         binding.rvListItem.layoutManager = GridLayoutManager(context, 2)
-        val data = ItemAdapter(data, requireContext())
+        val data = ItemAdapter(data, thisContext)
         binding.rvListItem.adapter = data
         binding.rvListItem.visibility = View.VISIBLE
 
