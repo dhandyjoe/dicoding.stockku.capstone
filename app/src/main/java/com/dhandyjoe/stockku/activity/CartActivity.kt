@@ -20,25 +20,18 @@ class CartActivity : AppCompatActivity() {
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
     private var listItemCart = ArrayList<Item>()
+    private val adapter = CartAdapter()
 
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == AddItemTransactionActivity.RESULT_CODE && result.data != null) {
             val selectedValue = result.data?.getParcelableExtra<Item>(AddItemTransactionActivity.EXTRA_SELECTED_VALUE)
             if (selectedValue != null) {
-                listItemCart.add(selectedValue)
+                val list = ArrayList<Item>()
+                list.add(selectedValue)
+                adapter.updateItem(list)
             }
         }
-
-        if (listItemCart.isNotEmpty()) {
-            binding.animationView.visibility = View.GONE
-            binding.btnSaveTransaction.visibility = View.VISIBLE
-            showRecycleView(listItemCart)
-            binding.rvListItemCart.visibility = View.VISIBLE
-        } else {
-            binding.animationView.visibility = View.VISIBLE
-            binding.btnSaveTransaction.visibility = View.GONE
-            binding.rvListItemCart.visibility = View.GONE
-        }
+        showEmptyIndicator(adapter.isEmpty())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,17 +47,15 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTransaction.setOnClickListener {
-            Toast.makeText(this, listItemCart[0].totalTransaction.toString(), Toast.LENGTH_SHORT).show()
-
-//            saveTransaction(listItemCart)
-//            finish()
+            saveTransaction(listItemCart)
+            finish()
+            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun showRecycleView(data: ArrayList<Item>) {
+    private fun showRecycleView() {
         binding.rvListItemCart.layoutManager = LinearLayoutManager(this)
-        val data = CartAdapter(data)
-        binding.rvListItemCart.adapter = data
+        binding.rvListItemCart.adapter = adapter
     }
 
     fun saveTransaction(dataitem: ArrayList<Item>) {
@@ -74,6 +65,19 @@ class CartActivity : AppCompatActivity() {
 
         for (i in dataitem.indices) {
             database.addItemTransaction(dataitem[i], docTransaction.id)
+        }
+    }
+
+    private fun showEmptyIndicator(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding.animationView.visibility = View.VISIBLE
+            binding.btnSaveTransaction.visibility = View.GONE
+            binding.rvListItemCart.visibility = View.GONE
+        } else {
+            binding.animationView.visibility = View.GONE
+            binding.btnSaveTransaction.visibility = View.VISIBLE
+            showRecycleView()
+            binding.rvListItemCart.visibility = View.VISIBLE
         }
     }
 }
