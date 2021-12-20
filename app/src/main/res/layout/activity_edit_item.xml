@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="Delete"
+                android:text="Hapus"
                 android:backgroundTint="#A21217"
                 android:layout_marginHorizontal="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"

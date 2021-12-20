@@ -39,6 +39,7 @@ class EditItemActivity : AppCompatActivity() {
 
         val data = intent.getParcelableExtra<Item>(EXTRA_BARANG)
 
+
         if (data?.imageUrl.isNullOrEmpty()) {
             Glide.with(this)
                 .load(R.drawable.empty_image)
