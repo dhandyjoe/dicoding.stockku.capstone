@@ -70,11 +70,11 @@ class CartActivity : AppCompatActivity() {
 
     private fun showEmptyIndicator(isEmpty: Boolean) {
         if (isEmpty) {
-            binding.animationView.visibility = View.VISIBLE
+            binding.ivIndicatorCart.visibility = View.VISIBLE
             binding.btnSaveTransaction.visibility = View.GONE
             binding.rvListItemCart.visibility = View.GONE
         } else {
-            binding.animationView.visibility = View.GONE
+            binding.ivIndicatorCart.visibility = View.GONE
             binding.btnSaveTransaction.visibility = View.VISIBLE
             showRecycleView()
             binding.rvListItemCart.visibility = View.VISIBLE

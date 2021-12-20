@@ -49,7 +49,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.animationView.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
-        val data = ItemCartAdapter(data)
+        val data = ItemCartAdapter(data, this)
         binding.rvTransactionItem.adapter = data
         binding.rvTransactionItem.visibility = View.VISIBLE
 

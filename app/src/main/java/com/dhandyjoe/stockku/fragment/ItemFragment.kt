@@ -103,7 +103,7 @@ class DashboardFragment : Fragment() {
                     if (it.name.lowercase().contains(query!!.lowercase())) {
                         listItemSearch.add(it)
                         showRecycleView(listItemSearch)
-                    } else {
+                    } else if (listItemSearch.isEmpty()) {
                         showRecycleView(listItemSearch)
                         binding.animationView.visibility = View.VISIBLE
                     }
@@ -117,7 +117,7 @@ class DashboardFragment : Fragment() {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
                         listItemSearch!!.add(it)
                         showRecycleView(listItemSearch)
-                    } else {
+                    } else if (listItemSearch.isEmpty()) {
                         showRecycleView(listItemSearch)
                         binding.animationView.visibility = View.VISIBLE
                     }

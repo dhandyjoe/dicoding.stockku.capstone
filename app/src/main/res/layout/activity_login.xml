@@ -10,6 +10,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Selamta datang,"
+            android:layout_gravity="center_vertical"
+            android:text="Selamat datang,"
             android:textColor="@color/second"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -83,7 +85,7 @@
             android:layout_marginHorizontal="16dp"
             android:textColor="@color/primary"
             android:layout_gravity="right"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:text="Login" />
     </LinearLayout>
 

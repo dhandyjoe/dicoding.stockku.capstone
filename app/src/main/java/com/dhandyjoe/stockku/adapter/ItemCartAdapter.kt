@@ -1,5 +1,6 @@
 package com.dhandyjoe.stockku.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -8,7 +9,7 @@ import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Item
 
-class ItemCartAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListCartBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -39,7 +40,11 @@ class ItemCartAdapter(private val data: ArrayList<Item>): RecyclerView.Adapter<R
             }
 
             holder.itemView.setOnClickListener {
-                onItemClickCallback.onItemClicked(data[holder.adapterPosition])
+                if (statusIndicator == 0) {
+                    Toast.makeText(context, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
+                } else {
+                    onItemClickCallback.onItemClicked(data[holder.adapterPosition])
+                }
             }
         }
     }
