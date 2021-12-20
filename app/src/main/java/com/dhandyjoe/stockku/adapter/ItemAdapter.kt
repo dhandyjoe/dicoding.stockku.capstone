@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Item
 
@@ -25,9 +26,16 @@ class ItemAdapter(private val data: ArrayList<Item>, private val context: Contex
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvStockItem.text = model.stock.toString()
             holder.binding.tvPriceItem.text = model.price
-            Glide.with(context)
-                .load(model.imageUrl)
-                .into(holder.binding.ivItem)
+
+            if (model.imageUrl.isEmpty()) {
+                Glide.with(context)
+                    .load(R.drawable.empty_image)
+                    .into(holder.binding.ivItem)
+            } else {
+                Glide.with(context)
+                    .load(model.imageUrl)
+                    .into(holder.binding.ivItem)
+            }
 
             holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data[holder.adapterPosition])

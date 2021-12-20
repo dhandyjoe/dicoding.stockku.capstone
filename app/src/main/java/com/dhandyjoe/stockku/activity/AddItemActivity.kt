@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
@@ -43,25 +44,26 @@ class AddItemActivity : AppCompatActivity() {
             resultLauncher.launch("image/*")
         }
 
-        binding.btnSave.setOnClickListener { saveItem() }
-    }
+        binding.btnSave.setOnClickListener {
+            checkValidationData()
 
-    fun saveItem() {
-        val nameItem = binding.etNameItem.text.toString()
-        val sizeItem = binding.etSizeItem.text.toString()
-        val priceItem = binding.etPriceItem.text.toString()
-        val stockItem = binding.etStockItem.text.toString()
-
-        database.addItem(nameItem, sizeItem, priceItem, imageUrl, stockItem.toInt())
-        finish()
+        }
     }
 
     private fun userImage(context: Context, uri: String, imageView: ImageView) {
-        val option = RequestOptions()
+        val option = RequestOptions().placeholder(progresDrawable(context))
         Glide.with(context)
             .load(uri)
             .apply(option)
             .into(imageView)
+    }
+
+    private fun progresDrawable(context: Context): CircularProgressDrawable {
+        return CircularProgressDrawable(context).apply {
+            strokeWidth = 5f
+            centerRadius = 30f
+            start()
+        }
     }
 
     private fun storeImage(imageUri: Uri?) {
@@ -84,6 +86,26 @@ class AddItemActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Toast.makeText(this, "Image Upload failed. Please try again later.", Toast.LENGTH_SHORT).show()
                 }
+        }
+    }
+
+    private fun checkValidationData() {
+        if (binding.etNameItem.text.isNullOrEmpty()) {
+            binding.etNameItem.error = "Harus diisi"
+        } else if (binding.etSizeItem.text.isNullOrEmpty()) {
+            binding.etSizeItem.error = "Harus diisi"
+        } else if (binding.etStockItem.text.isNullOrEmpty()) {
+            binding.etStockItem.error = "Harus diisi"
+        } else if (binding.etPriceItem.text.isNullOrEmpty()) {
+            binding.etPriceItem.error = "Harus diisi"
+        } else {
+            val nameItem = binding.etNameItem.text.toString()
+            val sizeItem = binding.etSizeItem.text.toString()
+            val priceItem = binding.etPriceItem.text.toString()
+            val stockItem = binding.etStockItem.text.toString()
+
+            database.addItem(nameItem, sizeItem, priceItem, imageUrl, stockItem.toInt())
+            finish()
         }
     }
 

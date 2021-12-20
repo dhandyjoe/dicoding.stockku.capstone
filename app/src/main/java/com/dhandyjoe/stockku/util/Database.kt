@@ -15,11 +15,12 @@ class Database {
         docBarang.set(item)
     }
 
-    fun editItem(itemId: String, nameItem: String, priceItem: String, sizeItem: String) {
+    fun editItem(itemId: String, nameItem: String, priceItem: String, sizeItem: String, imageUrl: String) {
         val map = HashMap<String, Any>()
         map["name"] = nameItem
         map["price"] = priceItem
         map["size"] = sizeItem
+        map["imageUrl"] = imageUrl
 
         firebaseDB.collection(COLLECTION_ITEM)
             .document(itemId)
