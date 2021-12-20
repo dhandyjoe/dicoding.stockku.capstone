@@ -6,13 +6,13 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.dhandyjoe.stockku.databinding.ItemCartBinding
+import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Item
 
 class CartAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    class MyViewHolder(val binding: ItemCartBinding): RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(val binding: ItemDetailCartBinding): RecyclerView.ViewHolder(binding.root)
     var listItemCart = ArrayList<Item>()
 
     fun updateItem(list: ArrayList<Item>) {
@@ -38,7 +38,7 @@ class CartAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun isEmpty(): Boolean = listItemCart.isEmpty()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return MyViewHolder(ItemDetailCartBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

@@ -42,8 +42,6 @@ class DetailTransactionActivity : AppCompatActivity() {
                     user.add(docItem.toObject(Item::class.java))
                     adapter.updateItem(user)
                 }
-
-
                 showRecycleView()
             }
             .addOnFailureListener {
