@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.util
 import android.widget.Toast
 import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Database {
@@ -15,12 +16,12 @@ class Database {
         docBarang.set(item)
     }
 
-    fun editItem(itemId: String, nameItem: String, priceItem: String, sizeItem: String, imageUrl: String) {
+    fun editItem(itemId: String, nameItem: String, priceItem: String, sizeItem: String, stockItem: String) {
         val map = HashMap<String, Any>()
         map["name"] = nameItem
         map["price"] = priceItem
         map["size"] = sizeItem
-        map["imageUrl"] = imageUrl
+        map["stock"] = FieldValue.increment(stockItem.toDouble())
 
         firebaseDB.collection(COLLECTION_ITEM)
             .document(itemId)

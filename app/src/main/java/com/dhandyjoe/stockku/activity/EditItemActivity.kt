@@ -25,11 +25,6 @@ class EditItemActivity : AppCompatActivity() {
     private var firebaseDB = FirebaseFirestore.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance().reference
     private val database = Database()
-    private var imageUrl: String = ""
-
-    private val resultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        storeImage(uri)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +49,6 @@ class EditItemActivity : AppCompatActivity() {
         binding.etEditNameItem.setText(data?.name)
         binding.etEditSizeItem.setText(data?.size)
         binding.etEditPriceItem.setText(data?.price)
-
-        binding.ivAddImageItem.setOnClickListener {
-            resultLauncher.launch("image/*")
-        }
 
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)
@@ -89,8 +80,9 @@ class EditItemActivity : AppCompatActivity() {
         val nameItem = binding.etEditNameItem.text.toString()
         val sizeItem = binding.etEditSizeItem.text.toString()
         val priceItem = binding.etEditPriceItem.text.toString()
+        val addStockItem = binding.etEditStockItem.text.toString()
 
-        database.editItem(item.id, nameItem, priceItem, sizeItem, imageUrl)
+        database.editItem(item.id, nameItem, priceItem, sizeItem, addStockItem)
     }
 
     fun deleteItem(item: Item) {
@@ -100,50 +92,10 @@ class EditItemActivity : AppCompatActivity() {
             .setPositiveButton("Ya") { dialog, which ->
                 Toast.makeText(this, "Barang dihapus", Toast.LENGTH_SHORT).show()
                 database.deleteItem(item.id)
-                firebaseStorage.child(DATA_IMAGES).child(item.imageUrl).delete()
                 finish()
             }
             .setNegativeButton("Tidak") {dialog, which -> }
             .show()
-    }
-
-    private fun userImage(context: Context, uri: String, imageView: ImageView) {
-        val option = RequestOptions().placeholder(progresDrawable(context))
-        Glide.with(context)
-            .load(uri)
-            .apply(option)
-            .into(imageView)
-    }
-
-    private fun progresDrawable(context: Context): CircularProgressDrawable {
-        return CircularProgressDrawable(context).apply {
-            strokeWidth = 5f
-            centerRadius = 30f
-            start()
-        }
-    }
-
-    private fun storeImage(imageUri: Uri?) {
-        if (imageUri != null) {
-            Toast.makeText(this, "Uploading...", Toast.LENGTH_SHORT).show()
-            val filePath = firebaseStorage.child(DATA_IMAGES).child("${UUID.randomUUID()}.jpg")
-
-            filePath.putFile(imageUri)
-                .addOnSuccessListener {
-                    filePath.downloadUrl
-                        .addOnSuccessListener { taskSnapshot ->
-                            val url = taskSnapshot.toString()
-                            imageUrl = url
-                            userImage(this, imageUrl, binding.ivAddImageItem)
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(this, "Image Upload failed. Please try again later.", Toast.LENGTH_SHORT).show()
-                        }
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Image Upload failed. Please try again later.", Toast.LENGTH_SHORT).show()
-                }
-        }
     }
 
     companion object {
