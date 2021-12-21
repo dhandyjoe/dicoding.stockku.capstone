@@ -12,6 +12,7 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.activity.LoginActivity
 import com.dhandyjoe.stockku.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -22,6 +23,7 @@ class FragmentNotification : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentProfileBinding
     private val auth = FirebaseAuth.getInstance()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,8 @@ class FragmentNotification : Fragment() {
         binding.btnLogout.setOnClickListener {
             showAlertLogout()
         }
+
+        binding.tvEmailUser.text = currentUser?.email
 
         return binding.root
     }

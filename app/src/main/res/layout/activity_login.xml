@@ -49,6 +49,8 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawablePadding="10dp"
                 android:hint="Email"
                 tools:layout_editor_absoluteX="11dp"
                 tools:layout_editor_absoluteY="301dp" />
@@ -61,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="16dp"
+            app:passwordToggleEnabled="true"
             app:boxStrokeColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -69,6 +72,8 @@
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="10dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 tools:layout_editor_absoluteX="11dp"
