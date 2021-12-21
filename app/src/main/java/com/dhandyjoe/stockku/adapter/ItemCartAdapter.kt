@@ -24,6 +24,7 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvPriceItem.text = model.price
+            holder.binding.tvStockItem.text = model.stock.toString()
 
             holder.binding.ivPlus.setOnClickListener {
                 statusIndicator++
@@ -40,7 +41,9 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
             }
 
             holder.itemView.setOnClickListener {
-                if (statusIndicator == 0) {
+                if (model.stock == 0) {
+                    Toast.makeText(context, "Stock habis", Toast.LENGTH_SHORT).show()
+                } else if (statusIndicator == 0) {
                     Toast.makeText(context, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
                 } else {
                     onItemClickCallback.onItemClicked(data[holder.adapterPosition])
