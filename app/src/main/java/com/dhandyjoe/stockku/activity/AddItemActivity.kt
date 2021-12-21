@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.type.DateTime
+import java.util.*
 
 class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
@@ -69,7 +70,7 @@ class AddItemActivity : AppCompatActivity() {
     private fun storeImage(imageUri: Uri?) {
         if (imageUri != null) {
             Toast.makeText(this, "Uploading...", Toast.LENGTH_SHORT).show()
-            val filePath = firebaseStorage.child(DATA_IMAGES)
+            val filePath = firebaseStorage.child(DATA_IMAGES).child("${UUID.randomUUID()}.jpg")
 
             filePath.putFile(imageUri)
                 .addOnSuccessListener {

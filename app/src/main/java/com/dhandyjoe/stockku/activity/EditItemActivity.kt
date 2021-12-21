@@ -18,6 +18,7 @@ import com.dhandyjoe.stockku.util.DATA_IMAGES
 import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class EditItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
@@ -89,7 +90,7 @@ class EditItemActivity : AppCompatActivity() {
         val sizeItem = binding.etEditSizeItem.text.toString()
         val priceItem = binding.etEditPriceItem.text.toString()
 
-        database.editItem(item.id, nameItem, sizeItem, priceItem, imageUrl)
+        database.editItem(item.id, nameItem, priceItem, sizeItem, imageUrl)
     }
 
     fun deleteItem(item: Item) {
@@ -99,6 +100,7 @@ class EditItemActivity : AppCompatActivity() {
             .setPositiveButton("Ya") { dialog, which ->
                 Toast.makeText(this, "Barang dihapus", Toast.LENGTH_SHORT).show()
                 database.deleteItem(item.id)
+                firebaseStorage.child(DATA_IMAGES).child(item.imageUrl).delete()
                 finish()
             }
             .setNegativeButton("Tidak") {dialog, which -> }
@@ -124,7 +126,7 @@ class EditItemActivity : AppCompatActivity() {
     private fun storeImage(imageUri: Uri?) {
         if (imageUri != null) {
             Toast.makeText(this, "Uploading...", Toast.LENGTH_SHORT).show()
-            val filePath = firebaseStorage.child(DATA_IMAGES)
+            val filePath = firebaseStorage.child(DATA_IMAGES).child("${UUID.randomUUID()}.jpg")
 
             filePath.putFile(imageUri)
                 .addOnSuccessListener {
