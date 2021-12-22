@@ -6,7 +6,7 @@
     <string name="imageitem">imageItem</string>
     <string name="nama_barang">Nama barang</string>
     <string name="ukuran">Ukuran</string>
-    <string name="stok_barang">Stok barang</string>
+    <string name="stok_barang">Tambah stok barang</string>
     <string name="harga_barang">Harga barang</string>
     <string name="simpan">Simpan</string>
     <string name="empty_cart">empty_cart</string>

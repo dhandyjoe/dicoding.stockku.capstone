@@ -65,12 +65,18 @@ class EditItemActivity : AppCompatActivity() {
 //    }
 
     private fun updateItem(item: Item) {
+        var indicatorAddStock = 0
+
         val nameItem = binding.etEditNameItem.text.toString()
         val sizeItem = binding.etEditSizeItem.text.toString()
         val priceItem = binding.etEditPriceItem.text.toString()
         val addStockItem = binding.etEditStockItem.text.toString()
 
-        database.editItem(item.id, nameItem, priceItem, sizeItem, addStockItem)
+        if (addStockItem.isNotEmpty()) {
+            indicatorAddStock = addStockItem.toInt()
+        }
+
+        database.editItem(item.id, nameItem, priceItem, sizeItem, indicatorAddStock.toString())
     }
 
     private fun deleteItem(item: Item) {
