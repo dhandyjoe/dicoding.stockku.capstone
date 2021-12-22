@@ -1,20 +1,13 @@
 package com.dhandyjoe.stockku.activity
 
-import android.content.Context
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.DATA_IMAGES
 import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -22,8 +15,6 @@ import java.util.*
 
 class EditItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
-    private var firebaseDB = FirebaseFirestore.getInstance()
-    private val firebaseStorage = FirebaseStorage.getInstance().reference
     private val database = Database()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Converse"
+            tools:text="Converse"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -37,13 +37,13 @@
                 android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ukuran : " />
+                tools:text="Ukuran : " />
 
             <TextView
                 android:id="@+id/tv_size_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="40"/>
+                tools:text="40"/>
 
         </LinearLayout>
 
@@ -58,13 +58,13 @@
                 android:id="@+id/tv_stock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stock : " />
+                tools:text="Stock : " />
 
             <TextView
                 android:id="@+id/tv_stock_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"/>
+                tools:text="0"/>
 
         </LinearLayout>
 
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp. "
+                tools:text="Rp. "
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -89,7 +89,7 @@
                 android:id="@+id/tv_price_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20000"
+                tools:text="20000"
                 android:textSize="16sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -110,21 +110,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_remove" />
+                android:src="@drawable/ic_remove"
+                android:contentDescription="@string/minusicon" />
 
             <TextView
                 android:id="@+id/tv_indicatorItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="0"/>
+                tools:text="0"/>
 
             <ImageView
                 android:id="@+id/iv_plus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/ic_plus"/>
+                android:src="@drawable/ic_plus"
+                android:contentDescription="@string/plusicon"/>
 
         </LinearLayout>
     </RelativeLayout>

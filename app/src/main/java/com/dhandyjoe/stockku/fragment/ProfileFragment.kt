@@ -8,11 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.activity.LoginActivity
 import com.dhandyjoe.stockku.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"

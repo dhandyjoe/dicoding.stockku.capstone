@@ -1,7 +1,5 @@
 package com.dhandyjoe.stockku.util
 
-import android.widget.Toast
-import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore

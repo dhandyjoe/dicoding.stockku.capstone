@@ -10,7 +10,6 @@ import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.activity.CartActivity
 import com.dhandyjoe.stockku.activity.DetailTransactionActivity
-import com.dhandyjoe.stockku.activity.EditItemActivity
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
 import com.dhandyjoe.stockku.model.Cart

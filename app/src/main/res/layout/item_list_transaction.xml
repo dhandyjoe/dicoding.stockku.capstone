@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Converse"
+            tools:text="Converse"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -37,20 +37,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="Tanggal :"
+                android:layout_marginEnd="10dp"
+                tools:text="Tanggal :"
                 android:textSize="15sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="20 Desember 2021"
+                tools:text="20 Desember 2021"
                 android:textSize="15sp" />
-
-
         </LinearLayout>
-
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

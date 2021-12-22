@@ -16,4 +16,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imageitem">imageItem</string>
+    <string name="nama_barang">Nama barang</string>
+    <string name="ukuran">Ukuran</string>
+    <string name="stok_barang">Stok barang</string>
+    <string name="harga_barang">Harga barang</string>
+    <string name="simpan">Simpan</string>
+    <string name="empty_cart">empty_cart</string>
+    <string name="add_cart_item">add_cart_item</string>
+    <string name="update">Update</string>
+    <string name="hapus">Hapus</string>
+    <string name="welcome_text">Selamat datang,</string>
+    <string name="sign_in">Sign In!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="imageapp">imageApp</string>
+    <string name="imagefab">imageFab</string>
+    <string name="emailicon">emailIcon</string>
+    <string name="logout">Logout</string>
+    <string name="minusicon">minusIcon</string>
+    <string name="plusicon">plusIcon</string>
 </resources>

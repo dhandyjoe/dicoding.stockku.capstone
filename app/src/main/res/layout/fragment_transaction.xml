@@ -53,7 +53,8 @@
         app:tint="@null"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/imagefab" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

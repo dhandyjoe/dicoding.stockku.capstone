@@ -1,11 +1,9 @@
 package com.dhandyjoe.stockku.activity
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,15 +11,9 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
-import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.COLLECTION_ITEM
 import com.dhandyjoe.stockku.util.DATA_IMAGES
 import com.dhandyjoe.stockku.util.Database
-import com.dhandyjoe.stockku.util.REQUEST_CODE_PHOTO
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.google.type.DateTime
 import java.util.*
 
 class AddItemActivity : AppCompatActivity() {

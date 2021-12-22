@@ -20,6 +20,7 @@
             android:id="@+id/iv_item"
             android:layout_width="match_parent"
             android:layout_height="180dp"
+            android:contentDescription="@string/imageitem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Converse"
+            tools:text="Converse"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
             android:layout_below="@id/tv_name_item"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Ukuran : "
+            tools:text="Ukuran : "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name_item" />
 
@@ -52,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_name_item"
-            android:layout_toRightOf="@id/tv_size"
-            android:text="40"
+            android:layout_toEndOf="@id/tv_size"
+            tools:text="40"
             app:layout_constraintBottom_toBottomOf="@+id/tv_size"
             app:layout_constraintStart_toEndOf="@+id/tv_size"
             app:layout_constraintTop_toTopOf="@+id/tv_size" />
@@ -65,7 +66,7 @@
             android:layout_below="@id/tv_size_item"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Stok : "
+            tools:text="Stok : "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_size" />
 
@@ -74,8 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_size_item"
-            android:layout_toRightOf="@id/tv_stock"
-            android:text="100"
+            android:layout_toEndOf="@id/tv_stock"
+            tools:text="100"
             app:layout_constraintBottom_toBottomOf="@+id/tv_stock"
             app:layout_constraintStart_toEndOf="@+id/tv_stock"
             app:layout_constraintTop_toTopOf="@+id/tv_stock" />
@@ -96,7 +97,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp. "
+                tools:text="Rp. "
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -104,7 +105,7 @@
                 android:id="@+id/tv_price_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20000"
+                tools:text="20000"
                 android:textSize="16sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"

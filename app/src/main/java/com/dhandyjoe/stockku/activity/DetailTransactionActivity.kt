@@ -1,13 +1,9 @@
 package com.dhandyjoe.stockku.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
-import com.dhandyjoe.stockku.adapter.ItemAdapter
 import com.dhandyjoe.stockku.databinding.ActivityDetailTransactionBinding
 import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item

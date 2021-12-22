@@ -22,14 +22,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_baseline_email_24"/>
+                android:src="@drawable/ic_baseline_email_24"
+                android:contentDescription="@string/emailicon" />
 
             <TextView
                 android:id="@+id/tv_emailUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:text="asdasd"/>
+                tools:text="manajer@sepatukakikaki.com"/>
         </LinearLayout>
 
         <Button
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/primary"
-            android:text="Logout"/>
+            android:text="@string/logout"/>
     </LinearLayout>
 
 

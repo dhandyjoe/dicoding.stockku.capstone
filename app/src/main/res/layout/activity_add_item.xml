@@ -26,7 +26,8 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/imageitem" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til1"
@@ -43,9 +44,11 @@
                     android:id="@+id/et_name_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama barang"
+                    android:hint="@string/nama_barang"
                     tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp" />
+                    tools:layout_editor_absoluteY="301dp"
+                    android:autofillHints="name"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,10 +67,11 @@
                     android:id="@+id/et_size_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ukuran"
+                    android:hint="@string/ukuran"
                     android:inputType="number"
                     tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp" />
+                    tools:layout_editor_absoluteY="301dp"
+                    android:autofillHints="name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,10 +91,11 @@
                     android:id="@+id/et_stock_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Stok barang"
+                    android:hint="@string/stok_barang"
                     android:inputType="number"
                     tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp" />
+                    tools:layout_editor_absoluteY="301dp"
+                    android:autofillHints="name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,10 +114,11 @@
                     android:id="@+id/et_price_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Harga barang"
+                    android:hint="@string/harga_barang"
                     android:inputType="number"
                     tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp" />
+                    tools:layout_editor_absoluteY="301dp"
+                    android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +129,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:text="Simpan"
+                android:text="@string/simpan"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
