@@ -18,6 +18,7 @@ class TransactionAdapter(private val data: ArrayList<Cart>): RecyclerView.Adapte
 
         if (holder is MyViewHolder) {
             holder.binding.tvNameTransaction.text = model.name
+            holder.binding.tvDateTransaction.text = model.date
             holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data[holder.adapterPosition])
             }

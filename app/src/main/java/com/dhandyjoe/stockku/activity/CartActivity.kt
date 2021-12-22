@@ -13,6 +13,9 @@ import com.dhandyjoe.stockku.model.Cart
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
@@ -57,8 +60,16 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun saveTransaction(dataitem: ArrayList<Item>) {
+        val patternNameTransaction = "yyyyMMddHHmm"
+        val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
+        val nameTransaction: String = simpleDateFormat1.format(Date())
+
+        val patternDateTransaction = "dd MMMM yyyy hh:mm:ss"
+        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction)
+        val dateTransaction: String = simpleDateFormat2.format(Date())
+
         val docTransaction = firebaseDB.collection("transaksi").document()
-        val item = Cart(docTransaction.id, "transaksi1 - debug")
+        val item = Cart(docTransaction.id, "transaksi-$nameTransaction", dateTransaction)
         docTransaction.set(item)
 
         for (i in dataitem.indices) {
