@@ -14,7 +14,6 @@ import com.dhandyjoe.stockku.activity.EditItemActivity
 import com.dhandyjoe.stockku.adapter.ItemAdapter
 import com.dhandyjoe.stockku.databinding.FragmentItemBinding
 import com.dhandyjoe.stockku.model.Item
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 private const val ARG_PARAM1 = "param1"
