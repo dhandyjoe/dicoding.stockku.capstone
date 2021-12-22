@@ -68,14 +68,34 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_price_item"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="20000"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_below="@id/ll_stock"
-            android:textSize="20sp" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. "
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/tv_price_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20000"
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_stock" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
