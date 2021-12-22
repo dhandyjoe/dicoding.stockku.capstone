@@ -37,12 +37,13 @@
                 android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Ukuran : " />
+                android:text="@string/tv_ukuran" />
 
             <TextView
                 android:id="@+id/tv_size_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 tools:text="40"/>
 
         </LinearLayout>
@@ -58,12 +59,13 @@
                 android:id="@+id/tv_stock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Stock : " />
+                android:text="@string/tv_stok" />
 
             <TextView
                 android:id="@+id/tv_stock_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 tools:text="0"/>
 
         </LinearLayout>
@@ -81,7 +83,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Rp. "
+                android:text="@string/rp"
+                android:layout_marginEnd="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -118,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                tools:text="0"/>
+                android:text="@string/indicatorItem"/>
 
             <ImageView
                 android:id="@+id/iv_plus"

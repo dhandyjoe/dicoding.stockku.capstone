@@ -24,4 +24,10 @@
     <string name="logout">Logout</string>
     <string name="minusicon">minusIcon</string>
     <string name="plusicon">plusIcon</string>
+    <string name="tv_ukuran">Ukuran :</string>
+    <string name="tv_stok">Stok :</string>
+    <string name="tanggal">Tanggal :</string>
+    <string name="rp">Rp.</string>
+    <string name="indicatorItem">0</string>
+    <string name="total_item">Total item :</string>
 </resources>

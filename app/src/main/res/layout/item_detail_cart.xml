@@ -37,12 +37,13 @@
                 android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Ukuran : " />
+                android:text="@string/tv_ukuran" />
 
             <TextView
                 android:id="@+id/tv_size_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 tools:text="40"/>
 
         </LinearLayout>
@@ -60,7 +61,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Rp. "
+                android:text="@string/rp"
+                android:layout_marginEnd="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -89,8 +91,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textStyle="italic"
-                tools:text="Total item : "/>
-
+                android:layout_marginEnd="10dp"
+                android:text="@string/total_item"/>
 
             <TextView
                 android:id="@+id/tv_indicatorItem"
