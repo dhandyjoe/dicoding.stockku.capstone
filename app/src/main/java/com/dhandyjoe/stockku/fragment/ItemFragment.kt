@@ -26,8 +26,6 @@ class DashboardFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentItemBinding
     private lateinit var thisContext: Context
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val userUid = FirebaseAuth.getInstance().currentUser?.uid
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val listItemSearch = ArrayList<Item>()
 
@@ -42,7 +40,7 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         thisContext = container!!.context
         binding = FragmentItemBinding.inflate(inflater, container, false)
 
@@ -56,8 +54,8 @@ class DashboardFragment : Fragment() {
         return binding.root
     }
 
-    fun getBarangList() {
-        var doc = firebaseDB.collection("barang")
+    private fun getBarangList() {
+        val doc = firebaseDB.collection("barang")
         doc.addSnapshotListener { snapshot, _ ->
             val user = ArrayList<Item>()
 
@@ -113,7 +111,7 @@ class DashboardFragment : Fragment() {
                 listItemSearch.clear()
                 data.forEach {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
-                        listItemSearch!!.add(it)
+                        listItemSearch.add(it)
                         showRecycleView(listItemSearch)
                     } else if (listItemSearch.isEmpty()) {
                         showRecycleView(listItemSearch)

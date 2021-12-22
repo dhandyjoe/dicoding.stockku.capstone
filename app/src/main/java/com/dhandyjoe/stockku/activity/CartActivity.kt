@@ -56,8 +56,8 @@ class CartActivity : AppCompatActivity() {
         binding.rvListItemCart.adapter = adapter
     }
 
-    fun saveTransaction(dataitem: ArrayList<Item>) {
-        var docTransaction = firebaseDB.collection("transaksi").document()
+    private fun saveTransaction(dataitem: ArrayList<Item>) {
+        val docTransaction = firebaseDB.collection("transaksi").document()
         val item = Cart(docTransaction.id, "transaksi1 - debug")
         docTransaction.set(item)
 

@@ -37,7 +37,7 @@ class TransactionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTransactionBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
 
@@ -51,8 +51,8 @@ class TransactionFragment : Fragment() {
         return binding.root
     }
 
-    fun getBarangList() {
-        var doc = firebaseDB.collection("transaksi")
+    private fun getBarangList() {
+        val doc = firebaseDB.collection("transaksi")
         doc.addSnapshotListener { snapshot, _ ->
             val user = ArrayList<Cart>()
 
@@ -107,7 +107,7 @@ class TransactionFragment : Fragment() {
                 listItemSearch.clear()
                 data.forEach {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
-                        listItemSearch!!.add(it)
+                        listItemSearch.add(it)
                         showRecycleView(listItemSearch)
                     } else if (listItemSearch.isEmpty()) {
                         showRecycleView(listItemSearch)

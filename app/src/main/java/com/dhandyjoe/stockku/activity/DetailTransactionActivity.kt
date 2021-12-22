@@ -29,8 +29,8 @@ class DetailTransactionActivity : AppCompatActivity() {
         }
     }
 
-    fun getItemTransactionList(transaksiId: String) {
-        var doc = firebaseDB.collection(COLLECTION_TRANSACTION).document(transaksiId).collection("itemTransaksi")
+    private fun getItemTransactionList(transaksiId: String) {
+        val doc = firebaseDB.collection(COLLECTION_TRANSACTION).document(transaksiId).collection("itemTransaksi")
         doc.get()
             .addOnSuccessListener {
                 for(docItem in it) {

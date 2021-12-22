@@ -26,8 +26,8 @@ class AddItemTransactionActivity : AppCompatActivity() {
         getBarangList()
     }
 
-    fun getBarangList() {
-        var doc = firebaseDB.collection("barang")
+    private fun getBarangList() {
+        val doc = firebaseDB.collection("barang")
         doc.addSnapshotListener { snapshot, _ ->
             val user = ArrayList<Item>()
 
@@ -86,7 +86,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
                 listItemSearch.clear()
                 data.forEach {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
-                        listItemSearch!!.add(it)
+                        listItemSearch.add(it)
                         showRecycleView(listItemSearch)
                     } else if (listItemSearch.isEmpty()) {
                         showRecycleView(listItemSearch)

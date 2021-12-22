@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
-import com.dhandyjoe.stockku.util.DATA_IMAGES
+import com.dhandyjoe.stockku.util.STORAGE_IMAGES
 import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
@@ -62,7 +62,7 @@ class AddItemActivity : AppCompatActivity() {
     private fun storeImage(imageUri: Uri?) {
         if (imageUri != null) {
             Toast.makeText(this, "Uploading...", Toast.LENGTH_SHORT).show()
-            val filePath = firebaseStorage.child(DATA_IMAGES).child("${UUID.randomUUID()}.jpg")
+            val filePath = firebaseStorage.child(STORAGE_IMAGES).child("${UUID.randomUUID()}.jpg")
 
             filePath.putFile(imageUri)
                 .addOnSuccessListener {
@@ -100,9 +100,5 @@ class AddItemActivity : AppCompatActivity() {
             database.addItem(nameItem, sizeItem, priceItem, imageUrl, stockItem.toInt())
             finish()
         }
-    }
-
-    companion object {
-        const val RESULT_CODE = 100
     }
 }

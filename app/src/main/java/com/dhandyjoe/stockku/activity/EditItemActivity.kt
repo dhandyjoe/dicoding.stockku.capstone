@@ -9,9 +9,6 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.util.Database
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import java.util.*
 
 class EditItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
@@ -67,7 +64,7 @@ class EditItemActivity : AppCompatActivity() {
 //            }
 //    }
 
-    fun updateItem(item: Item) {
+    private fun updateItem(item: Item) {
         val nameItem = binding.etEditNameItem.text.toString()
         val sizeItem = binding.etEditSizeItem.text.toString()
         val priceItem = binding.etEditPriceItem.text.toString()
@@ -76,7 +73,7 @@ class EditItemActivity : AppCompatActivity() {
         database.editItem(item.id, nameItem, priceItem, sizeItem, addStockItem)
     }
 
-    fun deleteItem(item: Item) {
+    private fun deleteItem(item: Item) {
         AlertDialog.Builder(this)
             .setTitle("Hapus barang")
             .setMessage("Ini akan menghapus barang anda. Apakah anda yakin?")
