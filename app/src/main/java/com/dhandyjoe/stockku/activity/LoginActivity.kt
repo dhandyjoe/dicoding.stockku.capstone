@@ -32,12 +32,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signInEmail(email: String, password: String) {
+        binding.llLogin.visibility = View.VISIBLE
         binding.pbLogin.visibility = View.VISIBLE
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     binding.pbLogin.visibility = View.GONE
+                    binding.llLogin.visibility = View.GONE
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()

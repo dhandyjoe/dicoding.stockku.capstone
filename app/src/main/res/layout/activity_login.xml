@@ -95,15 +95,28 @@
             android:text="@string/login" />
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/pb_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#3C000000">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pb_login"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets6.lottiefiles.com/packages/lf20_h1cidhml.json" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
