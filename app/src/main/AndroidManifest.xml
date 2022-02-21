@@ -13,29 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Stockku">
         <activity
-            android:name=".activity.DetailTransactionActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.DetailTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.CartActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AddItemTransactionActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.AddItemTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.EditItemActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.EditItemActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AddItemActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.AddItemActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Stockku2" />
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name="com.dhandyjoe.stockku.ui.activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

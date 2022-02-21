@@ -1,5 +1,6 @@
-package com.dhandyjoe.stockku.fragment
+package com.dhandyjoe.stockku.ui.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,24 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.activity.CartActivity
-import com.dhandyjoe.stockku.activity.DetailTransactionActivity
-import com.dhandyjoe.stockku.adapter.TransactionAdapter
-import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
-import com.dhandyjoe.stockku.model.Cart
+import androidx.recyclerview.widget.GridLayoutManager
+import com.dhandyjoe.stockku.ui.activity.AddItemActivity
+import com.dhandyjoe.stockku.ui.activity.EditItemActivity
+import com.dhandyjoe.stockku.adapter.ItemAdapter
+import com.dhandyjoe.stockku.databinding.FragmentItemBinding
+import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FirebaseFirestore
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class TransactionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+class DashboardFragment : Fragment() {
+
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var binding: FragmentTransactionBinding
+    private lateinit var binding: FragmentItemBinding
+    private lateinit var thisContext: Context
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private var listItemSearch = ArrayList<Cart>()
+    private val listItemSearch = ArrayList<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +40,11 @@ class TransactionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTransactionBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
+        thisContext = container!!.context
+        binding = FragmentItemBinding.inflate(inflater, container, false)
 
         binding.favAddTransaction.setOnClickListener {
-            val intent = Intent(activity, CartActivity::class.java)
+            val intent = Intent(activity, AddItemActivity::class.java)
             startActivity(intent)
         }
 
@@ -52,42 +54,43 @@ class TransactionFragment : Fragment() {
     }
 
     private fun getBarangList() {
-        val doc = firebaseDB.collection("transaksi")
+        val doc = firebaseDB.collection("barang")
         doc.addSnapshotListener { snapshot, _ ->
-            val user = ArrayList<Cart>()
+            val user = ArrayList<Item>()
 
             for(docItem in snapshot!!) {
-                user.add(docItem.toObject(Cart::class.java))
+                user.add(docItem.toObject(Item::class.java))
             }
 
             if (user.size > 0) {
                 showRecycleView(user)
             } else {
                 binding.animationView.visibility = View.VISIBLE
-                binding.rvListTransaction.visibility = View.GONE
+                binding.rvListItem.visibility = View.GONE
             }
 
             searchItem(user)
+
         }
     }
 
-    private fun showRecycleView(data: ArrayList<Cart>) {
+    private fun showRecycleView(data: ArrayList<Item>) {
         binding.animationView.visibility = View.GONE
-        binding.rvListTransaction.layoutManager = LinearLayoutManager(context)
-        val data = TransactionAdapter(data)
-        binding.rvListTransaction.adapter = data
-        binding.rvListTransaction.visibility = View.VISIBLE
+        binding.rvListItem.layoutManager = GridLayoutManager(context, 2)
+        val data = ItemAdapter(data, thisContext)
+        binding.rvListItem.adapter = data
+        binding.rvListItem.visibility = View.VISIBLE
 
-        data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: Cart) {
-                val intent = Intent(activity, DetailTransactionActivity::class.java)
-                intent.putExtra(DetailTransactionActivity.EXTRA_DATA, data)
+        data.setOnItemClickCallback(object : ItemAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Item) {
+                val intent = Intent(activity, EditItemActivity::class.java)
+                intent.putExtra(EditItemActivity.EXTRA_BARANG, data)
                 startActivity(intent)
             }
         })
     }
 
-    private fun searchItem(data: ArrayList<Cart>) {
+    private fun searchItem(data: ArrayList<Item>) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()

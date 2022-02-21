@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.activity
+package com.dhandyjoe.stockku.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -50,6 +50,7 @@ class DetailTransactionActivity : AppCompatActivity() {
         binding.rvDetailTransaction.layoutManager = LinearLayoutManager(this)
         binding.rvDetailTransaction.adapter = adapter
     }
+
     companion object {
         const val EXTRA_DATA = "extra_data"
     }
