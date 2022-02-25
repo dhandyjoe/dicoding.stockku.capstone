@@ -29,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name="com.dhandyjoe.stockku.ui.activity.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name="com.dhandyjoe.stockku.ui.activity.MainActivity"
             android:exported="false"

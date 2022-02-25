@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/drawable/ic_plus.xml" value="0.21875" />
         <entry key="app/src/main/res/drawable/ic_remove.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/activity_add_item.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_add_item_transaction.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/layout/activity_add_item_transaction.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail_cart.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.20260416666666667" />
@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/activity_primary.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_transaction.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/dialog_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_item.xml" value="0.25" />
@@ -31,10 +32,10 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_detail_transaction.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_list_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_list_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_stock.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction1.xml" value="0.20260416666666667" />

@@ -13,6 +13,7 @@ import com.dhandyjoe.stockku.ui.activity.DetailTransactionActivity
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
 import com.dhandyjoe.stockku.model.Cart
+import com.dhandyjoe.stockku.ui.activity.AddItemTransactionActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
 private const val ARG_PARAM1 = "param1"
@@ -42,7 +43,7 @@ class TransactionFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding.favAddTransaction.setOnClickListener {
-            val intent = Intent(activity, CartActivity::class.java)
+            val intent = Intent(activity, AddItemTransactionActivity::class.java)
             startActivity(intent)
         }
 

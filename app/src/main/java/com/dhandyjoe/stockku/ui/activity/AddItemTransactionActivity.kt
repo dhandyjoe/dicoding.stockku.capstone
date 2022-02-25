@@ -4,11 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
 import com.dhandyjoe.stockku.model.Item
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemTransactionActivity : AppCompatActivity() {
@@ -58,13 +64,31 @@ class AddItemTransactionActivity : AppCompatActivity() {
 //                viewModel.addItem(data)
 //                binding.debug.text = viewModel.data.size.toString()
 
-                val resultIntent = Intent()
-                resultIntent.putExtra(EXTRA_SELECTED_VALUE, data)
-                setResult(RESULT_CODE, resultIntent)
-                finish()
+                cartDialog(data)
+
+//                val resultIntent = Intent()
+//                resultIntent.putExtra(EXTRA_SELECTED_VALUE, data)
+//                setResult(RESULT_CODE, resultIntent)
+//                finish()
             }
         })
     }
+
+    private fun cartDialog(data: Item) {
+        val cartDialog =  layoutInflater.inflate(R.layout.dialog_cart, null)
+        val dialog = BottomSheetDialog(this)
+        dialog.apply {
+            setContentView(cartDialog)
+            setTitle("")
+        }
+        cartDialog.findViewById<TextView>(R.id.tv_item_addcart).text = data.name
+        Glide.with(this)
+            .load(data.imageUrl)
+            .centerCrop()
+            .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
+        dialog.show()
+    }
+
 
     private fun searchItem(data: ArrayList<Item>) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{

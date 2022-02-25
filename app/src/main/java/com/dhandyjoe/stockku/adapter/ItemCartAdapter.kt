@@ -16,7 +16,6 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        var statusIndicator = 0
         val model = data[position]
 
         if (holder is MyViewHolder) {
@@ -25,28 +24,16 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
             holder.binding.tvPriceItem.text = model.price
             holder.binding.tvStockItem.text = model.stock.toString()
 
-            holder.binding.ivPlus.setOnClickListener {
-                statusIndicator++
-                holder.binding.tvIndicatorItem.text = statusIndicator.toString()
-                model.totalTransaction = statusIndicator
-            }
-
-            holder.binding.ivRemove.setOnClickListener {
-                if (statusIndicator > 0) {
-                    statusIndicator--
-                    holder.binding.tvIndicatorItem.text = statusIndicator.toString()
-                    model.totalTransaction = statusIndicator
-                }
-            }
-
             holder.itemView.setOnClickListener {
-                if (model.stock == 0) {
-                    Toast.makeText(context, "Stock habis", Toast.LENGTH_SHORT).show()
-                } else if (statusIndicator == 0) {
-                    Toast.makeText(context, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
-                } else {
-                    onItemClickCallback.onItemClicked(data[holder.adapterPosition])
-                }
+                onItemClickCallback.onItemClicked(model)
+
+//                if (model.stock == 0) {
+//                    Toast.makeText(context, "Stock habis", Toast.LENGTH_SHORT).show()
+//                } else if (statusIndicator == 0) {
+//                    Toast.makeText(context, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    onItemClickCallback.onItemClicked(data[holder.adapterPosition])
+//                }
             }
         }
     }
