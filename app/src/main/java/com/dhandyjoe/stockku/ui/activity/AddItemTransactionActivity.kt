@@ -68,6 +68,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
     }
 
     private fun cartDialog(data: Item) {
+        var statusIndicator = 0
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_cart, null)
         val dialog = BottomSheetDialog(this)
         dialog.apply {
@@ -75,10 +76,24 @@ class AddItemTransactionActivity : AppCompatActivity() {
             setTitle("")
         }
         cartDialog.findViewById<TextView>(R.id.tv_item_addcart).text = data.name
+        cartDialog.findViewById<ImageView>(R.id.iv_minus).setOnClickListener {
+            if (statusIndicator > 0) {
+                statusIndicator--
+                cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
+            }
+        }
+        cartDialog.findViewById<ImageView>(R.id.iv_plus).setOnClickListener {
+            statusIndicator++
+            cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
+        }
         cartDialog.findViewById<Button>(R.id.btn_cart).setOnClickListener {
-            val resultIntent = Intent()
-            resultIntent.putExtra(EXTRA_SELECTED_VALUE, data)
-            setResult(RESULT_CODE, resultIntent)
+            if (data.stock == 0) {
+                Toast.makeText(this, "Stock habis", Toast.LENGTH_SHORT).show()
+            } else if (statusIndicator == 0) {
+                Toast.makeText(this, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
+            } else {
+                //
+            }
         }
         Glide.with(this)
             .load(data.imageUrl)
