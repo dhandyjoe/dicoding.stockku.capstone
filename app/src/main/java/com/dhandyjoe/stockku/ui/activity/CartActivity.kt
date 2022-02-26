@@ -42,10 +42,10 @@ class CartActivity : AppCompatActivity() {
 
         binding.toolbar.title = "Keranjang"
 
-        binding.ivAddItemTransaction.setOnClickListener {
-            val moveForResultIntent = Intent(this, AddItemTransactionActivity::class.java)
-            resultLauncher.launch(moveForResultIntent)
-        }
+//        binding.ivAddItemTransaction.setOnClickListener {
+//            val moveForResultIntent = Intent(this, AddItemTransactionActivity::class.java)
+//            resultLauncher.launch(moveForResultIntent)
+//        }
 
         binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(adapter.listItemCart)

@@ -3,16 +3,16 @@ package com.dhandyjoe.stockku.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
+import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Item
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,6 +28,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbarMain.title = "Pilih item"
+        setSupportActionBar(binding.toolbarMain)
 
         getBarangList()
     }
@@ -61,15 +62,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
 
         data.setOnItemClickCallback(object : ItemCartAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Item) {
-//                viewModel.addItem(data)
-//                binding.debug.text = viewModel.data.size.toString()
-
                 cartDialog(data)
-
-//                val resultIntent = Intent()
-//                resultIntent.putExtra(EXTRA_SELECTED_VALUE, data)
-//                setResult(RESULT_CODE, resultIntent)
-//                finish()
             }
         })
     }
@@ -82,6 +75,11 @@ class AddItemTransactionActivity : AppCompatActivity() {
             setTitle("")
         }
         cartDialog.findViewById<TextView>(R.id.tv_item_addcart).text = data.name
+        cartDialog.findViewById<Button>(R.id.btn_cart).setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra(EXTRA_SELECTED_VALUE, data)
+            setResult(RESULT_CODE, resultIntent)
+        }
         Glide.with(this)
             .load(data.imageUrl)
             .centerCrop()
@@ -120,6 +118,22 @@ class AddItemTransactionActivity : AppCompatActivity() {
                 return false
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.cart_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_cart -> {
+                val intent  = Intent(this, CartActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {
