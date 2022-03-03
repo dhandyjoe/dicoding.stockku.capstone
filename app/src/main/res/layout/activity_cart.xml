@@ -31,6 +31,7 @@
         android:id="@+id/iv_indicatorCart"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="invisible"
         android:src="@drawable/undraw_add_cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

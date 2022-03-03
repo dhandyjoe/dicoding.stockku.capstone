@@ -13,23 +13,25 @@ class CartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var listItemCart = ArrayList<Item>()
 
     fun updateItem(list: ArrayList<Item>) {
-        var newItem = false
-        for (oldItem in listItemCart) {
-            if (oldItem.id == list[0].id) {
-                oldItem.totalTransaction += list[0].totalTransaction
-                newItem = false
-                break
-            } else {
-                newItem = true
-            }
-        }
+//        var newItem = false
+//        for (oldItem in listItemCart) {
+//            if (oldItem.id == list[0].id) {
+//                oldItem.totalTransaction += list[0].totalTransaction
+//                newItem = false
+//                break
+//            } else {
+//                newItem = true
+//            }
+//        }
+//
+//        val diffCallback = ItemDiffCallback(listItemCart, list)
+//        val diffResult = DiffUtil.calculateDiff(diffCallback)
+//        if (newItem || listItemCart.isEmpty()){
+//            listItemCart.add(list[0])
+//        }
+//        diffResult.dispatchUpdatesTo(this)
 
-        val diffCallback = ItemDiffCallback(listItemCart, list)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        if (newItem || listItemCart.isEmpty()){
-            listItemCart.add(list[0])
-        }
-        diffResult.dispatchUpdatesTo(this)
+        listItemCart.addAll(list)
     }
 
     fun isEmpty(): Boolean = listItemCart.isEmpty()
@@ -52,30 +54,30 @@ class CartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = listItemCart.size
 }
 
-class ItemDiffCallback(oldEmployeeList: List<Item>, newEmployeeList: List<Item>) : DiffUtil.Callback() {
-    private val mOldItemList: List<Item> = oldEmployeeList
-    private val mNewItemList: List<Item> = newEmployeeList
-
-    override fun getOldListSize(): Int {
-        return mOldItemList.size
-    }
-
-    override fun getNewListSize(): Int {
-        return mNewItemList.size
-    }
-
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return mOldItemList[oldItemPosition].id === mNewItemList[newItemPosition].id
-    }
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldEmployee: Item = mOldItemList[oldItemPosition]
-        val newEmployee: Item = mNewItemList[newItemPosition]
-        return oldEmployee.totalTransaction == newEmployee.totalTransaction
-    }
-
-    @Nullable
-    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        return super.getChangePayload(oldItemPosition, newItemPosition)
-    }
-}
+//class ItemDiffCallback(oldEmployeeList: List<Item>, newEmployeeList: List<Item>) : DiffUtil.Callback() {
+//    private val mOldItemList: List<Item> = oldEmployeeList
+//    private val mNewItemList: List<Item> = newEmployeeList
+//
+//    override fun getOldListSize(): Int {
+//        return mOldItemList.size
+//    }
+//
+//    override fun getNewListSize(): Int {
+//        return mNewItemList.size
+//    }
+//
+//    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+//        return mOldItemList[oldItemPosition].id === mNewItemList[newItemPosition].id
+//    }
+//
+//    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+//        val oldEmployee: Item = mOldItemList[oldItemPosition]
+//        val newEmployee: Item = mNewItemList[newItemPosition]
+//        return oldEmployee.totalTransaction == newEmployee.totalTransaction
+//    }
+//
+//    @Nullable
+//    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
+//        return super.getChangePayload(oldItemPosition, newItemPosition)
+//    }
+//}

@@ -38,10 +38,6 @@ class Database {
         firebaseDB.collection(COLLECTION_ITEM)
             .document(item.id)
             .update("stock", item.stock - item.totalTransaction)
-
-        firebaseDB.collection(COLLECTION_ITEM)
-            .document(item.id)
-            .update("totalTransaction", 0)
     }
 
     fun addItemTransaction(data: Item, docTransaction: String) {

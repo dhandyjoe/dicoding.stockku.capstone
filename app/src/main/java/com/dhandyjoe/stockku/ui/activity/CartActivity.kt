@@ -2,6 +2,7 @@ package com.dhandyjoe.stockku.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -10,6 +11,7 @@ import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.util.COLLECTION_CART
 import com.dhandyjoe.stockku.util.Database
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -22,17 +24,17 @@ class CartActivity : AppCompatActivity() {
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val adapter = CartAdapter()
 
-    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == AddItemTransactionActivity.RESULT_CODE && result.data != null) {
-            val selectedValue = result.data?.getParcelableExtra<Item>(AddItemTransactionActivity.EXTRA_SELECTED_VALUE)
-            if (selectedValue != null) {
-                val list = ArrayList<Item>()
-                list.add(selectedValue)
-                adapter.updateItem(list)
-            }
-        }
-        showEmptyIndicator(adapter.isEmpty())
-    }
+//    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//        if (result.resultCode == AddItemTransactionActivity.RESULT_CODE && result.data != null) {
+//            val selectedValue = result.data?.getParcelableExtra<Item>(AddItemTransactionActivity.EXTRA_SELECTED_VALUE)
+//            if (selectedValue != null) {
+//                val list = ArrayList<Item>()
+//                list.add(selectedValue)
+//                adapter.updateItem(list)
+//            }
+//        }
+//        showEmptyIndicator(adapter.isEmpty())
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,17 @@ class CartActivity : AppCompatActivity() {
 //            val moveForResultIntent = Intent(this, AddItemTransactionActivity::class.java)
 //            resultLauncher.launch(moveForResultIntent)
 //        }
+
+        firebaseDB.collection(COLLECTION_CART).get()
+            .addOnSuccessListener {
+                val docs = ArrayList<Item>()
+                for (document in it) {
+                    docs.add(document.toObject(Item::class.java))
+                }
+
+                adapter.updateItem(docs)
+                showEmptyIndicator(adapter.isEmpty())
+            }
 
         binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(adapter.listItemCart)

@@ -25,6 +25,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val database = Database()
     private val listItemSearch = ArrayList<Item>()
+    private lateinit var menuItemCount: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +121,9 @@ class AddItemTransactionActivity : AppCompatActivity() {
                         if (newItem) {
                             database.addItemCart(data)
                             Log.d("update", "add")
+
+                            // seek count item cart
+//                            menuItemCount.title = docs.size.toString()
                         }
                     }
 
@@ -167,11 +171,15 @@ class AddItemTransactionActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.cart_menu, menu)
+        menuItemCount = menu!!.findItem(R.id.action_count)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_count -> {
+                true
+            }
             R.id.action_cart -> {
                 val intent  = Intent(this, CartActivity::class.java)
                 startActivity(intent)
