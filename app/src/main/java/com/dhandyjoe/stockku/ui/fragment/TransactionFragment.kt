@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.ui.activity.CartActivity
 import com.dhandyjoe.stockku.ui.activity.DetailTransactionActivity
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
-import com.dhandyjoe.stockku.model.Cart
+import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.ui.activity.AddItemTransactionActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -25,7 +24,7 @@ class TransactionFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private var listItemSearch = ArrayList<Cart>()
+    private var listItemSearch = ArrayList<Transaction>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +54,10 @@ class TransactionFragment : Fragment() {
     private fun getBarangList() {
         val doc = firebaseDB.collection("transaksi")
         doc.addSnapshotListener { snapshot, _ ->
-            val user = ArrayList<Cart>()
+            val user = ArrayList<Transaction>()
 
             for(docItem in snapshot!!) {
-                user.add(docItem.toObject(Cart::class.java))
+                user.add(docItem.toObject(Transaction::class.java))
             }
 
             if (user.size > 0) {
@@ -72,7 +71,7 @@ class TransactionFragment : Fragment() {
         }
     }
 
-    private fun showRecycleView(data: ArrayList<Cart>) {
+    private fun showRecycleView(data: ArrayList<Transaction>) {
         binding.animationView.visibility = View.GONE
         binding.rvListTransaction.layoutManager = LinearLayoutManager(context)
         val data = TransactionAdapter(data)
@@ -80,7 +79,7 @@ class TransactionFragment : Fragment() {
         binding.rvListTransaction.visibility = View.VISIBLE
 
         data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: Cart) {
+            override fun onItemClicked(data: Transaction) {
                 val intent = Intent(activity, DetailTransactionActivity::class.java)
                 intent.putExtra(DetailTransactionActivity.EXTRA_DATA, data)
                 startActivity(intent)
@@ -88,7 +87,7 @@ class TransactionFragment : Fragment() {
         })
     }
 
-    private fun searchItem(data: ArrayList<Cart>) {
+    private fun searchItem(data: ArrayList<Transaction>) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()

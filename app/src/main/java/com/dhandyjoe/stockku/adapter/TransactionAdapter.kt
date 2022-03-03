@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListTransactionBinding
-import com.dhandyjoe.stockku.model.Cart
+import com.dhandyjoe.stockku.model.Transaction
 
-class TransactionAdapter(private val data: ArrayList<Cart>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TransactionAdapter(private val data: ArrayList<Transaction>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListTransactionBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,7 +34,7 @@ class TransactionAdapter(private val data: ArrayList<Cart>): RecyclerView.Adapte
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Cart)
+        fun onItemClicked(data: Transaction)
     }
 
 }

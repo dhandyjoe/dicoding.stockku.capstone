@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize
-data class Cart (
+data class Transaction (
     var id: String = "",
     var name: String = "",
     var date: String = ""

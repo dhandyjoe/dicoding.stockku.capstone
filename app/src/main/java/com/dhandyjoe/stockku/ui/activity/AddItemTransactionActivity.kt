@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,12 +15,15 @@ import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.util.COLLECTION_CART
+import com.dhandyjoe.stockku.util.Database
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
+    private val database = Database()
     private val listItemSearch = ArrayList<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +72,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
     }
 
     private fun cartDialog(data: Item) {
-        var statusIndicator = 0
+        var statusIndicator = 1
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_cart, null)
         val dialog = BottomSheetDialog(this)
         dialog.apply {
@@ -87,12 +91,39 @@ class AddItemTransactionActivity : AppCompatActivity() {
             cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
         }
         cartDialog.findViewById<Button>(R.id.btn_cart).setOnClickListener {
+            var newItem = true
             if (data.stock == 0) {
                 Toast.makeText(this, "Stock habis", Toast.LENGTH_SHORT).show()
             } else if (statusIndicator == 0) {
                 Toast.makeText(this, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
             } else {
-                //
+                data.totalTransaction = statusIndicator
+
+                firebaseDB.collection(COLLECTION_CART).get()
+                    .addOnSuccessListener {
+                        val docs = ArrayList<Item>()
+                        for (document in it) {
+                            docs.add(document.toObject(Item::class.java))
+                        }
+
+                        for (doc in docs) {
+                            if (data.id == doc.id) {
+                                newItem = false
+                                database.updateItemCart(doc, statusIndicator)
+                                Log.d("update", "update")
+                                break
+                            } else {
+                                newItem = true
+                            }
+                        }
+
+                        if (newItem) {
+                            database.addItemCart(data)
+                            Log.d("update", "add")
+                        }
+                    }
+
+                dialog.dismiss()
             }
         }
         Glide.with(this)
@@ -101,7 +132,6 @@ class AddItemTransactionActivity : AppCompatActivity() {
             .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
         dialog.show()
     }
-
 
     private fun searchItem(data: ArrayList<Item>) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{

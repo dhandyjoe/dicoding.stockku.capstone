@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityDetailTransactionBinding
-import com.dhandyjoe.stockku.model.Cart
+import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.util.COLLECTION_TRANSACTION
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,7 +22,7 @@ class DetailTransactionActivity : AppCompatActivity() {
 
         binding.toolbar.title = "Detail transaksi"
 
-        val data = intent.getParcelableExtra<Cart>(EXTRA_DATA)
+        val data = intent.getParcelableExtra<Transaction>(EXTRA_DATA)
 
         if (data != null) {
             getItemTransactionList(data.id)
