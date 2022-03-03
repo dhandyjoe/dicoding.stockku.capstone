@@ -73,6 +73,10 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
+    // Animation - Lottie
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // Bluetooth Printer
+    implementation 'com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.1.2'
 }
