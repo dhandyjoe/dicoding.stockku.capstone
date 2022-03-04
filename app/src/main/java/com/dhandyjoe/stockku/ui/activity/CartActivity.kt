@@ -25,7 +25,7 @@ class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private val adapter = CartAdapter()
+    private val adapter = CartAdapter(this)
 
 //    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 //        if (result.resultCode == AddItemTransactionActivity.RESULT_CODE && result.data != null) {

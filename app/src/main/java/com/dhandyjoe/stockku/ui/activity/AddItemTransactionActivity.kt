@@ -119,7 +119,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
                         }
 
                         if (newItem) {
-                            database.addItemCart(data)
+                            database.addItemCart(data, statusIndicator)
                             Log.d("update", "add")
 
                             // seek count item cart

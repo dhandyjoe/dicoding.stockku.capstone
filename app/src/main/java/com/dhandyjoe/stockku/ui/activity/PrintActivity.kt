@@ -37,7 +37,7 @@ class PrintActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ScanningActivity.SCANNING_FOR_PRINTER && resultCode == Activity.RESULT_OK) {
-            Log.d("Print", "Print successfully")
+            Log.d("Printasdasdasdg", "Print successfully")
         }
     }
 }

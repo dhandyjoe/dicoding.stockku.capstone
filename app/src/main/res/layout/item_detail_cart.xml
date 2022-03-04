@@ -12,26 +12,30 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:padding="15dp">
 
         <TextView
             android:id="@+id/tv_name_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            tools:text="Converse"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            tools:text="Converse" />
 
         <LinearLayout
             android:id="@+id/ll_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/tv_name_item"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_item"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_item">
 
             <TextView
                 android:id="@+id/tv_size"
@@ -44,25 +48,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                tools:text="40"/>
+                tools:text="40" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
             android:layout_below="@id/ll_size"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingVertical="5dp">
+            android:paddingVertical="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ll_size">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rp"
                 android:layout_marginEnd="5dp"
+                android:text="@string/rp"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -70,43 +75,55 @@
                 android:id="@+id/tv_price_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="20000"
                 android:textSize="16sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_stock" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_stock"
+                tools:text="20000" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginEnd="5dp"
-            android:paddingHorizontal="5dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true">
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textStyle="italic"
                 android:layout_marginEnd="10dp"
-                android:text="@string/total_item"/>
+                android:contentDescription="@string/minusicon"
+                android:src="@drawable/ic_remove" />
 
             <TextView
                 android:id="@+id/tv_indicatorItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="0dp"
-                android:paddingEnd="5dp"
-                android:textStyle="italic"
-                android:textSize="16sp"
-                tools:text="0"/>
+                android:text="@string/indicatorItem"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/plusicon"
+                android:src="@drawable/ic_plus" />
 
         </LinearLayout>
-    </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_cart"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -1,14 +1,21 @@
 package com.dhandyjoe.stockku.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.util.COLLECTION_CART
+import com.dhandyjoe.stockku.util.Database
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val firebaseDB = FirebaseFirestore.getInstance()
+    private val database = Database()
+
     class MyViewHolder(val binding: ItemListCartBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,6 +41,36 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
 //                } else {
 //                    onItemClickCallback.onItemClicked(data[holder.adapterPosition])
 //                }
+            }
+
+            holder.binding.btnDirectCart.setOnClickListener {
+                var newItem = true
+                firebaseDB.collection(COLLECTION_CART).get()
+                    .addOnSuccessListener {
+                        val docs = ArrayList<Item>()
+                        for (document in it) {
+                            docs.add(document.toObject(Item::class.java))
+                        }
+
+                        for (doc in docs) {
+                            if (model.id == doc.id) {
+                                newItem = false
+                                database.updateItemCart(doc, 1)
+                                Log.d("update", "update")
+                                break
+                            } else {
+                                newItem = true
+                            }
+                        }
+
+                        if (newItem) {
+                            database.addItemCart(model, 1)
+                            Log.d("update", "add")
+
+                            // seek count item cart
+//                            menuItemCount.title = docs.size.toString()
+                        }
+                    }
             }
         }
     }

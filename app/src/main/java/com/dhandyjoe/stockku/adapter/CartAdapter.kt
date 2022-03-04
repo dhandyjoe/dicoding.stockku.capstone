@@ -1,14 +1,17 @@
 package com.dhandyjoe.stockku.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.animation.content.Content
+import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.model.Item
 
-class CartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CartAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemDetailCartBinding): RecyclerView.ViewHolder(binding.root)
     var listItemCart = ArrayList<Item>()
 
@@ -47,6 +50,10 @@ class CartAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvPriceItem.text = model.price
+            Glide.with(context)
+                .load(model.imageUrl)
+                .into(holder.binding.ivCart)
+
             holder.binding.tvIndicatorItem.text = model.totalTransaction.toString()
         }
     }

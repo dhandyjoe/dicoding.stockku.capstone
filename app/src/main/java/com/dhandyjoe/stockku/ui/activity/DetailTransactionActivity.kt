@@ -13,7 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class DetailTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private val adapter = CartAdapter()
+    private val adapter = CartAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

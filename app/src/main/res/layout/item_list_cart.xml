@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="180dp"
     android:layout_margin="15dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp"
@@ -99,6 +99,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_stock" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_directCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="+ keranjang"
+            android:textSize="8sp"/>
+
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

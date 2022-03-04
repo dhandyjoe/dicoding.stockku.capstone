@@ -46,9 +46,9 @@ class Database {
         docItemTransaction.set(data)
     }
 
-    fun addItemCart(data: Item) {
+    fun addItemCart(data: Item, totalTransaction: Int) {
         val docItemCart = firebaseDB.collection(COLLECTION_CART).document()
-        val item = Item(data.id, docItemCart.id, data.name, data.size, data.price, data.imageUrl, data.stock, data.totalTransaction)
+        val item = Item(data.id, docItemCart.id, data.name, data.size, data.price, data.imageUrl, data.stock, totalTransaction)
         docItemCart.set(item)
     }
 

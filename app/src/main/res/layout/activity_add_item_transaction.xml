@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sv_item"
-        tools:listitem="@layout/item_list_transaction" />
+        tools:listitem="@layout/item_list_cart" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
