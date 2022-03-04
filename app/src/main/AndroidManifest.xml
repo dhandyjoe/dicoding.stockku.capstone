@@ -7,7 +7,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -17,30 +21,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Stockku">
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.DetailTransactionActivity"
+            android:name=".ui.activity.PrintActivity"
             android:exported="false" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.CartActivity"
+            android:name=".ui.activity.DetailTransactionActivity"
             android:exported="false" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.AddItemTransactionActivity"
+            android:name=".ui.activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.EditItemActivity"
+            android:name=".ui.activity.AddItemTransactionActivity"
             android:exported="false" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.AddItemActivity"
+            android:name=".ui.activity.EditItemActivity"
             android:exported="false" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.LoginActivity"
+            android:name=".ui.activity.AddItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Stockku2" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.activity.SplashScreenActivity"
+            android:name=".ui.activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

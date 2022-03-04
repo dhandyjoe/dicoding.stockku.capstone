@@ -1,11 +1,14 @@
 package com.dhandyjoe.stockku.ui.activity
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
@@ -61,9 +64,25 @@ class CartActivity : AppCompatActivity() {
 
         binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(adapter.listItemCart)
-            finish()
-            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
+            showPrintDialog()
+//            finish()
+//            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showPrintDialog() {
+        val alert = AlertDialog.Builder(this)
+        alert.setTitle("Transaksi berhasil disimpan!")
+        alert.setMessage("Apakah anda ingin mencetak struk?")
+        alert.setPositiveButton("Print", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this, PrintActivity::class.java)
+            startActivity(intent)
+        })
+
+        alert.setNegativeButton("Tutup") { dialog, which ->
+
+        }
+        alert.show()
     }
 
     private fun showRecycleView() {
