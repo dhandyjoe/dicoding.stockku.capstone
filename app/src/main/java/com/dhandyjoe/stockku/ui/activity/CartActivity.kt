@@ -117,4 +117,13 @@ class CartActivity : AppCompatActivity() {
             binding.rvListItemCart.visibility = View.VISIBLE
         }
     }
+
+    fun liveTotal() {
+        var total = 0
+        for (item in docs) {
+            total += item.price.toInt() * item.totalTransaction
+        }
+
+        binding.tvLiveTotal.text = "$total"
+    }
 }

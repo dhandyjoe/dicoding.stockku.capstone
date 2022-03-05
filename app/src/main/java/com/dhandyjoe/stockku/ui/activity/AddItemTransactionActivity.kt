@@ -125,6 +125,8 @@ class AddItemTransactionActivity : AppCompatActivity() {
                             // seek count item cart
 //                            menuItemCount.title = docs.size.toString()
                         }
+
+//                        menuItemCount.title = "${docs.size}"
                     }
 
                 dialog.dismiss()

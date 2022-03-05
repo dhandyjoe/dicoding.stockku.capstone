@@ -13,6 +13,7 @@ import com.airbnb.lottie.animation.content.Content
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.ui.activity.CartActivity
 import com.dhandyjoe.stockku.ui.activity.PrintActivity
 import com.dhandyjoe.stockku.util.Database
 
@@ -60,7 +61,7 @@ class CartAdapter(private val data: ArrayList<Item>, private val context: Contex
             Glide.with(context)
                 .load(model.imageUrl)
                 .into(holder.binding.ivCart)
-
+            (context as CartActivity).liveTotal()
             holder.binding.ivMinusCart.setOnClickListener {
                 if (model.totalTransaction > 1) {
                     database.updateItemCart(model, -1)
