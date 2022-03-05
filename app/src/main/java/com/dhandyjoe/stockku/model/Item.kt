@@ -9,7 +9,7 @@ data class Item(
     val idCart: String = "",
     val name: String = "",
     val size: String = "",
-    val price: String = "",
+    val price: Int = 0,
     val imageUrl: String = "",
     val stock: Int = 0,
     var totalTransaction: Int = 0

@@ -13,10 +13,9 @@ import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
-import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.COLLECTION_CART
-import com.dhandyjoe.stockku.util.Database
+import com.dhandyjoe.stockku.utils.COLLECTION_CART
+import com.dhandyjoe.stockku.utils.Database
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
 

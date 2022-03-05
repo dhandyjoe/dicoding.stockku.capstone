@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.Database
+import com.dhandyjoe.stockku.utils.Database
 
 class EditItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
@@ -36,7 +36,7 @@ class EditItemActivity : AppCompatActivity() {
 
         binding.etEditNameItem.setText(data?.name)
         binding.etEditSizeItem.setText(data?.size)
-        binding.etEditPriceItem.setText(data?.price)
+        binding.etEditPriceItem.setText(data?.price.toString())
 
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)

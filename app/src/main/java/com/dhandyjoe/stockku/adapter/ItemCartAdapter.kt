@@ -4,12 +4,12 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.COLLECTION_CART
-import com.dhandyjoe.stockku.util.Database
+import com.dhandyjoe.stockku.utils.COLLECTION_CART
+import com.dhandyjoe.stockku.utils.Database
+import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -28,7 +28,7 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
         if (holder is MyViewHolder) {
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
-            holder.binding.tvPriceItem.text = model.price
+            holder.binding.tvPriceItem.text = idrFormat(model.price)
             holder.binding.tvStockItem.text = model.stock.toString()
 
             holder.itemView.setOnClickListener {

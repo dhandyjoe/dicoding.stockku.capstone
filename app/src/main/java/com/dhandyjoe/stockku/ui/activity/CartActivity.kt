@@ -11,8 +11,8 @@ import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.COLLECTION_CART
-import com.dhandyjoe.stockku.util.Database
+import com.dhandyjoe.stockku.utils.Database
+import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -124,6 +124,6 @@ class CartActivity : AppCompatActivity() {
             total += item.price.toInt() * item.totalTransaction
         }
 
-        binding.tvLiveTotal.text = "$total"
+        binding.tvLiveTotal.text = "Rp. ${idrFormat(total)}"
     }
 }

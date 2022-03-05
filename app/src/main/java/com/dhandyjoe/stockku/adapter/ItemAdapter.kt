@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.utils.idrFormat
 
 class ItemAdapter(private val data: ArrayList<Item>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListStockBinding): RecyclerView.ViewHolder(binding.root)
@@ -23,7 +24,7 @@ class ItemAdapter(private val data: ArrayList<Item>, private val context: Contex
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvStockItem.text = model.stock.toString()
-            holder.binding.tvPriceItem.text = model.price
+            holder.binding.tvPriceItem.text = idrFormat(model.price)
 
             if (model.imageUrl.isEmpty()) {
                 Glide.with(context)

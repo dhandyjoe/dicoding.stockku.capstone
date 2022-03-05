@@ -2,20 +2,16 @@ package com.dhandyjoe.stockku.adapter
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.animation.content.Content
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.ui.activity.CartActivity
-import com.dhandyjoe.stockku.ui.activity.PrintActivity
-import com.dhandyjoe.stockku.util.Database
+import com.dhandyjoe.stockku.utils.Database
+import com.dhandyjoe.stockku.utils.idrFormat
 
 class CartAdapter(private val data: ArrayList<Item>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val database = Database()
@@ -57,7 +53,7 @@ class CartAdapter(private val data: ArrayList<Item>, private val context: Contex
         if (holder is MyViewHolder) {
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
-            holder.binding.tvPriceItem.text = model.price
+            holder.binding.tvPriceItem.text = idrFormat(model.price)
             Glide.with(context)
                 .load(model.imageUrl)
                 .into(holder.binding.ivCart)

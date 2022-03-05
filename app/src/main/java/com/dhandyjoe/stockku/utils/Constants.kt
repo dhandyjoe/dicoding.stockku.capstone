@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.util
+package com.dhandyjoe.stockku.utils
 
 const val COLLECTION_ITEM = "barang"
 const val COLLECTION_TRANSACTION = "transaksi"

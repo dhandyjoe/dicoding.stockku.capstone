@@ -11,8 +11,8 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
-import com.dhandyjoe.stockku.util.STORAGE_IMAGES
-import com.dhandyjoe.stockku.util.Database
+import com.dhandyjoe.stockku.utils.STORAGE_IMAGES
+import com.dhandyjoe.stockku.utils.Database
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
@@ -97,7 +97,7 @@ class AddItemActivity : AppCompatActivity() {
             val priceItem = binding.etPriceItem.text.toString()
             val stockItem = binding.etStockItem.text.toString()
 
-            database.addItem(nameItem, sizeItem, priceItem, imageUrl, stockItem.toInt())
+            database.addItem(nameItem, sizeItem, priceItem.toInt(), imageUrl, stockItem.toInt())
             finish()
         }
     }

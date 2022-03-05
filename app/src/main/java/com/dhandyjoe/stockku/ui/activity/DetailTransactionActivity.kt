@@ -7,7 +7,7 @@ import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityDetailTransactionBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.util.COLLECTION_TRANSACTION
+import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DetailTransactionActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.util
+package com.dhandyjoe.stockku.utils
 
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FieldValue
@@ -8,7 +8,7 @@ class Database {
     private val firebaseDB = FirebaseFirestore.getInstance()
 
     // CREATE
-    fun addItem(nameItem: String, sizeItem: String, priceItem: String, imageUrl: String, stockItem: Int) {
+    fun addItem(nameItem: String, sizeItem: String, priceItem: Int, imageUrl: String, stockItem: Int) {
         val docBarang = firebaseDB.collection(COLLECTION_ITEM).document()
         val item = Item(docBarang.id,"",nameItem, sizeItem, priceItem, imageUrl, stockItem)
 
