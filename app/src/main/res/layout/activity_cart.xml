@@ -21,8 +21,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/cardviewcart"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/cv_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"/>
@@ -31,7 +31,7 @@
         android:id="@+id/iv_indicatorCart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:src="@drawable/undraw_add_cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +40,10 @@
         android:contentDescription="@string/empty_cart" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardviewcart"
+        android:id="@+id/cv_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

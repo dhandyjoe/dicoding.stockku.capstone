@@ -40,7 +40,7 @@ class Database {
             .update("stock", item.stock - item.totalTransaction)
     }
 
-    fun addItemTransaction(data: Item, docTransaction: String) {
+    fun saveTransaction(data: Item, docTransaction: String) {
         val docItemTransaction = firebaseDB.collection(COLLECTION_TRANSACTION).document(docTransaction).
         collection("itemTransaksi").document()
         docItemTransaction.set(data)
@@ -55,5 +55,10 @@ class Database {
     fun updateItemCart(data: Item, statusIndicator: Int) {
         val docItemCart = firebaseDB.collection(COLLECTION_CART).document(data.idCart)
         docItemCart.update("totalTransaction", data.totalTransaction + statusIndicator)
+    }
+
+    fun deleteItemCart(data: Item) {
+        val docItemcart = firebaseDB.collection(COLLECTION_CART).document(data.idCart)
+        docItemcart.delete()
     }
 }

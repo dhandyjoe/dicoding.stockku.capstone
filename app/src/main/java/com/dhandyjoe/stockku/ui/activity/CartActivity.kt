@@ -4,10 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
@@ -76,12 +73,11 @@ class CartActivity : AppCompatActivity() {
         alert.setMessage("Apakah anda ingin mencetak struk?")
         alert.setPositiveButton("Print", DialogInterface.OnClickListener { dialog, which ->
             val intent = Intent(this, PrintActivity::class.java)
+            intent.putExtra("intent_cart", adapter.listItemCart)
             startActivity(intent)
         })
 
-        alert.setNegativeButton("Tutup") { dialog, which ->
-
-        }
+        alert.setNegativeButton("Tutup") { dialog, which -> }
         alert.show()
     }
 
@@ -104,7 +100,7 @@ class CartActivity : AppCompatActivity() {
         docTransaction.set(item)
 
         for (i in dataitem.indices) {
-            database.addItemTransaction(dataitem[i], docTransaction.id)
+            database.saveTransaction(dataitem[i], docTransaction.id)
             database.updateStockItem(dataitem[i])
         }
     }
@@ -112,11 +108,11 @@ class CartActivity : AppCompatActivity() {
     private fun showEmptyIndicator(isEmpty: Boolean) {
         if (isEmpty) {
             binding.ivIndicatorCart.visibility = View.VISIBLE
-            binding.btnSaveTransaction.visibility = View.GONE
+            binding.cvCart.visibility = View.GONE
             binding.rvListItemCart.visibility = View.GONE
         } else {
             binding.ivIndicatorCart.visibility = View.GONE
-            binding.btnSaveTransaction.visibility = View.VISIBLE
+            binding.cvCart.visibility = View.VISIBLE
             showRecycleView()
             binding.rvListItemCart.visibility = View.VISIBLE
         }

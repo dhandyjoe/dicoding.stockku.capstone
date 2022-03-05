@@ -24,7 +24,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/iv_cart"
             tools:text="Converse" />
 
         <LinearLayout
@@ -91,10 +91,11 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
+                android:id="@+id/iv_minusCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -109,6 +110,7 @@
                 android:textSize="20sp" />
 
             <ImageView
+                android:id="@+id/iv_plusCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -119,8 +121,8 @@
 
         <ImageView
             android:id="@+id/iv_cart"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
