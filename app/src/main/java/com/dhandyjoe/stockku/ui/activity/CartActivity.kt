@@ -22,7 +22,7 @@ class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private val adapter = CartAdapter(this)
+    private lateinit var docs: ArrayList<Item>
 
 //    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 //        if (result.resultCode == AddItemTransactionActivity.RESULT_CODE && result.data != null) {
@@ -48,19 +48,19 @@ class CartActivity : AppCompatActivity() {
 //            resultLauncher.launch(moveForResultIntent)
 //        }
 
-        firebaseDB.collection(COLLECTION_CART).get()
-            .addOnSuccessListener {
-                val docs = ArrayList<Item>()
-                for (document in it) {
-                    docs.add(document.toObject(Item::class.java))
-                }
-
-                adapter.updateItem(docs)
-                showEmptyIndicator(adapter.isEmpty())
+        val doc = firebaseDB.collection("cart")
+        doc.addSnapshotListener { snapshot, _ ->
+            docs = ArrayList()
+            for (document in snapshot!!) {
+                docs.add(document.toObject(Item::class.java))
             }
 
+            val data = CartAdapter(docs, this)
+            showEmptyIndicator(data.isEmpty(), data)
+        }
+
         binding.btnSaveTransaction.setOnClickListener {
-            saveTransaction(adapter.listItemCart)
+            saveTransaction(docs)
             showPrintDialog()
 //            finish()
 //            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
@@ -73,7 +73,7 @@ class CartActivity : AppCompatActivity() {
         alert.setMessage("Apakah anda ingin mencetak struk?")
         alert.setPositiveButton("Print", DialogInterface.OnClickListener { dialog, which ->
             val intent = Intent(this, PrintActivity::class.java)
-            intent.putExtra("intent_cart", adapter.listItemCart)
+            intent.putExtra("intent_cart", docs)
             startActivity(intent)
         })
 
@@ -81,7 +81,7 @@ class CartActivity : AppCompatActivity() {
         alert.show()
     }
 
-    private fun showRecycleView() {
+    private fun showRecycleView(adapter: CartAdapter) {
         binding.rvListItemCart.layoutManager = LinearLayoutManager(this)
         binding.rvListItemCart.adapter = adapter
     }
@@ -105,7 +105,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    private fun showEmptyIndicator(isEmpty: Boolean) {
+    private fun showEmptyIndicator(isEmpty: Boolean, adapter: CartAdapter) {
         if (isEmpty) {
             binding.ivIndicatorCart.visibility = View.VISIBLE
             binding.cvCart.visibility = View.GONE
@@ -113,7 +113,7 @@ class CartActivity : AppCompatActivity() {
         } else {
             binding.ivIndicatorCart.visibility = View.GONE
             binding.cvCart.visibility = View.VISIBLE
-            showRecycleView()
+            showRecycleView(adapter)
             binding.rvListItemCart.visibility = View.VISIBLE
         }
     }

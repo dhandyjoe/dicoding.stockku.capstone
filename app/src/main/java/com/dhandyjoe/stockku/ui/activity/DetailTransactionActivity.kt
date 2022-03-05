@@ -13,7 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 class DetailTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private val adapter = CartAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +32,12 @@ class DetailTransactionActivity : AppCompatActivity() {
         val doc = firebaseDB.collection(COLLECTION_TRANSACTION).document(transaksiId).collection("itemTransaksi")
         doc.get()
             .addOnSuccessListener {
+                val user = ArrayList<Item>()
                 for(docItem in it) {
-                    val user = ArrayList<Item>()
                     user.add(docItem.toObject(Item::class.java))
-                    adapter.updateItem(user)
                 }
-                showRecycleView()
+                val data = CartAdapter(user, this)
+                showRecycleView(data)
             }
             .addOnFailureListener {
 
@@ -46,7 +45,7 @@ class DetailTransactionActivity : AppCompatActivity() {
     }
 
 
-    private fun showRecycleView() {
+    private fun showRecycleView(adapter: CartAdapter) {
         binding.rvDetailTransaction.layoutManager = LinearLayoutManager(this)
         binding.rvDetailTransaction.adapter = adapter
     }

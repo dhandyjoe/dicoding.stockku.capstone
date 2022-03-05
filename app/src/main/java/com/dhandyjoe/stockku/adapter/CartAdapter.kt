@@ -16,11 +16,11 @@ import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.ui.activity.PrintActivity
 import com.dhandyjoe.stockku.util.Database
 
-class CartAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CartAdapter(private val data: ArrayList<Item>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val database = Database()
 
     class MyViewHolder(val binding: ItemDetailCartBinding): RecyclerView.ViewHolder(binding.root)
-    var listItemCart = ArrayList<Item>()
+//    var listItemCart = ArrayList<Item>()
 
     fun updateItem(list: ArrayList<Item>) {
 //        var newItem = false
@@ -41,17 +41,17 @@ class CartAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
 //        }
 //        diffResult.dispatchUpdatesTo(this)
 
-        listItemCart.addAll(list)
+//        listItemCart.addAll(list)
     }
 
-    fun isEmpty(): Boolean = listItemCart.isEmpty()
+    fun isEmpty(): Boolean = data.isEmpty()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(ItemDetailCartBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val model = listItemCart[position]
+        val model = data[position]
 
         if (holder is MyViewHolder) {
             holder.binding.tvNameItem.text = model.name
@@ -62,7 +62,7 @@ class CartAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
                 .into(holder.binding.ivCart)
 
             holder.binding.ivMinusCart.setOnClickListener {
-                if (model.totalTransaction > 0) {
+                if (model.totalTransaction > 1) {
                     database.updateItemCart(model, -1)
                 } else {
                     showPrintDialog(model)
@@ -75,7 +75,7 @@ class CartAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
         }
     }
 
-    override fun getItemCount(): Int = listItemCart.size
+    override fun getItemCount(): Int = data.size
 
     private fun showPrintDialog(model: Item) {
         val alert = AlertDialog.Builder(context)
