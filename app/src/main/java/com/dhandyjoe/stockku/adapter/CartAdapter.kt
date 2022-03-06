@@ -12,9 +12,11 @@ import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
+import com.google.firebase.auth.FirebaseAuth
 
 class CartAdapter(private val data: ArrayList<Item>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val database = Database()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     class MyViewHolder(val binding: ItemDetailCartBinding): RecyclerView.ViewHolder(binding.root)
 //    var listItemCart = ArrayList<Item>()
@@ -60,14 +62,14 @@ class CartAdapter(private val data: ArrayList<Item>, private val context: Contex
             (context as CartActivity).liveTotal()
             holder.binding.ivMinusCart.setOnClickListener {
                 if (model.totalTransaction > 1) {
-                    database.updateItemCart(model, -1)
+                    database.updateItemCart(currentUser?.uid ?: "", model, -1)
                 } else {
                     showPrintDialog(model)
                 }
             }
             holder.binding.tvIndicatorItem.text = model.totalTransaction.toString()
             holder.binding.ivPlusCart.setOnClickListener {
-                database.updateItemCart(model, 1)
+                database.updateItemCart(currentUser?.uid ?: "", model, 1)
             }
         }
     }
@@ -79,7 +81,7 @@ class CartAdapter(private val data: ArrayList<Item>, private val context: Contex
         alert.setTitle("Keranjang")
         alert.setMessage("Apakah anda ingin menghapus barang ini dari keranjang?")
         alert.setPositiveButton("Iya", DialogInterface.OnClickListener { dialog, which ->
-            database.deleteItemCart(model)
+            database.deleteItemCart(currentUser?.uid ?: "", model)
         })
 
         alert.setNegativeButton("Tidak") { dialog, which ->

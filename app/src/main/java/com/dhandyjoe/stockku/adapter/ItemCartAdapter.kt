@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.utils.COLLECTION_CART
+import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val firebaseDB = FirebaseFirestore.getInstance()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
     private val database = Database()
 
     class MyViewHolder(val binding: ItemListCartBinding): RecyclerView.ViewHolder(binding.root)
@@ -45,7 +48,8 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
 
             holder.binding.btnDirectCart.setOnClickListener {
                 var newItem = true
-                firebaseDB.collection(COLLECTION_CART).get()
+                firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+                    .collection(COLLECTION_CART).get()
                     .addOnSuccessListener {
                         val docs = ArrayList<Item>()
                         for (document in it) {
@@ -55,7 +59,7 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
                         for (doc in docs) {
                             if (model.id == doc.id) {
                                 newItem = false
-                                database.updateItemCart(doc, 1)
+                                database.updateItemCart(currentUser?.uid ?: "", doc, 1)
                                 Log.d("update", "update")
                                 break
                             } else {
@@ -64,7 +68,7 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
                         }
 
                         if (newItem) {
-                            database.addItemCart(model, 1)
+                            database.addItemCart(currentUser?.uid ?: "", model, 1)
                             Log.d("update", "add")
 
                             // seek count item cart

@@ -15,13 +15,16 @@ import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.utils.COLLECTION_CART
+import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.Database
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemTransactionBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
     private val database = Database()
     private val listItemSearch = ArrayList<Item>()
     private lateinit var menuItemCount: MenuItem
@@ -38,7 +41,8 @@ class AddItemTransactionActivity : AppCompatActivity() {
     }
 
     private fun getBarangList() {
-        val doc = firebaseDB.collection("barang")
+        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection("barang")
         doc.addSnapshotListener { snapshot, _ ->
             val user = ArrayList<Item>()
 
@@ -99,7 +103,8 @@ class AddItemTransactionActivity : AppCompatActivity() {
             } else {
                 data.totalTransaction = statusIndicator
 
-                firebaseDB.collection(COLLECTION_CART).get()
+                firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+                    .collection(COLLECTION_CART).get()
                     .addOnSuccessListener {
                         val docs = ArrayList<Item>()
                         for (document in it) {
@@ -109,7 +114,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
                         for (doc in docs) {
                             if (data.id == doc.id) {
                                 newItem = false
-                                database.updateItemCart(doc, statusIndicator)
+                                database.updateItemCart(currentUser?.uid ?: "", doc, statusIndicator)
                                 Log.d("update", "update")
                                 break
                             } else {
@@ -118,7 +123,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
                         }
 
                         if (newItem) {
-                            database.addItemCart(data, statusIndicator)
+                            database.addItemCart(currentUser?.uid ?: "", data, statusIndicator)
                             Log.d("update", "add")
 
                             // seek count item cart
@@ -131,10 +136,17 @@ class AddItemTransactionActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         }
-        Glide.with(this)
-            .load(data.imageUrl)
-            .centerCrop()
-            .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
+        if (data.imageUrl.isEmpty()) {
+            Glide.with(this)
+                .load(R.drawable.empty_image)
+                .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
+        } else {
+            Glide.with(this)
+                .load(data.imageUrl)
+                .centerCrop()
+                .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
+        }
+
         dialog.show()
     }
 

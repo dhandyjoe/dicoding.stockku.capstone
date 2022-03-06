@@ -9,10 +9,12 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.utils.Database
+import com.google.firebase.auth.FirebaseAuth
 
 class EditItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
     private val database = Database()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +78,7 @@ class EditItemActivity : AppCompatActivity() {
             indicatorAddStock = addStockItem.toInt()
         }
 
-        database.editItem(item.id, nameItem, priceItem.toInt(), sizeItem, indicatorAddStock)
+        database.editItem(currentUser?.uid ?: "", item.id, nameItem, priceItem.toInt(), sizeItem, indicatorAddStock)
     }
 
     private fun deleteItem(item: Item) {
@@ -85,7 +87,7 @@ class EditItemActivity : AppCompatActivity() {
             .setMessage("Ini akan menghapus barang anda. Apakah anda yakin?")
             .setPositiveButton("Ya") { dialog, which ->
                 Toast.makeText(this, "Barang dihapus", Toast.LENGTH_SHORT).show()
-                database.deleteItem(item.id)
+                database.deleteItem(currentUser?.uid ?: "", item.id)
                 finish()
             }
             .setNegativeButton("Tidak") {dialog, which -> }

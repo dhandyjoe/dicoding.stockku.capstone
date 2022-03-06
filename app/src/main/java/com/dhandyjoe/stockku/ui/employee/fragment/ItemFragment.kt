@@ -14,6 +14,9 @@ import com.dhandyjoe.stockku.ui.employee.activity.EditItemActivity
 import com.dhandyjoe.stockku.adapter.ItemAdapter
 import com.dhandyjoe.stockku.databinding.FragmentItemBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.utils.COLLECTION_ITEM
+import com.dhandyjoe.stockku.utils.COLLECTION_USERS
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 private const val ARG_PARAM1 = "param1"
@@ -27,6 +30,7 @@ class DashboardFragment : Fragment() {
     private lateinit var thisContext: Context
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val listItemSearch = ArrayList<Item>()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +58,8 @@ class DashboardFragment : Fragment() {
     }
 
     private fun getBarangList() {
-        val doc = firebaseDB.collection("barang")
+        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_ITEM)
         doc.addSnapshotListener { snapshot, _ ->
             val user = ArrayList<Item>()
 

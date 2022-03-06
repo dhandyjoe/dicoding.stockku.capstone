@@ -13,12 +13,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
 import com.dhandyjoe.stockku.utils.STORAGE_IMAGES
 import com.dhandyjoe.stockku.utils.Database
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
 class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
     private val firebaseStorage = FirebaseStorage.getInstance().reference
+    private val currentUser = FirebaseAuth.getInstance().currentUser
     private val database = Database()
     private var imageUrl: String = ""
 
@@ -39,7 +41,6 @@ class AddItemActivity : AppCompatActivity() {
 
         binding.btnSave.setOnClickListener {
             checkValidationData()
-
         }
     }
 
@@ -97,7 +98,7 @@ class AddItemActivity : AppCompatActivity() {
             val priceItem = binding.etPriceItem.text.toString()
             val stockItem = binding.etStockItem.text.toString()
 
-            database.addItem(nameItem, sizeItem, priceItem.toInt(), imageUrl, stockItem.toInt())
+            database.addItem(currentUser?.uid ?: "", nameItem, sizeItem, priceItem.toInt(), imageUrl, stockItem.toInt())
             finish()
         }
     }
