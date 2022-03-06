@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.activity
+package com.dhandyjoe.stockku.ui.employee.activity
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -23,6 +23,7 @@ class CartActivity : AppCompatActivity() {
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
     private lateinit var docs: ArrayList<Item>
+    private var totalPrice: Int = 0
 
 //    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 //        if (result.resultCode == AddItemTransactionActivity.RESULT_CODE && result.data != null) {
@@ -62,6 +63,10 @@ class CartActivity : AppCompatActivity() {
         binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(docs)
             showPrintDialog()
+
+            for (i in docs.indices) {
+                database.deleteItemCart(docs[i])
+            }
 //            finish()
 //            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
         }
@@ -74,10 +79,11 @@ class CartActivity : AppCompatActivity() {
         alert.setPositiveButton("Print", DialogInterface.OnClickListener { dialog, which ->
             val intent = Intent(this, PrintActivity::class.java)
             intent.putExtra("intent_cart", docs)
+            intent.putExtra("intent_totalPrice", totalPrice)
             startActivity(intent)
         })
 
-        alert.setNegativeButton("Tutup") { dialog, which -> }
+        alert.setNegativeButton("Tidak") { dialog, which -> }
         alert.show()
     }
 
@@ -96,7 +102,7 @@ class CartActivity : AppCompatActivity() {
         val dateTransaction: String = simpleDateFormat2.format(Date())
 
         val docTransaction = firebaseDB.collection("transaksi").document()
-        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", dateTransaction)
+        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", dateTransaction, totalPrice)
         docTransaction.set(item)
 
         for (i in dataitem.indices) {
@@ -121,9 +127,10 @@ class CartActivity : AppCompatActivity() {
     fun liveTotal() {
         var total = 0
         for (item in docs) {
-            total += item.price.toInt() * item.totalTransaction
+            total += item.price * item.totalTransaction
         }
 
         binding.tvLiveTotal.text = "Rp. ${idrFormat(total)}"
+        totalPrice = total
     }
 }

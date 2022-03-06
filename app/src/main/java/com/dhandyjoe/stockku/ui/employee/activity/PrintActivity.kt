@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.activity
+package com.dhandyjoe.stockku.ui.employee.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -20,6 +20,9 @@ class PrintActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrintBinding
     private val cart by lazy {
         intent.getParcelableArrayListExtra<Item>("intent_cart") as ArrayList<Item>
+    }
+    private val totalPrice by lazy {
+        intent.getIntExtra("intent_totalPrice", 0)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,7 +112,7 @@ class PrintActivity : AppCompatActivity() {
 
         printables.add(
             TextPrintable.Builder()
-                .setText("Total harga : ")
+                .setText("Total harga : $totalPrice")
                 .setNewLinesAfter(2)
                 .build(),
         )

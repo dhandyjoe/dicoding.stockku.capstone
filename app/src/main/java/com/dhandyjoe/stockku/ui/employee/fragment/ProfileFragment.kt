@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.fragment
+package com.dhandyjoe.stockku.ui.employee.fragment
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import com.dhandyjoe.stockku.ui.activity.LoginActivity
+import com.dhandyjoe.stockku.ui.employee.activity.LoginActivity
 import com.dhandyjoe.stockku.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 

@@ -30,4 +30,6 @@
     <string name="rp">Rp.</string>
     <string name="indicatorItem">1</string>
     <string name="total_item">Total item :</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

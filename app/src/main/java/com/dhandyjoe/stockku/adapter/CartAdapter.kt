@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.ui.activity.CartActivity
+import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
 

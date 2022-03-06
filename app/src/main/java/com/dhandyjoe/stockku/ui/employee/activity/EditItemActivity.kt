@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.activity
+package com.dhandyjoe.stockku.ui.employee.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -76,7 +76,7 @@ class EditItemActivity : AppCompatActivity() {
             indicatorAddStock = addStockItem.toInt()
         }
 
-        database.editItem(item.id, nameItem, priceItem, sizeItem, indicatorAddStock.toString())
+        database.editItem(item.id, nameItem, priceItem.toInt(), sizeItem, indicatorAddStock)
     }
 
     private fun deleteItem(item: Item) {

@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.activity
+package com.dhandyjoe.stockku.ui.employee.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

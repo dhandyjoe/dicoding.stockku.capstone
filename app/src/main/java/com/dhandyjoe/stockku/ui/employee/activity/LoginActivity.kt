@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.activity
+package com.dhandyjoe.stockku.ui.employee.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.dhandyjoe.stockku.databinding.ActivityLoginBinding
+import com.dhandyjoe.stockku.ui.owner.activity.OwnerActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private var firebaseAuth = FirebaseAuth.getInstance()
+    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +42,16 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     binding.pbLogin.visibility = View.GONE
                     binding.llLogin.visibility = View.GONE
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+
+                    if (email == "owner@sepatukakikaki.com") {
+                        val intent = Intent(this, OwnerActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             }
             .addOnFailureListener {

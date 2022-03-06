@@ -102,13 +102,13 @@
 
         <Button
             android:id="@+id/btn_directCart"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="+ keranjang"
-            android:textSize="8sp"/>
+            android:textSize="9sp" />
 
     </RelativeLayout>
 

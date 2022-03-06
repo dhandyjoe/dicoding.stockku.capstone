@@ -1,4 +1,4 @@
-package com.dhandyjoe.stockku.ui.activity
+package com.dhandyjoe.stockku.ui.owner.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,20 +7,20 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dhandyjoe.stockku.R
-import com.dhandyjoe.stockku.databinding.ActivityMainBinding
+import com.dhandyjoe.stockku.databinding.ActivityOwnerBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class OwnerActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOwnerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityOwnerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navController = findNavController(R.id.nav_controller)
+        val navController = findNavController(R.id.nav_controller_owner)
 
         val appBarConfiguration = AppBarConfiguration.Builder(
-            R.id.navigation_transaction, R.id.navigation_item, R.id.navigation_profile
+            R.id.navigation_transaction_owner, R.id.navigation_profile
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)

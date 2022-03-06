@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_transaction"
-        android:name="com.dhandyjoe.stockku.ui.fragment.TransactionFragment"
+        android:name="com.dhandyjoe.stockku.ui.employee.fragment.TransactionFragment"
         android:label="@string/title_transaction"
         tools:layout="@layout/fragment_transaction" />
 
     <fragment
         android:id="@+id/navigation_item"
-        android:name="com.dhandyjoe.stockku.ui.fragment.DashboardFragment"
+        android:name="com.dhandyjoe.stockku.ui.employee.fragment.DashboardFragment"
         android:label= "@string/title_item"
         tools:layout="@layout/fragment_item" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.dhandyjoe.stockku.ui.fragment.FragmentNotification"
+        android:name="com.dhandyjoe.stockku.ui.employee.fragment.FragmentNotification"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
