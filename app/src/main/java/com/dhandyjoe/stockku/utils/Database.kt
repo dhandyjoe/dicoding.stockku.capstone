@@ -30,39 +30,45 @@ class Database {
 
     // delete item firebase
     fun deleteItem(userId: String, itemId: String) {
-        firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_ITEM).document(itemId).delete()
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_ITEM).document(itemId)
+            .delete()
     }
 
     // update stock item after transaction
     fun updateStockItem(userId: String, item: Item) {
-        firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_ITEM)
-            .document(item.id)
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_ITEM).document(item.id)
             .update("stock", item.stock - item.totalTransaction)
     }
 
-    // add transaction to firebase
-    fun saveTransaction(userId: String, data: Item, docTransaction: String) {
-        val docItemTransaction = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_TRANSACTION).document(docTransaction).
-        collection("itemTransaksi").document()
-        docItemTransaction.set(data)
+    // add transaction item to firebase
+    fun saveTransactionItem(userId: String, data: Item, docTransaction: String) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_TRANSACTION).document(docTransaction)
+            .collection(COLLECTION_TRANSACTION_ITEM).document()
+            .set(data)
     }
 
     // add item to cart
     fun addItemCart(userId: String, data: Item, totalTransaction: Int) {
-        val docItemCart = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_CART).document()
+        val docItemCart = firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CART).document()
         val item = Item(data.id, docItemCart.id, data.name, data.size, data.price, data.imageUrl, data.stock, totalTransaction)
         docItemCart.set(item)
     }
 
     // update totalTransaction item in cart
     fun updateItemCart(userId: String, data: Item, statusIndicator: Int) {
-        val docItemCart = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_CART).document(data.idCart)
-        docItemCart.update("totalTransaction", data.totalTransaction + statusIndicator)
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CART).document(data.idCart)
+            .update("totalTransaction", data.totalTransaction + statusIndicator)
     }
 
     // delete item in cart
     fun deleteItemCart(userId: String, data: Item) {
-        val docItemcart = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_CART).document(data.idCart)
-        docItemcart.delete()
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CART).document(data.idCart)
+            .delete()
     }
 }

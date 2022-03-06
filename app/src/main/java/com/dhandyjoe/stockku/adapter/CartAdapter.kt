@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
@@ -56,9 +58,17 @@ class CartAdapter(private val data: ArrayList<Item>, private val context: Contex
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvPriceItem.text = idrFormat(model.price)
-            Glide.with(context)
-                .load(model.imageUrl)
-                .into(holder.binding.ivCart)
+
+            if (model.imageUrl.isEmpty()) {
+                Glide.with(context)
+                    .load(R.drawable.empty_image)
+                    .into(holder.binding.ivCart)
+            } else {
+                Glide.with(context)
+                    .load(model.imageUrl)
+                    .into(holder.binding.ivCart)
+            }
+
             (context as CartActivity).liveTotal()
             holder.binding.ivMinusCart.setOnClickListener {
                 if (model.totalTransaction > 1) {

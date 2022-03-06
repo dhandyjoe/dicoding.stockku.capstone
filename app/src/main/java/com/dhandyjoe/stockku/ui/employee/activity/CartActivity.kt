@@ -11,6 +11,7 @@ import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
@@ -105,13 +106,14 @@ class CartActivity : AppCompatActivity() {
         val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction)
         val dateTransaction: String = simpleDateFormat2.format(Date())
 
+        // save transaction
         val docTransaction = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection("transaksi").document()
+            .collection(COLLECTION_TRANSACTION).document()
         val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", dateTransaction, totalPrice)
         docTransaction.set(item)
 
         for (i in dataitem.indices) {
-            database.saveTransaction(currentUser?.uid ?: "", dataitem[i], docTransaction.id)
+            database.saveTransactionItem(currentUser?.uid ?: "", dataitem[i], docTransaction.id)
             database.updateStockItem(currentUser?.uid ?: "", dataitem[i])
         }
     }
