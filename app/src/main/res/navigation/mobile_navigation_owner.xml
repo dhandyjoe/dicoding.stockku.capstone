@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_transaction_owner"
-        android:name="com.dhandyjoe.stockku.ui.owner.TransactionOwnerFragment"
+        android:name="com.dhandyjoe.stockku.ui.owner.fragment.TransactionOwnerFragment"
         android:label="Laporan"
         tools:layout="@layout/fragment_transaction_owner" />
 

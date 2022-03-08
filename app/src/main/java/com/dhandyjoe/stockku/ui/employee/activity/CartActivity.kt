@@ -109,7 +109,7 @@ class CartActivity : AppCompatActivity() {
         // save transaction
         val docTransaction = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
             .collection(COLLECTION_TRANSACTION).document()
-        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", dateTransaction, totalPrice)
+        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", convertUidToName(currentUser!!.uid), dateTransaction, totalPrice)
         docTransaction.set(item)
 
         for (i in dataitem.indices) {
@@ -129,6 +129,17 @@ class CartActivity : AppCompatActivity() {
             showRecycleView(adapter)
             binding.rvListItemCart.visibility = View.VISIBLE
         }
+    }
+
+    private fun convertUidToName(data: String): String {
+        var result = ""
+        if (data == "njCJysmbC8bdjSNoLc2H8dyb1Fo2") {
+            result = "Kemiri"
+        } else {
+            result = "Tegalrejo"
+        }
+
+        return result
     }
 
     fun liveTotal() {

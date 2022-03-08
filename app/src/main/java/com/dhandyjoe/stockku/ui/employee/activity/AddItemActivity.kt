@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +17,7 @@ import com.dhandyjoe.stockku.utils.STORAGE_IMAGES
 import com.dhandyjoe.stockku.utils.Database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
+import java.text.NumberFormat
 import java.util.*
 
 class AddItemActivity : AppCompatActivity() {
@@ -34,6 +37,7 @@ class AddItemActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbar.title = "Tambah barang"
+
 
         binding.ivAddImageItem.setOnClickListener {
             resultLauncher.launch("image/*")

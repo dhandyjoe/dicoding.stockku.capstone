@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListTransactionBinding
 import com.dhandyjoe.stockku.model.Transaction
+import com.dhandyjoe.stockku.utils.idrFormat
 
 class TransactionAdapter(private val data: ArrayList<Transaction>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListTransactionBinding): RecyclerView.ViewHolder(binding.root)
@@ -17,11 +18,14 @@ class TransactionAdapter(private val data: ArrayList<Transaction>): RecyclerView
         val model = data[position]
 
         if (holder is MyViewHolder) {
+            holder.binding.tvBranchStore.text = model.nameBranch
             holder.binding.tvNameTransaction.text = model.name
             holder.binding.tvDateTransaction.text = model.date
             holder.itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data[holder.adapterPosition])
             }
+
+            holder.binding.tvTotalPrice.text = idrFormat(model.totalPrice)
         }
     }
 

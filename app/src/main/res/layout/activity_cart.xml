@@ -27,17 +27,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/iv_indicatorCart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
-        android:src="@drawable/undraw_add_cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:contentDescription="@string/empty_cart" />
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets4.lottiefiles.com/datafiles/vhvOcuUkH41HdrL/data.json" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_cart"
@@ -71,6 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp. 32.000"
+                android:textColor="@color/toolbar_color"
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="15dp"/>
 
@@ -82,7 +84,9 @@
                 android:textSize="13sp"
                 android:background="@drawable/custom_button_app"
                 android:text="@string/simpan"
+                android:textColor="@color/primary"
                 android:visibility="visible"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

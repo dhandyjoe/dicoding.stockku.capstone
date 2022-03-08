@@ -10,17 +10,18 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
         android:orientation="vertical"
+        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
             android:text="@string/welcome_text"
             android:textColor="@color/second"
             android:textSize="18sp"
@@ -49,13 +50,13 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="name"
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 tools:layout_editor_absoluteX="11dp"
-                tools:layout_editor_absoluteY="301dp"
-                android:autofillHints="name"
-                android:inputType="textEmailAddress" />
+                tools:layout_editor_absoluteY="301dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,24 +64,24 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="16dp"
-            app:passwordToggleEnabled="true"
+            android:layout_marginTop="10dp"
             app:boxStrokeColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="name"
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 tools:layout_editor_absoluteX="11dp"
-                tools:layout_editor_absoluteY="301dp"
-                android:autofillHints="name" />
+                tools:layout_editor_absoluteY="301dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,12 +89,12 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_app"
-            android:layout_marginHorizontal="16dp"
-            android:textColor="@color/primary"
             android:layout_gravity="end"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
-            android:text="@string/login" />
+            android:background="@drawable/custom_button_app"
+            android:text="@string/login"
+            android:textColor="@color/primary" />
     </LinearLayout>
 
     <LinearLayout

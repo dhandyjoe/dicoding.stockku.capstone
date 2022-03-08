@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_plus_white.xml" value="0.21875" />
         <entry key="app/src/main/res/drawable/custom_button_app.xml" value="0.141" />
+        <entry key="app/src/main/res/drawable/custom_button_app_second.xml" value="0.151" />
         <entry key="app/src/main/res/drawable/custom_dialog_cart.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/custom_view_dialog.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/ic_baseline_add.xml" value="0.21875" />
@@ -17,13 +18,13 @@
         <entry key="app/src/main/res/drawable/ic_remove.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/activity_add_item.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_add_item_transaction.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_detail_cart.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_edit_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_owner.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/activity_owner.xml" value="0.11504424778761062" />
         <entry key="app/src/main/res/layout/activity_primary.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_print.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16" />
@@ -37,6 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_transaction_owner.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_detail_transaction.xml" value="0.20260416666666667" />
@@ -45,6 +47,7 @@
         <entry key="app/src/main/res/layout/item_list_stock.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction1.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/layout/item_list_transaction_owner.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/menu/bottom_menu_employee.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/menu/bottom_menu_owner.xml" value="0.19583333333333333" />

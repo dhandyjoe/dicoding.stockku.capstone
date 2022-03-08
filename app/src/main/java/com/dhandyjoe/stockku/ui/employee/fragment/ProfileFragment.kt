@@ -10,7 +10,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.dhandyjoe.stockku.ui.employee.activity.LoginActivity
 import com.dhandyjoe.stockku.databinding.FragmentProfileBinding
+import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Users
+import com.dhandyjoe.stockku.utils.COLLECTION_ITEM
+import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -21,6 +26,7 @@ class FragmentNotification : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentProfileBinding
     private val auth = FirebaseAuth.getInstance()
+    private val firebaseDB = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +43,16 @@ class FragmentNotification : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "").get()
+            .addOnSuccessListener {
+                val data = it.toObject(Users::class.java)
+                binding.tvBranchStore.text = data?.name
+            }
+
         binding.btnLogout.setOnClickListener {
             showAlertLogout()
         }
+
 
         binding.tvEmailUser.text = currentUser?.email
 

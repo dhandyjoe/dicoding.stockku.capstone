@@ -9,6 +9,7 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.utils.Database
+import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.auth.FirebaseAuth
 
 class EditItemActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class EditItemActivity : AppCompatActivity() {
 
         binding.etEditNameItem.setText(data?.name)
         binding.etEditSizeItem.setText(data?.size)
-        binding.etEditPriceItem.setText(data?.price.toString())
+        binding.etEditPriceItem.setText(idrFormat(data!!.price))
 
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)
@@ -92,6 +93,10 @@ class EditItemActivity : AppCompatActivity() {
             }
             .setNegativeButton("Tidak") {dialog, which -> }
             .show()
+    }
+
+    private fun formatIdr() {
+        binding.etEditPriceItem
     }
 
     companion object {

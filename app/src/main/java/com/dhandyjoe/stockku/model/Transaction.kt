@@ -8,6 +8,7 @@ import java.util.*
 data class Transaction (
     var id: String = "",
     var name: String = "",
+    var nameBranch: String = "",
     var date: String = "",
     var totalPrice: Int = 0
 ): Parcelable
