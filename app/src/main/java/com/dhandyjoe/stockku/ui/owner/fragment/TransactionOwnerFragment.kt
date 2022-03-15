@@ -28,6 +28,9 @@ import com.itextpdf.layout.property.TextAlignment
 import com.itextpdf.layout.property.VerticalAlignment
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -124,8 +127,12 @@ class TransactionOwnerFragment : Fragment() {
     }
 
     private fun printPDF(branch: String, data: ArrayList<Transaction>) {
-        val file = File(thisContext.getExternalFilesDir("/"), "cobaPDF.pdf")
-        val outputStream = FileOutputStream(file)
+        // formatting name PDF
+        val patternNameTransaction = "yyyyMMdd"
+        val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
+        val nameDocument: String = simpleDateFormat1.format(Date())
+
+        val file = File(thisContext.getExternalFilesDir("/"), "$nameDocument.pdf")
 
         val writer = PdfWriter(file)
         val pdfDocument = com.itextpdf.kernel.pdf.PdfDocument(writer)

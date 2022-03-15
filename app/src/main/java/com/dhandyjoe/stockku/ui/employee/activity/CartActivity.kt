@@ -103,7 +103,7 @@ class CartActivity : AppCompatActivity() {
         val nameTransaction: String = simpleDateFormat1.format(Date())
 
         val patternDateTransaction = "dd MMMM yyyy hh:mm:ss"
-        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction)
+        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction, Locale("ID"))
         val dateTransaction: String = simpleDateFormat2.format(Date())
 
         // save transaction

@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_transaction_owner" />
 
     <fragment
+        android:id="@+id/navigation_chart_owner"
+        android:name="com.dhandyjoe.stockku.ui.owner.fragment.ChartFragment"
+        android:label="Grafik Penjualan"
+        tools:layout="@layout/fragment_chart" />
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.dhandyjoe.stockku.ui.employee.fragment.FragmentNotification"
         android:label="@string/title_profile"

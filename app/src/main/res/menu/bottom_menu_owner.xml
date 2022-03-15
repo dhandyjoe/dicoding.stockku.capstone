@@ -5,6 +5,12 @@
         android:id="@+id/navigation_transaction_owner"
         android:icon="@drawable/money_transfer"
         android:title="Laporan" />
+
+    <item
+        android:id="@+id/navigation_chart_owner"
+        android:icon="@drawable/chart"
+        android:title="Grafik Penjualan" />
+
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile_user"
