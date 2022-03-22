@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.dhandyjoe.stockku">
+    package="com.dhandyjoe.stockku" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -9,8 +9,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -23,40 +22,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Stockku"
-        tools:replace="android:theme">
+        tools:replace="android:theme" >
         <activity
-            android:name="com.dhandyjoe.stockku.ui.owner.activity.OwnerActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Stockku2"/>
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.PrintActivity"
+            android:name=".ui.owner.activity.DetailTransactionOwnerActivity"
             android:exported="false" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.DetailTransactionActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.CartActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.AddItemTransactionActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.EditItemActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.AddItemActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.LoginActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.MainActivity"
+            android:name=".ui.owner.activity.OwnerActivity"
             android:exported="false"
             android:theme="@style/Theme.Stockku2" />
         <activity
-            android:name="com.dhandyjoe.stockku.ui.employee.activity.SplashScreenActivity"
-            android:exported="true">
+            android:name=".ui.employee.activity.PrintActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.employee.activity.DetailTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.employee.activity.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.employee.activity.AddItemTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.employee.activity.EditItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.employee.activity.AddItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.employee.activity.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.employee.activity.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Stockku2" />
+        <activity
+            android:name=".ui.employee.activity.SplashScreenActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package com.dhandyjoe.stockku.ui.owner.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionOwnerBinding
 import com.dhandyjoe.stockku.model.Transaction
+import com.dhandyjoe.stockku.ui.owner.activity.DetailTransactionOwnerActivity
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.idrFormat
@@ -27,7 +29,6 @@ import com.itextpdf.layout.property.HorizontalAlignment
 import com.itextpdf.layout.property.TextAlignment
 import com.itextpdf.layout.property.VerticalAlignment
 import java.io.File
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -99,7 +100,7 @@ class TransactionOwnerFragment : Fragment() {
             }
 
             if (user.size > 0) {
-                showRecycleView(user)
+                showRecycleView(user, uid)
             } else {
                 binding.rvListTransaction.visibility = View.GONE
             }
@@ -111,7 +112,7 @@ class TransactionOwnerFragment : Fragment() {
         }
     }
 
-    private fun showRecycleView(data: ArrayList<Transaction>) {
+    private fun showRecycleView(data: ArrayList<Transaction>, uid: String) {
         binding.rvListTransaction.layoutManager = LinearLayoutManager(context)
         val data = TransactionAdapter(data)
         binding.rvListTransaction.adapter = data
@@ -119,9 +120,10 @@ class TransactionOwnerFragment : Fragment() {
 
         data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Transaction) {
-//                val intent = Intent(activity, DetailTransactionActivity::class.java)
-//                intent.putExtra(DetailTransactionActivity.EXTRA_DATA, data)
-//                startActivity(intent)
+                val intent = Intent(activity, DetailTransactionOwnerActivity::class.java)
+                intent.putExtra(DetailTransactionOwnerActivity.EXTRA_DATA, data)
+                intent.putExtra(DetailTransactionOwnerActivity.EXTRA_UID, uid)
+                startActivity(intent)
             }
         })
     }
