@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
+import com.dhandyjoe.stockku.adapter.DetailTransactionAdapter
 import com.dhandyjoe.stockku.databinding.ActivityDetailTransactionBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
+import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION_ITEM
+import com.dhandyjoe.stockku.utils.COLLECTION_USERS
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DetailTransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailTransactionBinding
+    private val currentUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDB = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,23 +34,24 @@ class DetailTransactionActivity : AppCompatActivity() {
     }
 
     private fun getItemTransactionList(transaksiId: String) {
-        val doc = firebaseDB.collection(COLLECTION_TRANSACTION).document(transaksiId).collection("itemTransaksi")
+        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_TRANSACTION).document(transaksiId).collection(COLLECTION_TRANSACTION_ITEM)
         doc.get()
             .addOnSuccessListener {
                 val user = ArrayList<Item>()
                 for(docItem in it) {
                     user.add(docItem.toObject(Item::class.java))
                 }
-                val data = CartAdapter(user, this)
+
+                val data = DetailTransactionAdapter(user, this)
                 showRecycleView(data)
             }
-            .addOnFailureListener {
 
-            }
+            .addOnFailureListener {}
     }
 
 
-    private fun showRecycleView(adapter: CartAdapter) {
+    private fun showRecycleView(adapter: DetailTransactionAdapter) {
         binding.rvDetailTransaction.layoutManager = LinearLayoutManager(this)
         binding.rvDetailTransaction.adapter = adapter
     }

@@ -37,7 +37,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_branchStore"
-            tools:text="Converse" />
+            tools:text="transaksi-20220327" />
 
         <TextView
             android:id="@+id/tv_date_transaction"
