@@ -223,6 +223,6 @@ class TransactionOwnerFragment : Fragment() {
         document.add(newline)
         document.add(table)
         document.close()
-        Toast.makeText(thisContext, "PDF created!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(thisContext, "soft file PDF berhasil dibuat!", Toast.LENGTH_SHORT).show()
     }
 }
