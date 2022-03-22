@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.FragmentChartBinding
 import com.dhandyjoe.stockku.databinding.FragmentTransactionOwnerBinding
+import com.dhandyjoe.stockku.utils.AxisDateFormatter
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -24,6 +25,7 @@ class ChartFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentChartBinding
+    private var monthValue = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,11 @@ class ChartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChartBinding.inflate(inflater, container, false)
+
+        monthValue.add("Januari")
+        monthValue.add("Februari")
+        monthValue.add("Maret")
+        monthValue.add("April")
 
         barChart()
 
@@ -67,6 +74,9 @@ class ChartFragment : Fragment() {
         binding.barChart.data = BarData( barDataSet )
         binding.barChart.animateXY(100, 500)
         binding.barChart.setDrawGridBackground( false )
+//
+//        val monthArray = AxisDateFormatter (monthValue.toArray(arrayOfNulls(monthValue.size)))
+//        binding.barChart.xAxis.valueFormatter = monthArray
 
     }
 }

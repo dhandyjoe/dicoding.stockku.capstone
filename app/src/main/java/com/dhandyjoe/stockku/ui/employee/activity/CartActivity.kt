@@ -67,7 +67,7 @@ class CartActivity : AppCompatActivity() {
 
         binding.btnSaveTransaction.setOnClickListener {
             saveTransaction(docs)
-            showPrintDialog()
+            showPrintDialog(docs)
 
             for (i in docs.indices) {
                 database.deleteItemCart(currentUser?.uid ?: "", docs[i])
@@ -77,13 +77,13 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPrintDialog() {
+    private fun showPrintDialog(data: ArrayList<Item>) {
         val alert = AlertDialog.Builder(this)
         alert.setTitle("Transaksi berhasil disimpan!")
         alert.setMessage("Apakah anda ingin mencetak struk?")
         alert.setPositiveButton("Print", DialogInterface.OnClickListener { dialog, which ->
             val intent = Intent(this, PrintActivity::class.java)
-            intent.putExtra("intent_cart", docs)
+            intent.putExtra("intent_cart", data)
             intent.putExtra("intent_totalPrice", totalPrice)
             startActivity(intent)
         })

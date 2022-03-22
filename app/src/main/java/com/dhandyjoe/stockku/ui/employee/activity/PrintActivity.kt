@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import com.dhandyjoe.stockku.databinding.ActivityPrintBinding
 import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Users
+import com.dhandyjoe.stockku.utils.COLLECTION_USERS
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.mazenrashed.printooth.Printooth
 import com.mazenrashed.printooth.data.printable.Printable
 import com.mazenrashed.printooth.data.printable.TextPrintable
@@ -18,6 +22,10 @@ private const val TAG = "PrintActivity"
 class PrintActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPrintBinding
+    private val currentUser = FirebaseAuth.getInstance().currentUser
+    private val firebaseDB = FirebaseFirestore.getInstance()
+    private var nameBranch = ""
+
     private val cart by lazy {
         intent.getParcelableArrayListExtra<Item>("intent_cart") as ArrayList<Item>
     }
@@ -31,6 +39,13 @@ class PrintActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Log.e(TAG, cart.size.toString())
+        Log.e(TAG, totalPrice.toString())
+
+        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "").get()
+            .addOnSuccessListener {
+                val data = it.toObject(Users::class.java)
+                nameBranch = data!!.name
+            }
 
         Printooth.init(this)
 
@@ -127,7 +142,7 @@ class PrintActivity : AppCompatActivity() {
 
         printables.add(
             TextPrintable.Builder()
-                .setText("Cabang : ")
+                .setText("Cabang : $nameBranch")
                 .setNewLinesAfter(6)
                 .build(),
         )
