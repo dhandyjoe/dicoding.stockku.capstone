@@ -58,10 +58,10 @@ class ChartFragment : Fragment() {
     ): View? {
         thisContext = container!!.context
         binding = FragmentChartBinding.inflate(inflater, container, false)
+        transaction.clear()
 
         getTransactionList("njCJysmbC8bdjSNoLc2H8dyb1Fo2")
         getTransactionList("tvFiA8aXFaXOhoPC1CpYpmauTYB2")
-
 
         binding.btnDialogYear.setOnClickListener {
             dialogYear(transaction)
@@ -142,6 +142,8 @@ class ChartFragment : Fragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_year)
 
+        val dataFromYear = ArrayList<Transaction>()
+
         val yearPicker = dialog.findViewById<NumberPicker>(R.id.np_year)
         yearPicker.minValue = 1990
         yearPicker.maxValue = 2100
@@ -156,25 +158,18 @@ class ChartFragment : Fragment() {
 
         val btnPickYear = dialog.findViewById<Button>(R.id.btn_pickYear)
         btnPickYear.setOnClickListener {
-            barChart(ConvertToChartData(dataFromYear(data, year)))
+            dataFromYear.clear()
+            data.forEach {
+                if (subStringDate(it.name, 10, 14) == year.toString()) {
+                    dataFromYear.add(it)
+                }
+            }
+            barChart(ConvertToChartData(dataFromYear))
             binding.tvMonitorYear.text = year.toString()
             dialog.cancel()
         }
 
         dialog.show()
-    }
-
-    private fun dataFromYear(data: ArrayList<Transaction>, year: Int): ArrayList<Transaction> {
-        val dataFromYear = ArrayList<Transaction>()
-
-        dataFromYear.clear()
-        data.forEach {
-            if (subStringDate(it.name, 10, 14) == year.toString()) {
-                dataFromYear.add(it)
-            }
-        }
-
-        return  dataFromYear
     }
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {

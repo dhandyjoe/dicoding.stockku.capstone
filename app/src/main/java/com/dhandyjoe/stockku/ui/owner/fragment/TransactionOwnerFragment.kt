@@ -3,6 +3,7 @@ package com.dhandyjoe.stockku.ui.owner.fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,6 @@ class TransactionOwnerFragment : Fragment() {
     private lateinit var binding: FragmentTransactionOwnerBinding
     private lateinit var thisContext: Context
     private val firebaseDB = FirebaseFirestore.getInstance()
-    private var listItemSearch = ArrayList<Transaction>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,7 +119,7 @@ class TransactionOwnerFragment : Fragment() {
         binding.rvListTransaction.visibility = View.VISIBLE
 
         data.setOnItemClickCallback(object : TransactionAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: Transaction) {
+            override fun onItemClicked(data:    Transaction) {
                 val intent = Intent(activity, DetailTransactionOwnerActivity::class.java)
                 intent.putExtra(DetailTransactionOwnerActivity.EXTRA_DATA, data)
                 intent.putExtra(DetailTransactionOwnerActivity.EXTRA_UID, uid)
@@ -134,7 +134,7 @@ class TransactionOwnerFragment : Fragment() {
         val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
         val nameDocument: String = simpleDateFormat1.format(Date())
 
-        val file = File(thisContext.getExternalFilesDir("/"), "$nameDocument.pdf")
+        val file = File(thisContext.getExternalFilesDir("/"), "$branch-$nameDocument.pdf")
 
         val writer = PdfWriter(file)
         val pdfDocument = com.itextpdf.kernel.pdf.PdfDocument(writer)
@@ -222,6 +222,6 @@ class TransactionOwnerFragment : Fragment() {
         document.add(newline)
         document.add(table)
         document.close()
-        Toast.makeText(thisContext, "soft file PDF berhasil dibuat!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(thisContext, "file PDF berhasil dibuat!", Toast.LENGTH_SHORT).show()
     }
 }

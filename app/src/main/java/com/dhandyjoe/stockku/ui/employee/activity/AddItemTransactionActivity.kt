@@ -184,15 +184,11 @@ class AddItemTransactionActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.cart_menu, menu)
-        menuItemCount = menu!!.findItem(R.id.action_count)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_count -> {
-                true
-            }
             R.id.action_cart -> {
                 val intent  = Intent(this, CartActivity::class.java)
                 startActivity(intent)
