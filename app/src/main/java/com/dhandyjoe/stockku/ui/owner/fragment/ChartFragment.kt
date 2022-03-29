@@ -62,7 +62,6 @@ class ChartFragment : Fragment() {
         getTransactionList("njCJysmbC8bdjSNoLc2H8dyb1Fo2")
         getTransactionList("tvFiA8aXFaXOhoPC1CpYpmauTYB2")
 
-//        barChart(ConvertToChartData())
 
         binding.btnDialogYear.setOnClickListener {
             dialogYear(transaction)
@@ -137,8 +136,6 @@ class ChartFragment : Fragment() {
         // current year
         val calendar = Calendar.getInstance()
         val currentYear = calendar.get(Calendar.YEAR)
-
-        val dataFromYear = ArrayList<Transaction>()
         var year = currentYear
 
         val dialog = Dialog(thisContext)
@@ -159,17 +156,25 @@ class ChartFragment : Fragment() {
 
         val btnPickYear = dialog.findViewById<Button>(R.id.btn_pickYear)
         btnPickYear.setOnClickListener {
-            dataFromYear.clear()
-            data.forEach {
-                if (subStringDate(it.name, 10, 14) == year.toString()) {
-                    dataFromYear.add(it)
-                }
-            }
-            barChart(ConvertToChartData(dataFromYear))
+            barChart(ConvertToChartData(dataFromYear(data, year)))
+            binding.tvMonitorYear.text = year.toString()
             dialog.cancel()
         }
 
         dialog.show()
+    }
+
+    private fun dataFromYear(data: ArrayList<Transaction>, year: Int): ArrayList<Transaction> {
+        val dataFromYear = ArrayList<Transaction>()
+
+        dataFromYear.clear()
+        data.forEach {
+            if (subStringDate(it.name, 10, 14) == year.toString()) {
+                dataFromYear.add(it)
+            }
+        }
+
+        return  dataFromYear
     }
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {
