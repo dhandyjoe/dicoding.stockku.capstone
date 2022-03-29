@@ -26,7 +26,6 @@ class EditItemActivity : AppCompatActivity() {
 
         val data = intent.getParcelableExtra<Item>(EXTRA_BARANG)
 
-
         if (data?.imageUrl.isNullOrEmpty()) {
             Glide.with(this)
                 .load(R.drawable.empty_image)
@@ -39,11 +38,12 @@ class EditItemActivity : AppCompatActivity() {
 
         binding.etEditNameItem.setText(data?.name)
         binding.etEditSizeItem.setText(data?.size)
-        binding.etEditPriceItem.setText(idrFormat(data!!.price))
+        binding.etEditPriceItem.setText(data!!.price.toString())
 
         binding.btnUpdate.setOnClickListener {
             updateItem(data!!)
             finish()
+//            Toast.makeText(this, binding.etEditPriceItem.text.toString(), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnDelete.setOnClickListener {
@@ -93,10 +93,6 @@ class EditItemActivity : AppCompatActivity() {
             }
             .setNegativeButton("Tidak") {dialog, which -> }
             .show()
-    }
-
-    private fun formatIdr() {
-        binding.etEditPriceItem
     }
 
     companion object {

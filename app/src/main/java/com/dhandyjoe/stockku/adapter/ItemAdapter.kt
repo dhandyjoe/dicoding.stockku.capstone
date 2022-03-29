@@ -24,7 +24,7 @@ class ItemAdapter(private val data: ArrayList<Item>, private val context: Contex
             holder.binding.tvNameItem.text = model.name
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvStockItem.text = model.stock.toString()
-            holder.binding.tvPriceItem.text = idrFormat(model.price)
+            holder.binding.tvPriceItem.text = "${idrFormat(model.price)} "
 
             if (model.imageUrl.isEmpty()) {
                 Glide.with(context)

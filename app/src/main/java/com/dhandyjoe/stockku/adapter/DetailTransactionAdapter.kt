@@ -34,7 +34,7 @@ class DetailTransactionAdapter(private val data: ArrayList<Item>, private val co
 
             holder.binding.tvNameDetailTransaction.text = model.name
             holder.binding.tvTotalDetailTransaction.text = "x${model.totalTransaction}"
-            holder.binding.tvTotalPriceTransaction.text = "Rp. ${idrFormat(model.totalTransaction * model.price)}"
+            holder.binding.tvTotalPriceTransaction.text = "Rp. ${idrFormat(model.totalTransaction * model.price)} "
         }
     }
 

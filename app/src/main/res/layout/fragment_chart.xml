@@ -10,7 +10,7 @@
         android:id="@+id/btn_dialogYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="Pilih Tahun"

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 tools:text="Kemiri" />
         </LinearLayout>
 
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 tools:text="owner@sepatukakikaki.com" />
         </LinearLayout>
     </LinearLayout>
