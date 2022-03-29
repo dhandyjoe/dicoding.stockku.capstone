@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
                 binding.pbLogin.visibility = View.GONE
                 binding.llLogin.visibility = View.GONE
             }

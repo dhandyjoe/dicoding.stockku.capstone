@@ -32,13 +32,14 @@
         <entry key="app/src/main/res/layout/activity_transaction.xml" value="0.2" />
         <entry key="app/src/main/res/layout/custom_dialog_cart.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_cart.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/dialog_year.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/fragment_chart.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_list_transaction.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_transaction_owner.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.20260416666666667" />

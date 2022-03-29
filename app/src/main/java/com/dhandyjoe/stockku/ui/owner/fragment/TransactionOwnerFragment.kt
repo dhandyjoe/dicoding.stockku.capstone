@@ -213,7 +213,6 @@ class TransactionOwnerFragment : Fragment() {
             counter++
         }
 
-
         // add layout in PDF
         document.add(paragraph1)
         document.add(paragraph2)
