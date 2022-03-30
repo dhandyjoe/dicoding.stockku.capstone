@@ -22,6 +22,7 @@ import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.firestore.FirebaseFirestore
 import com.itextpdf.kernel.colors.ColorConstants
+import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.kernel.pdf.canvas.draw.SolidLine
 import com.itextpdf.layout.Document
@@ -137,7 +138,7 @@ class TransactionOwnerFragment : Fragment() {
         val file = File(thisContext.getExternalFilesDir("/"), "$branch-$nameDocument.pdf")
 
         val writer = PdfWriter(file)
-        val pdfDocument = com.itextpdf.kernel.pdf.PdfDocument(writer)
+        val pdfDocument = PdfDocument(writer)
         val document = Document(pdfDocument)
 
         var counter = 1
