@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_plus_white"
+        android:src="@drawable/download_pdf"
         android:backgroundTint="@color/primary"
         app:tint="@null"
         app:layout_constraintBottom_toBottomOf="parent"

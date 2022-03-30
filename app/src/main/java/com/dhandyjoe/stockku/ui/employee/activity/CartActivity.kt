@@ -89,7 +89,10 @@ class CartActivity : AppCompatActivity() {
             startActivity(intent)
         })
 
-        alert.setNegativeButton("Tidak") { dialog, which -> }
+        alert.setNegativeButton("Tidak") { dialog, which ->
+            onBackPressed()
+        }
+
         alert.show()
     }
 

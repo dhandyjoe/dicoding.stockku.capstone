@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
 import com.dhandyjoe.stockku.model.Item
@@ -75,6 +76,8 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
 //                            menuItemCount.title = docs.size.toString()
                         }
                     }
+
+                Toast.makeText(context, "Berhasil memasukkan produk ke keranjang", Toast.LENGTH_SHORT).show()
             }
         }
     }

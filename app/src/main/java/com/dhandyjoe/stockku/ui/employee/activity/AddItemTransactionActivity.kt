@@ -135,6 +135,8 @@ class AddItemTransactionActivity : AppCompatActivity() {
 
                 dialog.dismiss()
             }
+
+            Toast.makeText(this, "Berhasil memasukkan produk ke keranjang", Toast.LENGTH_SHORT).show()
         }
         if (data.imageUrl.isEmpty()) {
             Glide.with(this)

@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
+            android:textColor="@color/toolbar_color"
             tools:text="Converse"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -100,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rp"
+                android:textColor="@color/primary"
                 android:layout_marginEnd="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
@@ -109,6 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="20000"
+                android:textColor="@color/primary"
                 android:textSize="16sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"

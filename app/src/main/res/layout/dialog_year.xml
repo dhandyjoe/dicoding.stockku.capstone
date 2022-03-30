@@ -18,12 +18,14 @@
 
     <Button
         android:id="@+id/btn_pickYear"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="oke"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Pilih"
+        android:textColor="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/np_year" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

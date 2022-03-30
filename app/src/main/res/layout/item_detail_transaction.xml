@@ -50,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
+                android:textColor="@color/second"
                 tools:text="x3" />
         </LinearLayout>
 
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:textStyle="bold|italic"
+            android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Rp. 300.000" />
