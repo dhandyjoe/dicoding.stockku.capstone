@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_item">
+    app:startDestination="@+id/navigation_category">
 
     <fragment
         android:id="@+id/navigation_transaction"
@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_transaction" />
 
     <fragment
-        android:id="@+id/navigation_item"
-        android:name="com.dhandyjoe.stockku.ui.employee.fragment.DashboardFragment"
-        android:label= "@string/title_item"
-        tools:layout="@layout/fragment_item" />
+        android:id="@+id/navigation_category"
+        android:name="com.dhandyjoe.stockku.ui.employee.fragment.CategoryFragment"
+        android:label= "@string/category"
+        tools:layout="@layout/fragment_category" />
 
     <fragment
         android:id="@+id/navigation_profile"

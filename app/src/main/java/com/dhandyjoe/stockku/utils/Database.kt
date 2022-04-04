@@ -1,11 +1,27 @@
 package com.dhandyjoe.stockku.utils
 
+import com.dhandyjoe.stockku.model.Category
 import com.dhandyjoe.stockku.model.Item
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Database {
     private val firebaseDB = FirebaseFirestore.getInstance()
+
+    // add category to firebase
+    fun addCategory (userId: String, nameCategory: String) {
+        val docCategory = firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CATEGORY).document()
+        docCategory.set(Category(docCategory.id, nameCategory))
+    }
+
+    // add item category to firebase
+    fun addItemCategory (userId: String, categoryId: String, nameItemCategory: String) {
+        val docItemCategory = firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CATEGORY).document(categoryId)
+            .collection(COLLECTION_ITEM_CATEGORY).document()
+        docItemCategory.set(Category(docItemCategory.id, nameItemCategory))
+    }
 
     // add item to firebase
     fun addItem(userId: String, nameItem: String, sizeItem: String, priceItem: Int, imageUrl: String, stockItem: Int) {

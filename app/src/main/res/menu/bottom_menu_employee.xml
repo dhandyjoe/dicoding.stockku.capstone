@@ -6,9 +6,10 @@
         android:icon="@drawable/money_transfer"
         android:title="@string/title_transaction" />
     <item
-        android:id="@+id/navigation_item"
-        android:icon="@drawable/boxes"
-        android:title="@string/title_item" />
+        android:id="@+id/navigation_category"
+        android:icon="@drawable/category"
+
+        android:title="@string/category" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile_user"
