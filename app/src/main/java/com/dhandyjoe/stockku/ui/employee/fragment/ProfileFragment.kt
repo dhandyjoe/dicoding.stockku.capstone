@@ -12,7 +12,6 @@ import com.dhandyjoe.stockku.ui.employee.activity.LoginActivity
 import com.dhandyjoe.stockku.databinding.FragmentProfileBinding
 import com.dhandyjoe.stockku.model.Item
 import com.dhandyjoe.stockku.model.Users
-import com.dhandyjoe.stockku.utils.COLLECTION_ITEM
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

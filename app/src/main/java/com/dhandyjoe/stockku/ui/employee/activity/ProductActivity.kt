@@ -1,94 +1,83 @@
-package com.dhandyjoe.stockku.ui.employee.fragment
+package com.dhandyjoe.stockku.ui.employee.activity
 
-import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dhandyjoe.stockku.ui.employee.activity.AddItemActivity
-import com.dhandyjoe.stockku.ui.employee.activity.EditItemActivity
 import com.dhandyjoe.stockku.adapter.ItemAdapter
-import com.dhandyjoe.stockku.databinding.FragmentItemBinding
+import com.dhandyjoe.stockku.databinding.ActivityProductBinding
+import com.dhandyjoe.stockku.model.Category
 import com.dhandyjoe.stockku.model.Item
-import com.dhandyjoe.stockku.utils.COLLECTION_ITEM
-import com.dhandyjoe.stockku.utils.COLLECTION_USERS
+import com.dhandyjoe.stockku.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+const val EXTRA_CATEGORY_ID = "extra_category_id"
+const val EXTRA_ITEM_CATEGORY = "extra_item_category"
 
-class DashboardFragment : Fragment() {
-
-    private var param1: String? = null
-    private var param2: String? = null
-    private lateinit var binding: FragmentItemBinding
-    private lateinit var thisContext: Context
+class ProductActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProductBinding
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val listItemSearch = ArrayList<Item>()
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+        binding = ActivityProductBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        thisContext = container!!.context
-        binding = FragmentItemBinding.inflate(inflater, container, false)
+        val categoryId = intent.getStringExtra(EXTRA_CATEGORY_ID)
+        val itemCategory = intent.getParcelableExtra<Category>(EXTRA_ITEM_CATEGORY)
+
+        binding.toolbar.title = itemCategory?.name
+
+//        getBarangList()
 
         binding.favAddTransaction.setOnClickListener {
-            val intent = Intent(activity, AddItemActivity::class.java)
-            startActivity(intent)
-        }
+//            val intent = Intent(this, AddItemActivity::class.java)
+//            startActivity(intent)
 
-        getBarangList()
-
-        return binding.root
-    }
-
-    private fun getBarangList() {
-        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection(COLLECTION_ITEM)
-        doc.addSnapshotListener { snapshot, _ ->
-            val user = ArrayList<Item>()
-
-            for(docItem in snapshot!!) {
-                user.add(docItem.toObject(Item::class.java))
-            }
-
-            if (user.size > 0) {
-                showRecycleView(user)
-            } else {
-                binding.animationView.visibility = View.VISIBLE
-                binding.rvListItem.visibility = View.GONE
-            }
-
-            searchItem(user)
-
+            Toast.makeText(this, categoryId, Toast.LENGTH_SHORT).show()
         }
     }
+
+//    private fun getBarangList() {
+//        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+//            .collection(COLLECTION_CATEGORY).document(categoryId)
+//            .collection(COLLECTION_ITEM_CATEGORY).document(itemCategory.id)
+//            .collection(COLLECTION_PRODUCT)
+//            .addSnapshotListener { snapshot, _ ->
+//                val user = ArrayList<Item>()
+//
+//                for(docItem in snapshot!!) {
+//                    user.add(docItem.toObject(Item::class.java))
+//                }
+//
+//                if (user.size > 0) {
+//                    showRecycleView(user)
+//                } else {
+//                    binding.animationView.visibility = View.VISIBLE
+//                    binding.rvListItem.visibility = View.GONE
+//                }
+//
+//                searchItem(user)
+//
+//            }
+//    }
 
     private fun showRecycleView(data: ArrayList<Item>) {
         binding.animationView.visibility = View.GONE
-        binding.rvListItem.layoutManager = GridLayoutManager(context, 2)
-        val data = ItemAdapter(data, thisContext)
-        binding.rvListItem.adapter = data
+        binding.rvListItem.layoutManager = GridLayoutManager(this, 2)
+        val adapter = ItemAdapter(data, this)
+        binding.rvListItem.adapter = adapter
         binding.rvListItem.visibility = View.VISIBLE
 
-        data.setOnItemClickCallback(object : ItemAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : ItemAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Item) {
-                val intent = Intent(activity, EditItemActivity::class.java)
+                val intent = Intent(this@ProductActivity, EditItemActivity::class.java)
                 intent.putExtra(EditItemActivity.EXTRA_BARANG, data)
                 startActivity(intent)
             }

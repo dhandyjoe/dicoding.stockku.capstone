@@ -2,6 +2,7 @@ package com.dhandyjoe.stockku.ui.employee.fragment
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,9 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.CategoryAdapter
 import com.dhandyjoe.stockku.databinding.FragmentCategoryBinding
 import com.dhandyjoe.stockku.model.Category
+import com.dhandyjoe.stockku.ui.employee.activity.EXTRA_CATEGORY_ID
+import com.dhandyjoe.stockku.ui.employee.activity.EXTRA_ITEM_CATEGORY
+import com.dhandyjoe.stockku.ui.employee.activity.ProductActivity
 import com.dhandyjoe.stockku.utils.*
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
@@ -123,7 +127,10 @@ class CategoryFragment : Fragment() {
 
         data.setOnItemClickCallback(object : CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Category) {
-//                getItemCategory(data.id)
+                val intent = Intent(requireContext(), ProductActivity::class.java)
+                intent.putExtra(EXTRA_CATEGORY_ID, currentIdCategory)
+                intent.putExtra(EXTRA_ITEM_CATEGORY, data)
+                startActivity(intent)
             }
         })
     }

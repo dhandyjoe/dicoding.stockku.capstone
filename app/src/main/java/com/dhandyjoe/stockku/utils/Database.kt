@@ -44,7 +44,7 @@ class Database {
 
     // add item to firebase
     fun addItem(userId: String, nameItem: String, sizeItem: String, priceItem: Int, imageUrl: String, stockItem: Int) {
-        val docBarang = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_ITEM).document()
+        val docBarang = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_PRODUCT).document()
         val item = Item(docBarang.id,"",nameItem, sizeItem, priceItem, imageUrl, stockItem)
 
         docBarang.set(item)
@@ -58,7 +58,7 @@ class Database {
         map["size"] = sizeItem
         map["stock"] = FieldValue.increment(stockItem.toDouble())
 
-        firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_ITEM)
+        firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_PRODUCT)
             .document(itemId)
             .update(map)
     }
@@ -66,14 +66,14 @@ class Database {
     // delete item firebase
     fun deleteItem(userId: String, itemId: String) {
         firebaseDB.collection(COLLECTION_USERS).document(userId)
-            .collection(COLLECTION_ITEM).document(itemId)
+            .collection(COLLECTION_PRODUCT).document(itemId)
             .delete()
     }
 
     // update stock item after transaction
     fun updateStockItem(userId: String, item: Item) {
         firebaseDB.collection(COLLECTION_USERS).document(userId)
-            .collection(COLLECTION_ITEM).document(item.id)
+            .collection(COLLECTION_PRODUCT).document(item.id)
             .update("stock", item.stock - item.totalTransaction)
     }
 
