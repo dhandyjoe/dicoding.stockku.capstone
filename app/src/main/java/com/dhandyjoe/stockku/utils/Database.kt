@@ -15,6 +15,25 @@ class Database {
         docCategory.set(Category(docCategory.id, nameCategory))
     }
 
+    // delete category from firebase
+    fun deleteCategory(userId: String, docId: String) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CATEGORY).document(docId)
+            .delete()
+    }
+
+    fun deleteItemCategory(userId: String, categoryId: String) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CATEGORY).document(categoryId)
+            .collection(COLLECTION_ITEM_CATEGORY)
+            .get()
+            .addOnSuccessListener {
+                it.forEach { query ->
+                    query.reference.delete()
+                }
+            }
+    }
+
     // add item category to firebase
     fun addItemCategory (userId: String, categoryId: String, nameItemCategory: String) {
         val docItemCategory = firebaseDB.collection(COLLECTION_USERS).document(userId)

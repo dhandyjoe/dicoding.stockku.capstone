@@ -32,9 +32,7 @@ class CategoryFragment : Fragment() {
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val database = Database()
     private val currentUser = FirebaseAuth.getInstance().currentUser
-
-    private val categoryList = ArrayList<Category>()
-    private val itemCategoryList = ArrayList<Category>()
+    private var currentIdCategory = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +55,23 @@ class CategoryFragment : Fragment() {
             cartDialogCategory()
         }
 
+        binding.ivDeleteCategory.setOnClickListener {
+            database.deleteCategory(currentUser?.uid ?: "", currentIdCategory)
+            database.deleteItemCategory(currentUser?.uid ?: "", currentIdCategory)
+            binding.tvMonitorCategory.text = ""
+            binding.ivDeleteCategory.visibility = View.GONE
+            binding.tvStatusCategory.visibility = View.VISIBLE
+        }
+
         return binding.root
     }
 
     private fun getCategory() {
-        categoryList.clear()
         firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
             .collection(COLLECTION_CATEGORY)
             .addSnapshotListener { snapshot, _ ->
+                val categoryList = ArrayList<Category>()
+
                 for(docItem in snapshot!!) {
                     categoryList.add(docItem.toObject(Category::class.java))
                 }
@@ -75,12 +82,13 @@ class CategoryFragment : Fragment() {
     }
 
     private fun getItemCategory(documentId: String) {
-        itemCategoryList.clear()
         firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
             .collection(COLLECTION_CATEGORY)
             .document(documentId)
             .collection(COLLECTION_ITEM_CATEGORY)
             .addSnapshotListener { snapshot, _ ->
+                val itemCategoryList = ArrayList<Category>()
+
                 for(docItem in snapshot!!) {
                     itemCategoryList.add(docItem.toObject(Category::class.java))
                 }
@@ -97,8 +105,12 @@ class CategoryFragment : Fragment() {
 
         data.setOnItemClickCallback(object : CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Category) {
+                binding.ivDeleteCategory.visibility = View.VISIBLE
+                binding.tvStatusCategory.visibility = View.GONE
+                binding.rvItemCategory.visibility = View.VISIBLE
                 binding.tvMonitorCategory.text = data.name
                 getItemCategory(data.id)
+                currentIdCategory = data.id
 //                Toast.makeText(thisContext, data.id, Toast.LENGTH_SHORT).show()
             }
         })
@@ -150,6 +162,7 @@ class CategoryFragment : Fragment() {
             )
 
             dialog.cancel()
+//            categoryList.clear()
         }
 
         dialog.show()
@@ -157,9 +170,20 @@ class CategoryFragment : Fragment() {
 
     private fun cartDialogAddItemCategory() {
         val listNameCategory = ArrayList<String>()
-        categoryList.forEach {
-            listNameCategory.add(it.name)
-        }
+        val categoryList = ArrayList<Category>()
+
+        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_CATEGORY)
+            .addSnapshotListener { snapshot, _ ->
+
+                for(docItem in snapshot!!) {
+                    categoryList.add(docItem.toObject(Category::class.java))
+                }
+
+                categoryList.forEach {
+                    listNameCategory.add(it.name)
+                }
+            }
 
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_add_item_category, null)
         val dialog = Dialog(thisContext, R.style.CustomDialog)
@@ -181,7 +205,8 @@ class CategoryFragment : Fragment() {
 
             dialog.cancel()
 
-//            Toast.makeText(requireContext(), convertNameToIdCategory(getValue.text.toString(), categoryList), Toast.LENGTH_SHORT).show()
+//            itemCategoryList.clear()
+//            Toast.makeText(requireContext(), currentItemCategory, Toast.LENGTH_SHORT).show()
         }
 
         dialog.show()
