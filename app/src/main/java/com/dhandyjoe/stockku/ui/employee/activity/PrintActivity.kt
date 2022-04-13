@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.dhandyjoe.stockku.databinding.ActivityPrintBinding
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.model.Users
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +27,7 @@ class PrintActivity : AppCompatActivity() {
     private var nameBranch = ""
 
     private val cart by lazy {
-        intent.getParcelableArrayListExtra<Item>("intent_cart") as ArrayList<Item>
+        intent.getParcelableArrayListExtra<Product>("intent_cart") as ArrayList<Product>
     }
     private val totalPrice by lazy {
         intent.getIntExtra("intent_totalPrice", 0)

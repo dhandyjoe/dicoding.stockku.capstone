@@ -3,11 +3,10 @@ package com.dhandyjoe.stockku.ui.employee.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.adapter.DetailTransactionAdapter
 import com.dhandyjoe.stockku.databinding.ActivityDetailTransactionBinding
 import com.dhandyjoe.stockku.model.Transaction
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION_ITEM
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
@@ -38,9 +37,9 @@ class DetailTransactionActivity : AppCompatActivity() {
             .collection(COLLECTION_TRANSACTION).document(transaksiId).collection(COLLECTION_TRANSACTION_ITEM)
         doc.get()
             .addOnSuccessListener {
-                val user = ArrayList<Item>()
+                val user = ArrayList<Product>()
                 for(docItem in it) {
-                    user.add(docItem.toObject(Item::class.java))
+                    user.add(docItem.toObject(Product::class.java))
                 }
 
                 val data = DetailTransactionAdapter(user, this)

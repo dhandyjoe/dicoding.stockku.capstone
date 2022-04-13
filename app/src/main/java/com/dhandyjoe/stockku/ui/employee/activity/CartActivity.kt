@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Transaction
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -27,7 +26,7 @@ class CartActivity : AppCompatActivity() {
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    private lateinit var docs: ArrayList<Item>
+    private lateinit var docs: ArrayList<Product>
     private var totalPrice: Int = 0
 
 //    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -59,7 +58,7 @@ class CartActivity : AppCompatActivity() {
         doc.addSnapshotListener { snapshot, _ ->
             docs = ArrayList()
             for (document in snapshot!!) {
-                docs.add(document.toObject(Item::class.java))
+                docs.add(document.toObject(Product::class.java))
             }
 
             val data = CartAdapter(docs, this)
@@ -78,7 +77,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPrintDialog(data: ArrayList<Item>) {
+    private fun showPrintDialog(data: ArrayList<Product>) {
         val alert = AlertDialog.Builder(this)
         alert.setTitle("Transaksi berhasil disimpan!")
         alert.setMessage("Apakah anda ingin mencetak struk?")
@@ -101,7 +100,7 @@ class CartActivity : AppCompatActivity() {
         binding.rvListItemCart.adapter = adapter
     }
 
-    private fun saveTransaction(dataitem: ArrayList<Item>) {
+    private fun saveTransaction(dataitem: ArrayList<Product>) {
         val patternNameTransaction = "yyyyMMddHHmm"
         val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
         val nameTransaction: String = simpleDateFormat1.format(Date())

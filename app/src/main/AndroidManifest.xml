@@ -46,7 +46,7 @@
             android:name=".ui.employee.activity.AddItemTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.employee.activity.EditItemActivity"
+            android:name=".ui.employee.activity.EditProductActivity"
             android:exported="false" />
         <activity
             android:name=".ui.employee.activity.AddItemActivity"

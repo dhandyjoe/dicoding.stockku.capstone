@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemListCartBinding
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.COLLECTION_CART
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.Database
@@ -15,7 +15,7 @@ import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemCartAdapter(private val data: ArrayList<Product>, val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private val database = Database()
@@ -52,9 +52,9 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
                 firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
                     .collection(COLLECTION_CART).get()
                     .addOnSuccessListener {
-                        val docs = ArrayList<Item>()
+                        val docs = ArrayList<Product>()
                         for (document in it) {
-                            docs.add(document.toObject(Item::class.java))
+                            docs.add(document.toObject(Product::class.java))
                         }
 
                         for (doc in docs) {
@@ -91,7 +91,7 @@ class ItemCartAdapter(private val data: ArrayList<Item>, val context: Context): 
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Item)
+        fun onItemClicked(data: Product)
     }
 
 }

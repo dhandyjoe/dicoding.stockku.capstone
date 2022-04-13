@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.ItemCartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.COLLECTION_CART
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.dhandyjoe.stockku.utils.Database
@@ -26,7 +26,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private val database = Database()
-    private val listItemSearch = ArrayList<Item>()
+    private val listItemSearch = ArrayList<Product>()
     private lateinit var menuItemCount: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +44,10 @@ class AddItemTransactionActivity : AppCompatActivity() {
         val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
             .collection("barang")
         doc.addSnapshotListener { snapshot, _ ->
-            val user = ArrayList<Item>()
+            val user = ArrayList<Product>()
 
             for(docItem in snapshot!!) {
-                user.add(docItem.toObject(Item::class.java))
+                user.add(docItem.toObject(Product::class.java))
             }
 
             if (user.size > 0) {
@@ -61,7 +61,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
         }
     }
 
-    private fun showRecycleView(data: ArrayList<Item>) {
+    private fun showRecycleView(data: ArrayList<Product>) {
         binding.animationView.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
         val data = ItemCartAdapter(data, this)
@@ -69,13 +69,13 @@ class AddItemTransactionActivity : AppCompatActivity() {
         binding.rvTransactionItem.visibility = View.VISIBLE
 
         data.setOnItemClickCallback(object : ItemCartAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: Item) {
+            override fun onItemClicked(data: Product) {
                 cartDialog(data)
             }
         })
     }
 
-    private fun cartDialog(data: Item) {
+    private fun cartDialog(data: Product) {
         var statusIndicator = 1
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_cart, null)
         val dialog = BottomSheetDialog(this)
@@ -106,9 +106,9 @@ class AddItemTransactionActivity : AppCompatActivity() {
                 firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
                     .collection(COLLECTION_CART).get()
                     .addOnSuccessListener {
-                        val docs = ArrayList<Item>()
+                        val docs = ArrayList<Product>()
                         for (document in it) {
-                            docs.add(document.toObject(Item::class.java))
+                            docs.add(document.toObject(Product::class.java))
                         }
 
                         for (doc in docs) {
@@ -152,7 +152,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun searchItem(data: ArrayList<Item>) {
+    private fun searchItem(data: ArrayList<Product>) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()

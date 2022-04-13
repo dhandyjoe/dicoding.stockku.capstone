@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemListStockBinding
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.idrFormat
 
-class ItemAdapter(private val data: ArrayList<Item>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemAdapter(private val data: ArrayList<Product>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListStockBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -51,6 +51,6 @@ class ItemAdapter(private val data: ArrayList<Item>, private val context: Contex
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Item)
+        fun onItemClicked(data: Product)
     }
 }

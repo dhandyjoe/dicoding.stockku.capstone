@@ -4,26 +4,25 @@ import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
-import com.dhandyjoe.stockku.model.Item
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.auth.FirebaseAuth
 
-class CartAdapter(private val data: ArrayList<Item>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CartAdapter(private val data: ArrayList<Product>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val database = Database()
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
     class MyViewHolder(val binding: ItemDetailCartBinding): RecyclerView.ViewHolder(binding.root)
 //    var listItemCart = ArrayList<Item>()
 
-    fun updateItem(list: ArrayList<Item>) {
+    fun updateItem(list: ArrayList<Product>) {
 //        var newItem = false
 //        for (oldItem in listItemCart) {
 //            if (oldItem.id == list[0].id) {
@@ -86,7 +85,7 @@ class CartAdapter(private val data: ArrayList<Item>, private val context: Contex
 
     override fun getItemCount(): Int = data.size
 
-    private fun showPrintDialog(model: Item) {
+    private fun showPrintDialog(model: Product) {
         val alert = AlertDialog.Builder(context)
         alert.setTitle("Keranjang")
         alert.setMessage("Apakah anda ingin menghapus barang ini dari keranjang?")

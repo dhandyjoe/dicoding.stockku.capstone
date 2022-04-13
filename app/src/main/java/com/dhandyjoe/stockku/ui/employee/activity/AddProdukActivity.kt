@@ -1,24 +1,34 @@
 package com.dhandyjoe.stockku.ui.employee.activity
 
+import android.app.Dialog
 import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ActivityAddItemBinding
+import com.dhandyjoe.stockku.model.Category
+import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.STORAGE_IMAGES
 import com.dhandyjoe.stockku.utils.Database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import java.text.NumberFormat
 import java.util.*
+
+const val EXTRA_ITEM_asd = "extra_item_asd"
+const val EXTRA_ITEM_qwe = "extra_item_qwe"
 
 class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
@@ -36,15 +46,36 @@ class AddItemActivity : AppCompatActivity() {
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbar.title = "Tambah barang"
+        binding.toolbar.title = "Tambah produk"
 
+        val categoryId = intent.getStringExtra(EXTRA_ITEM_qwe)
+        val itemCategory = intent.getParcelableExtra<Category>(EXTRA_ITEM_asd)
 
-        binding.ivAddImageItem.setOnClickListener {
-            resultLauncher.launch("image/*")
+        binding.btnAddProduct.setOnClickListener {
+            val product = Product(
+                "",
+                "",
+                binding.etNameProduct.text.toString(),
+                "",
+                0,
+                "",
+                0,
+                0
+            )
+
+            database.addProduct(
+                currentUser?.uid ?: "",
+                categoryId ?: "",
+                itemCategory!!.id,
+                product
+            )
+
+            Toast.makeText(this, "Berhasil menyimpan", Toast.LENGTH_SHORT).show()
+            onBackPressed()
         }
 
-        binding.btnSave.setOnClickListener {
-            checkValidationData()
+        binding.ivAddImageItem.setOnClickListener {
+//            resultLauncher.launch("image/*")
         }
     }
 
@@ -87,23 +118,41 @@ class AddItemActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkValidationData() {
-        if (binding.etNameItem.text.isNullOrEmpty()) {
-            binding.etNameItem.error = "Harus diisi"
-        } else if (binding.etSizeItem.text.isNullOrEmpty()) {
-            binding.etSizeItem.error = "Harus diisi"
-        } else if (binding.etStockItem.text.isNullOrEmpty()) {
-            binding.etStockItem.error = "Harus diisi"
-        } else if (binding.etPriceItem.text.isNullOrEmpty()) {
-            binding.etPriceItem.error = "Harus diisi"
-        } else {
-            val nameItem = binding.etNameItem.text.toString()
-            val sizeItem = binding.etSizeItem.text.toString()
-            val priceItem = binding.etPriceItem.text.toString()
-            val stockItem = binding.etStockItem.text.toString()
-
-            database.addItem(currentUser?.uid ?: "", nameItem, sizeItem, priceItem.toInt(), imageUrl, stockItem.toInt())
-            finish()
+    private fun dialogAddProduct(categoryId: String, itemCategory: String, product: Product) {
+        val cartDialog =  layoutInflater.inflate(R.layout.dialog_add_category, null)
+        val dialog = Dialog(this, R.style.CustomDialog)
+        dialog.apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(cartDialog)
+            setTitle("Tambah warna")
         }
+        cartDialog.findViewById<Button>(R.id.btn_addCategory).setOnClickListener {
+
+
+            dialog.cancel()
+//            categoryList.clear()
+        }
+
+        dialog.show()
     }
+
+//    private fun checkValidationData() {
+//        if (binding.etNameItem.text.isNullOrEmpty()) {
+//            binding.etNameItem.error = "Harus diisi"
+//        } else if (binding.etSizeItem.text.isNullOrEmpty()) {
+//            binding.etSizeItem.error = "Harus diisi"
+//        } else if (binding.etStockItem.text.isNullOrEmpty()) {
+//            binding.etStockItem.error = "Harus diisi"
+//        } else if (binding.etPriceItem.text.isNullOrEmpty()) {
+//            binding.etPriceItem.error = "Harus diisi"
+//        } else {
+//            val nameItem = binding.etNameItem.text.toString()
+//            val sizeItem = binding.etSizeItem.text.toString()
+//            val priceItem = binding.etPriceItem.text.toString()
+//            val stockItem = binding.etStockItem.text.toString()
+//
+//            database.addItem(currentUser?.uid ?: "", nameItem, sizeItem, priceItem.toInt(), imageUrl, stockItem.toInt())
+//            finish()
+//        }
+//    }
 }

@@ -29,112 +29,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="@string/imageitem" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til1"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <EditText
+                android:id="@+id/et_name_product"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_addImageItem">
-
-                <EditText
-                    android:id="@+id/et_name_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/nama_barang"
-                    tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp"
-                    android:autofillHints="name"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til2"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til1">
-
-                <EditText
-                    android:id="@+id/et_size_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/ukuran"
-                    android:inputType="number"
-                    tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp"
-                    android:autofillHints="name" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til3"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til2">
-
-                <EditText
-                    android:id="@+id/et_stock_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/stok_barang"
-                    android:inputType="number"
-                    tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp"
-                    android:autofillHints="name" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til4"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                app:prefixText="Rp. "
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til3">
-
-                <EditText
-                    android:id="@+id/et_price_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/harga_barang"
-                    android:inputType="number"
-                    tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="301dp"
-                    android:autofillHints="" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:hint="name"
+                app:layout_constraintEnd_toEndOf="@+id/iv_addImageItem"
+                app:layout_constraintStart_toStartOf="@+id/iv_addImageItem"
+                app:layout_constraintTop_toBottomOf="@id/iv_addImageItem" />
 
             <Button
-                android:id="@+id/btn_save"
-                android:layout_width="0dp"
+                android:id="@+id/btn_addProduct"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:text="@string/simpan"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til4" />
+                android:layout_marginTop="20dp"
+                android:text="simpan"
+                app:layout_constraintEnd_toEndOf="@+id/et_name_product"
+                app:layout_constraintStart_toStartOf="@+id/et_name_product"
+                app:layout_constraintTop_toBottomOf="@+id/et_name_product" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -18,13 +18,13 @@
         <entry key="app/src/main/res/drawable/ic_plus.xml" value="0.21875" />
         <entry key="app/src/main/res/drawable/ic_remove.xml" value="0.21875" />
         <entry key="app/src/main/res/drawable/radius_dialog.xml" value="0.1495" />
-        <entry key="app/src/main/res/layout/activity_add_item.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_add_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_add_item_transaction.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_detail_cart.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_detail_transaction_owner.xml" value="0.19583333333333333" />
-        <entry key="app/src/main/res/layout/activity_edit_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_edit_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_owner.xml" value="0.11504424778761062" />
@@ -35,7 +35,9 @@
         <entry key="app/src/main/res/layout/activity_transaction.xml" value="0.2" />
         <entry key="app/src/main/res/layout/custom_dialog_cart.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_add_category.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_add_color.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_add_item_category.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_add_size_stock.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_category.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_year.xml" value="0.19583333333333333" />
@@ -59,6 +61,7 @@
         <entry key="app/src/main/res/layout/item_list_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction1.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/item_list_transaction_owner.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_size_stock.xml" value="0.2" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/menu/bottom_menu_employee.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/menu/bottom_menu_owner.xml" value="0.19583333333333333" />
