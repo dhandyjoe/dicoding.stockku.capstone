@@ -50,7 +50,7 @@ class Database {
             .collection(COLLECTION_CATEGORY).document(categoryId)
             .collection(COLLECTION_ITEM_CATEGORY).document(itemCategoryId)
             .collection(COLLECTION_PRODUCT).document()
-        doc.set(Product(doc.id, "", product.name, product.size, product.price, "", product.stock, 0))
+        doc.set(Product(doc.id, "", product.name, product.size, product.price, product.imageUrl, product.stock, 0))
     }
 
     // add color product
@@ -87,6 +87,12 @@ class Database {
             .collection(COLLECTION_SIZE_STOCK_PRODUCT).document(sizeStock.id)
         doc.update(map)
     }
+
+
+
+
+
+
 
 
     // add item to firebase

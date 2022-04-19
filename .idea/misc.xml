@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/custom_button_app.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/custom_button_app_second.xml" value="0.151" />
+        <entry key="app/src/main/res/drawable/custom_click_border.xml" value="0.1375" />
         <entry key="app/src/main/res/drawable/custom_dialog_cart.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/custom_view_dialog.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/ic_baseline_add.xml" value="0.21875" />
@@ -40,6 +41,7 @@
         <entry key="app/src/main/res/layout/dialog_add_size_stock.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_category.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_choose_item_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_year.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chart.xml" value="0.25" />
@@ -49,7 +51,7 @@
         <entry key="app/src/main/res/layout/fragment_list_transaction.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_transaction_owner.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.25" />
@@ -57,6 +59,8 @@
         <entry key="app/src/main/res/layout/item_list.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_category.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_list_color_size_transaction.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_list_color_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_stock.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction1.xml" value="0.20260416666666667" />

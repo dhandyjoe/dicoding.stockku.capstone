@@ -22,6 +22,7 @@ import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import java.util.stream.Stream
 
 class EditProductActivity : AppCompatActivity() {
@@ -109,6 +110,7 @@ class EditProductActivity : AppCompatActivity() {
             .collection(COLLECTION_PRODUCT).document(productId)
             .collection(COLLECTION_COLOR_PRODUCT).document(colorId)
             .collection(COLLECTION_SIZE_STOCK_PRODUCT)
+            .orderBy("size", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, _ ->
                 val sizeStockProductList = ArrayList<SizeStock>()
 

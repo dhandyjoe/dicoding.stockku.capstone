@@ -58,7 +58,7 @@ class AddItemActivity : AppCompatActivity() {
                 binding.etNameProduct.text.toString(),
                 "",
                 0,
-                "",
+                imageUrl,
                 0,
                 0
             )
@@ -70,12 +70,12 @@ class AddItemActivity : AppCompatActivity() {
                 product
             )
 
-            Toast.makeText(this, "Berhasil menyimpan", Toast.LENGTH_SHORT).show()
-            onBackPressed()
+            Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show()
+//            onBackPressed()
         }
 
         binding.ivAddImageItem.setOnClickListener {
-//            resultLauncher.launch("image/*")
+            resultLauncher.launch("image/*")
         }
     }
 

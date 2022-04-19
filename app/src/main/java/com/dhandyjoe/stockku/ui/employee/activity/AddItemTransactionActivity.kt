@@ -8,15 +8,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
-import com.dhandyjoe.stockku.adapter.ItemCartAdapter
+import com.dhandyjoe.stockku.adapter.ListProductTransactionAdapter
 import com.dhandyjoe.stockku.databinding.ActivityAddItemTransactionBinding
+import com.dhandyjoe.stockku.model.Category
 import com.dhandyjoe.stockku.model.Product
-import com.dhandyjoe.stockku.utils.COLLECTION_CART
-import com.dhandyjoe.stockku.utils.COLLECTION_USERS
-import com.dhandyjoe.stockku.utils.Database
+import com.dhandyjoe.stockku.utils.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,42 +37,108 @@ class AddItemTransactionActivity : AppCompatActivity() {
         binding.toolbarMain.title = "Pilih item"
         setSupportActionBar(binding.toolbarMain)
 
-        getBarangList()
+
+        getCategory()
+
+//        getBarangList()
     }
 
-    private fun getBarangList() {
-        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection("barang")
-        doc.addSnapshotListener { snapshot, _ ->
-            val user = ArrayList<Product>()
+    private fun getCategory() {
+        var categoryId = ""
 
-            for(docItem in snapshot!!) {
-                user.add(docItem.toObject(Product::class.java))
+        // Category
+        val listNameCategory = ArrayList<String>()
+        val categoryList = ArrayList<Category>()
+
+        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_CATEGORY)
+            .addSnapshotListener { snapshot, _ ->
+
+                for(docItem in snapshot!!) {
+                    categoryList.add(docItem.toObject(Category::class.java))
+                }
+
+                categoryList.forEach {
+                    listNameCategory.add(it.name)
+                }
             }
 
-            if (user.size > 0) {
-                showRecycleView(user)
+        val getValueCategory = findViewById<AutoCompleteTextView>(R.id.act_listCategoryTransaction)
+        getValueCategory.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_1, listNameCategory))
+
+        getValueCategory.doOnTextChanged { text, start, before, count ->
+//            Toast.makeText(this, text.toString(), Toast.LENGTH_SHORT).show()
+
+            findViewById<AutoCompleteTextView>(R.id.act_listItemCategoryTransaction).setText("")
+
+            binding.textInputLayout4.visibility = View.VISIBLE
+            getItemCategory(convertNameToId(text.toString(), categoryList))
+        }
+    }
+
+    private fun getItemCategory (categoryId: String) {
+        // Item Category
+        val listNameItemCategory = ArrayList<String>()
+        val itemCategoryList = ArrayList<Category>()
+
+        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_CATEGORY).document(categoryId)
+            .collection(COLLECTION_ITEM_CATEGORY)
+            .addSnapshotListener { snapshot, _ ->
+
+                for(docItem in snapshot!!) {
+                    itemCategoryList.add(docItem.toObject(Category::class.java))
+                }
+
+                itemCategoryList.forEach {
+                    listNameItemCategory.add(it.name)
+                }
+            }
+
+        val getValueItemCategory = findViewById<AutoCompleteTextView>(R.id.act_listItemCategoryTransaction)
+        getValueItemCategory.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_1, listNameItemCategory))
+
+
+        binding.button.setOnClickListener {
+            getProductList(categoryId, convertNameToId(getValueItemCategory.text.toString(), itemCategoryList))
+        }
+    }
+
+    private fun getProductList(categoryId: String, itemCategoryId: String) {
+        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_CATEGORY).document(categoryId)
+            .collection(COLLECTION_ITEM_CATEGORY).document(itemCategoryId)
+            .collection(COLLECTION_PRODUCT)
+        doc.addSnapshotListener { snapshot, _ ->
+            val product = ArrayList<Product>()
+
+            for(docItem in snapshot!!) {
+                product.add(docItem.toObject(Product::class.java))
+            }
+
+            if (product.size > 0) {
+                showRecycleView(product, categoryId, itemCategoryId)
             } else {
                 binding.animationView.visibility = View.VISIBLE
                 binding.rvTransactionItem.visibility = View.GONE
             }
 
-            searchItem(user)
+            searchItem(product, categoryId, itemCategoryId)
         }
     }
 
-    private fun showRecycleView(data: ArrayList<Product>) {
+    private fun showRecycleView(data: ArrayList<Product>, categoryId: String, itemCategoryId: String) {
         binding.animationView.visibility = View.GONE
         binding.rvTransactionItem.layoutManager = LinearLayoutManager(this)
-        val data = ItemCartAdapter(data, this)
+        val data = ListProductTransactionAdapter(data, this, categoryId, itemCategoryId)
         binding.rvTransactionItem.adapter = data
         binding.rvTransactionItem.visibility = View.VISIBLE
 
-        data.setOnItemClickCallback(object : ItemCartAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: Product) {
-                cartDialog(data)
-            }
-        })
+//        data.setOnItemClickCallback(object : ItemCartAdapter.OnItemClickCallback{
+//            override fun onItemClicked(data: Product) {
+//                cartDialog(data)
+//            }
+//        })
     }
 
     private fun cartDialog(data: Product) {
@@ -152,16 +218,16 @@ class AddItemTransactionActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun searchItem(data: ArrayList<Product>) {
+    private fun searchItem(data: ArrayList<Product>, categoryId: String, itemCategoryId: String) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()
                 data.forEach {
                     if (it.name.lowercase().contains(query!!.lowercase())) {
                         listItemSearch.add(it)
-                        showRecycleView(listItemSearch)
+                        showRecycleView(listItemSearch, categoryId, itemCategoryId)
                     } else if (listItemSearch.isEmpty()) {
-                        showRecycleView(listItemSearch)
+                        showRecycleView(listItemSearch, categoryId, itemCategoryId)
                         binding.animationView.visibility = View.VISIBLE
                     }
                 }
@@ -173,9 +239,9 @@ class AddItemTransactionActivity : AppCompatActivity() {
                 data.forEach {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
                         listItemSearch.add(it)
-                        showRecycleView(listItemSearch)
+                        showRecycleView(listItemSearch, categoryId, itemCategoryId)
                     } else if (listItemSearch.isEmpty()) {
-                        showRecycleView(listItemSearch)
+                        showRecycleView(listItemSearch, categoryId, itemCategoryId)
                         binding.animationView.visibility = View.VISIBLE
                     }
                 }

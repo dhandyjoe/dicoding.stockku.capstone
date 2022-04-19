@@ -206,7 +206,7 @@ class CategoryFragment : Fragment() {
         cartDialog.findViewById<Button>(R.id.btn_addCategory).setOnClickListener {
             database.addItemCategory(
                 currentUser?.uid ?: "",
-                convertNameToIdCategory(getValue.text.toString(), categoryList),
+                convertNameToId(getValue.text.toString(), categoryList),
                 cartDialog.findViewById<EditText>(R.id.et_inputItemCategory).text.toString()
             )
 

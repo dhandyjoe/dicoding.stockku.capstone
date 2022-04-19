@@ -10,7 +10,7 @@ import com.dhandyjoe.stockku.databinding.ItemListStockBinding
 import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.utils.idrFormat
 
-class ItemAdapter(private val data: ArrayList<Product>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProductAdapter(private val data: ArrayList<Product>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemListStockBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -22,9 +22,6 @@ class ItemAdapter(private val data: ArrayList<Product>, private val context: Con
 
         if (holder is MyViewHolder) {
             holder.binding.tvNameItem.text = model.name
-            holder.binding.tvSizeItem.text = model.size
-            holder.binding.tvStockItem.text = model.stock.toString()
-            holder.binding.tvPriceItem.text = "${idrFormat(model.price)} "
 
             if (model.imageUrl.isEmpty()) {
                 Glide.with(context)

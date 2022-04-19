@@ -22,7 +22,8 @@
             android:id="@+id/et_inputSize"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:hint="Masukan ukuran"
+            android:inputType="number"
+            android:hint="Ukuran"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +46,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:hint="Harga"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_inputSize" />
@@ -66,7 +68,9 @@
             android:id="@+id/et_inputStock"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Tambah stok"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -74,6 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textColor="@color/primary"
         android:text="Simpan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

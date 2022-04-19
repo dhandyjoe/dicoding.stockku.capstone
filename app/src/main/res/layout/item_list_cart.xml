@@ -23,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            tools:text="Converse"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Converse" />
 
         <LinearLayout
             android:id="@+id/ll_size"
@@ -104,14 +104,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_directCart"
+            android:id="@+id/btn_addItemCart"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:textColor="@color/second"
+            android:layout_centerVertical="true"
             android:text="+ keranjang"
+            android:textColor="@color/second"
             android:textSize="8sp" />
 
     </RelativeLayout>

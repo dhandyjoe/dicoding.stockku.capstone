@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dhandyjoe.stockku.adapter.ItemAdapter
+import com.dhandyjoe.stockku.adapter.ProductAdapter
 import com.dhandyjoe.stockku.databinding.ActivityProductBinding
 import com.dhandyjoe.stockku.model.Category
 import com.dhandyjoe.stockku.model.Product
@@ -72,11 +72,11 @@ class ProductActivity : AppCompatActivity() {
     private fun showRecycleView(data: ArrayList<Product>, categoryId: String, itemCategory: String) {
         binding.animationView.visibility = View.GONE
         binding.rvListItem.layoutManager = GridLayoutManager(this, 2)
-        val adapter = ItemAdapter(data, this)
+        val adapter = ProductAdapter(data, this)
         binding.rvListItem.adapter = adapter
         binding.rvListItem.visibility = View.VISIBLE
 
-        adapter.setOnItemClickCallback(object : ItemAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : ProductAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Product) {
                 val intent = Intent(this@ProductActivity, EditProductActivity::class.java)
                 intent.putExtra(EditProductActivity.EXTRA_BARANG, data)
