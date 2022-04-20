@@ -70,7 +70,7 @@ class Database {
             .collection(COLLECTION_PRODUCT).document(productId)
             .collection(COLLECTION_COLOR_PRODUCT).document(colorId)
             .collection(COLLECTION_SIZE_STOCK_PRODUCT).document()
-        doc.set(SizeStock(doc.id, sizeStock.size, sizeStock.price, sizeStock.stock))
+        doc.set(SizeStock(doc.id, "", sizeStock.size, sizeStock.price, sizeStock.stock))
     }
 
     fun editSizeStockProduct(userId: String, categoryId: String, itemCategoryId: String, productId: String, colorId: String, sizeStock: SizeStock) {
@@ -138,16 +138,22 @@ class Database {
             .set(data)
     }
 
+
+
+
+
+
+
     // add item to cart
-    fun addItemCart(userId: String, data: Product, totalTransaction: Int) {
+    fun addItemCart(userId: String, data: SizeStock, totalTransaction: Int) {
         val docItemCart = firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_CART).document()
-        val item = Product(data.id, docItemCart.id, data.name, data.size, data.price, data.imageUrl, data.stock, totalTransaction)
+        val item = SizeStock(data.id, docItemCart.id, data.size, data.price, data.stock, totalTransaction)
         docItemCart.set(item)
     }
 
     // update totalTransaction item in cart
-    fun updateItemCart(userId: String, data: Product, statusIndicator: Int) {
+    fun updateItemCart(userId: String, data: SizeStock, statusIndicator: Int) {
         firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_CART).document(data.idCart)
             .update("totalTransaction", data.totalTransaction + statusIndicator)

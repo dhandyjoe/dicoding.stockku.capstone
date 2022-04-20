@@ -11,10 +11,7 @@ import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Product
-import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
-import com.dhandyjoe.stockku.utils.COLLECTION_USERS
-import com.dhandyjoe.stockku.utils.Database
-import com.dhandyjoe.stockku.utils.idrFormat
+import com.dhandyjoe.stockku.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -54,7 +51,7 @@ class CartActivity : AppCompatActivity() {
 //        }
 
         val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection("cart")
+            .collection(COLLECTION_CART)
         doc.addSnapshotListener { snapshot, _ ->
             docs = ArrayList()
             for (document in snapshot!!) {

@@ -104,8 +104,6 @@ class ListProductTransactionAdapter(
     override fun getItemCount(): Int = data.size
 
     private fun cartDialogAddCategory(product: Product) {
-        var statusIndicator = 0
-
         val cartDialog =  LayoutInflater.from(context).inflate(R.layout.dialog_choose_item_cart, null)
         val dialog = BottomSheetDialog(context)
         dialog.apply {
@@ -126,19 +124,7 @@ class ListProductTransactionAdapter(
 
         cartDialog.findViewById<TextView>(R.id.tv_priceItemTransaction).text = product.price.toString()
 
-        cartDialog.findViewById<ImageView>(R.id.iv_minus).setOnClickListener {
-            if (statusIndicator > 0) {
-                statusIndicator--
-                cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
-            }
-        }
-        cartDialog.findViewById<ImageView>(R.id.iv_plus).setOnClickListener {
-            statusIndicator++
-            cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
-        }
-
         getColorProduct(cartDialog, categoryId, itemCategory, product.id)
-
 
         dialog.show()
     }
@@ -216,13 +202,61 @@ class ListProductTransactionAdapter(
         itemCategory: String,
         productId: String
     ) {
+        var statusIndicator = 0
+
         binding.findViewById<RecyclerView>(R.id.rv_sizeTransaction).layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         val data = SizeStockTransactionAdapter(listSize)
         binding.findViewById<RecyclerView>(R.id.rv_sizeTransaction).adapter = data
 
+        binding.findViewById<ImageView>(R.id.iv_minus).setOnClickListener {
+            if (statusIndicator > 0) {
+                statusIndicator--
+                binding.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
+            }
+        }
+        binding.findViewById<ImageView>(R.id.iv_plus).setOnClickListener {
+            statusIndicator++
+            binding.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
+        }
+
         data.setOnItemClickCallback(object : SizeStockTransactionAdapter.OnItemClickCallback{
             override fun onItemClicked(data: SizeStock) {
-                Toast.makeText(context, data.size, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, data.size, Toast.LENGTH_SHORT).show()
+                var newItem = true
+
+                binding.findViewById<Button>(R.id.btn_cart).setOnClickListener {
+                    if (data.stock == 0) {
+                        Toast.makeText(context, "Stock habis", Toast.LENGTH_SHORT).show()
+                    } else if (statusIndicator == 0) {
+                        Toast.makeText(context, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
+                    } else {
+                        firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+                            .collection(COLLECTION_CART).get()
+                            .addOnSuccessListener {
+                                val docs = ArrayList<SizeStock>()
+                                for (document in it) {
+                                    docs.add(document.toObject(SizeStock::class.java))
+                                }
+
+                                for (doc in docs) {
+                                    if (data.id == doc.id) {
+                                        newItem = false
+                                        database.updateItemCart(currentUser?.uid ?: "", doc, statusIndicator)
+                                        Log.d("update", "update")
+                                        break
+                                    } else {
+                                        newItem = true
+                                    }
+                                }
+
+                                if (newItem) {
+                                    database.addItemCart(currentUser?.uid ?: "", data, statusIndicator)
+                                    Log.d("update", "add")
+
+                                }
+                            }
+                    }
+                }
             }
         })
     }

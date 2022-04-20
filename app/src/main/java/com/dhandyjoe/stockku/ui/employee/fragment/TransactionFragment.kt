@@ -13,6 +13,7 @@ import com.dhandyjoe.stockku.adapter.TransactionAdapter
 import com.dhandyjoe.stockku.databinding.FragmentTransactionBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.ui.employee.activity.AddItemTransactionActivity
+import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -56,7 +57,7 @@ class TransactionFragment : Fragment() {
 
     private fun getBarangList() {
         val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection("transaksi")
+            .collection(COLLECTION_TRANSACTION)
         doc.addSnapshotListener { snapshot, _ ->
             val user = ArrayList<Transaction>()
 

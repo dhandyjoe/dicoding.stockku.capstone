@@ -71,14 +71,14 @@ class CartAdapter(private val data: ArrayList<Product>, private val context: Con
             (context as CartActivity).liveTotal()
             holder.binding.ivMinusCart.setOnClickListener {
                 if (model.totalTransaction > 1) {
-                    database.updateItemCart(currentUser?.uid ?: "", model, -1)
+//                    database.updateItemCart(currentUser?.uid ?: "", model, -1)
                 } else {
                     showPrintDialog(model)
                 }
             }
             holder.binding.tvIndicatorItem.text = model.totalTransaction.toString()
             holder.binding.ivPlusCart.setOnClickListener {
-                database.updateItemCart(currentUser?.uid ?: "", model, 1)
+//                database.updateItemCart(currentUser?.uid ?: "", model, 1)
             }
         }
     }

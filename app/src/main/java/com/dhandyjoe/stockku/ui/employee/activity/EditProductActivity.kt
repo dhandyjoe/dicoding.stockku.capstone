@@ -214,9 +214,11 @@ class EditProductActivity : AppCompatActivity() {
                 colorId,
                 SizeStock(
                     "",
+                    "",
                     cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
                     cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
                     cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
+                    0
                 )
             )
             dialog.cancel()
@@ -253,10 +255,12 @@ class EditProductActivity : AppCompatActivity() {
                 productId,
                 colorId,
                 SizeStock(
-                    sizeStock.id,
+                    "",
+                    "",
                     cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
                     cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
                     cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
+                    0
                 )
             )
             dialog.cancel()

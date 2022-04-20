@@ -141,82 +141,82 @@ class AddItemTransactionActivity : AppCompatActivity() {
 //        })
     }
 
-    private fun cartDialog(data: Product) {
-        var statusIndicator = 1
-        val cartDialog =  layoutInflater.inflate(R.layout.dialog_cart, null)
-        val dialog = BottomSheetDialog(this)
-        dialog.apply {
-            setContentView(cartDialog)
-            setTitle("")
-        }
-        cartDialog.findViewById<TextView>(R.id.tv_item_addcart).text = data.name
-        cartDialog.findViewById<ImageView>(R.id.iv_minus).setOnClickListener {
-            if (statusIndicator > 0) {
-                statusIndicator--
-                cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
-            }
-        }
-        cartDialog.findViewById<ImageView>(R.id.iv_plus).setOnClickListener {
-            statusIndicator++
-            cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
-        }
-        cartDialog.findViewById<Button>(R.id.btn_cart).setOnClickListener {
-            var newItem = true
-            if (data.stock == 0) {
-                Toast.makeText(this, "Stock habis", Toast.LENGTH_SHORT).show()
-            } else if (statusIndicator == 0) {
-                Toast.makeText(this, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
-            } else {
-                data.totalTransaction = statusIndicator
-
-                firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-                    .collection(COLLECTION_CART).get()
-                    .addOnSuccessListener {
-                        val docs = ArrayList<Product>()
-                        for (document in it) {
-                            docs.add(document.toObject(Product::class.java))
-                        }
-
-                        for (doc in docs) {
-                            if (data.id == doc.id) {
-                                newItem = false
-                                database.updateItemCart(currentUser?.uid ?: "", doc, statusIndicator)
-                                Log.d("update", "update")
-                                break
-                            } else {
-                                newItem = true
-                            }
-                        }
-
-                        if (newItem) {
-                            database.addItemCart(currentUser?.uid ?: "", data, statusIndicator)
-                            Log.d("update", "add")
-
-                            // seek count item cart
-//                            menuItemCount.title = docs.size.toString()
-                        }
-
-//                        menuItemCount.title = "${docs.size}"
-                    }
-
-                dialog.dismiss()
-            }
-
-            Toast.makeText(this, "Berhasil memasukkan produk ke keranjang", Toast.LENGTH_SHORT).show()
-        }
-        if (data.imageUrl.isEmpty()) {
-            Glide.with(this)
-                .load(R.drawable.empty_image)
-                .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
-        } else {
-            Glide.with(this)
-                .load(data.imageUrl)
-                .centerCrop()
-                .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
-        }
-
-        dialog.show()
-    }
+//    private fun cartDialog(data: Product) {
+//        var statusIndicator = 1
+//        val cartDialog =  layoutInflater.inflate(R.layout.dialog_cart, null)
+//        val dialog = BottomSheetDialog(this)
+//        dialog.apply {
+//            setContentView(cartDialog)
+//            setTitle("")
+//        }
+//        cartDialog.findViewById<TextView>(R.id.tv_item_addcart).text = data.name
+//        cartDialog.findViewById<ImageView>(R.id.iv_minus).setOnClickListener {
+//            if (statusIndicator > 0) {
+//                statusIndicator--
+//                cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
+//            }
+//        }
+//        cartDialog.findViewById<ImageView>(R.id.iv_plus).setOnClickListener {
+//            statusIndicator++
+//            cartDialog.findViewById<TextView>(R.id.tv_indicatorItemCart).text = statusIndicator.toString()
+//        }
+//        cartDialog.findViewById<Button>(R.id.btn_cart).setOnClickListener {
+//            var newItem = true
+//            if (data.stock == 0) {
+//                Toast.makeText(this, "Stock habis", Toast.LENGTH_SHORT).show()
+//            } else if (statusIndicator == 0) {
+//                Toast.makeText(this, "Tentukan jumlah barang sebelum masuk ke keranjang", Toast.LENGTH_SHORT).show()
+//            } else {
+//                data.totalTransaction = statusIndicator
+//
+//                firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+//                    .collection(COLLECTION_CART).get()
+//                    .addOnSuccessListener {
+//                        val docs = ArrayList<Product>()
+//                        for (document in it) {
+//                            docs.add(document.toObject(Product::class.java))
+//                        }
+//
+//                        for (doc in docs) {
+//                            if (data.id == doc.id) {
+//                                newItem = false
+//                                database.updateItemCart(currentUser?.uid ?: "", doc, statusIndicator)
+//                                Log.d("update", "update")
+//                                break
+//                            } else {
+//                                newItem = true
+//                            }
+//                        }
+//
+//                        if (newItem) {
+//                            database.addItemCart(currentUser?.uid ?: "", data, statusIndicator)
+//                            Log.d("update", "add")
+//
+//                            // seek count item cart
+////                            menuItemCount.title = docs.size.toString()
+//                        }
+//
+////                        menuItemCount.title = "${docs.size}"
+//                    }
+//
+//                dialog.dismiss()
+//            }
+//
+//            Toast.makeText(this, "Berhasil memasukkan produk ke keranjang", Toast.LENGTH_SHORT).show()
+//        }
+//        if (data.imageUrl.isEmpty()) {
+//            Glide.with(this)
+//                .load(R.drawable.empty_image)
+//                .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
+//        } else {
+//            Glide.with(this)
+//                .load(data.imageUrl)
+//                .centerCrop()
+//                .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
+//        }
+//
+//        dialog.show()
+//    }
 
     private fun searchItem(data: ArrayList<Product>, categoryId: String, itemCategoryId: String) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
