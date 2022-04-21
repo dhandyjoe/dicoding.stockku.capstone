@@ -28,10 +28,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="15dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/iv_imageTransaction"
             app:layout_constraintStart_toEndOf="@+id/iv_imageTransaction"
             app:layout_constraintTop_toTopOf="@+id/iv_imageTransaction">
@@ -40,9 +41,9 @@
                 android:id="@+id/tv_name_detail_transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="10dp"
                 tools:layout_editor_absoluteY="15dp"
                 tools:text="Adidas Superstars Whie" />
 
@@ -52,21 +53,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                tools:text="Warna : Putih"/>
+                tools:text="Warna : Putih" />
 
             <TextView
                 android:id="@+id/tv_size_transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Ukuran : 40"/>
+                tools:text="Ukuran : 40" />
 
             <TextView
                 android:id="@+id/tv_total_detail_transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:textSize="17sp"
                 android:textColor="@color/second"
+                android:textSize="17sp"
                 tools:text="x3" />
         </LinearLayout>
 
@@ -74,12 +75,36 @@
             android:id="@+id/tv_totalPrice_transaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/primary"
             android:textSize="17sp"
             android:textStyle="bold|italic"
-            android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Rp. 300.000" />
+
+        <TextView
+            android:id="@+id/tv_monitorDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:visibility="gone"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_totalPrice_transaction"
+            tools:text="x 20%" />
+
+        <TextView
+            android:id="@+id/tv_resultDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/tv_totalPrice_transaction"
+            app:layout_constraintEnd_toEndOf="@+id/tv_totalPrice_transaction"
+            tools:text="Rp. 10000" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

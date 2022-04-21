@@ -1,14 +1,18 @@
 package com.dhandyjoe.stockku.adapter
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
+import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.databinding.ItemDetailTransactionBinding
 import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.utils.idrFormat
+import com.dhandyjoe.stockku.utils.resultDiscount
 
 class DetailTransactionAdapter(private val data: ArrayList<SizeStock>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class MyViewHolder(val binding: ItemDetailTransactionBinding): RecyclerView.ViewHolder(binding.root)
@@ -35,9 +39,23 @@ class DetailTransactionAdapter(private val data: ArrayList<SizeStock>, private v
             holder.binding.tvColorTransaction.text = "Warna : ${model.color.name}"
             holder.binding.tvSizeTransaction.text = "Ukuran : ${model.size}"
             holder.binding.tvTotalDetailTransaction.text = "x${model.totalTransaction}"
-            holder.binding.tvTotalPriceTransaction.text = "Rp. ${idrFormat(model.totalTransaction * model.price)} "
+            holder.binding.tvTotalPriceTransaction.text = "Rp. ${idrFormat(model.price)} "
+
+            if (model.discount > 0) {
+                showResultDiscount(model, holder.binding)
+            }
         }
     }
 
     override fun getItemCount(): Int = data.size
+
+    private fun showResultDiscount(sizeStock: SizeStock, binding: ItemDetailTransactionBinding) {
+        binding.tvTotalPriceTransaction.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+
+        binding.tvMonitorDiscount.visibility = View.VISIBLE
+        binding.tvMonitorDiscount.text = "${sizeStock.discount}% x"
+
+        binding.tvResultDiscount.visibility = View.VISIBLE
+        binding.tvResultDiscount.text = idrFormat(resultDiscount(sizeStock.discount, sizeStock.price))
+    }
 }
