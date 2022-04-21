@@ -54,7 +54,7 @@
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_transaction_owner.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_detail_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_cart.xml" value="0.22" />

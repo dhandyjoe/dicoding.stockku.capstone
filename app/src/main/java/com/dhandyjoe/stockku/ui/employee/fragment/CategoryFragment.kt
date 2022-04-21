@@ -16,7 +16,7 @@ import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.adapter.CategoryAdapter
 import com.dhandyjoe.stockku.databinding.FragmentCategoryBinding
 import com.dhandyjoe.stockku.model.Category
-import com.dhandyjoe.stockku.ui.employee.activity.EXTRA_CATEGORY_ID
+import com.dhandyjoe.stockku.ui.employee.activity.EXTRA_CATEGORY
 import com.dhandyjoe.stockku.ui.employee.activity.EXTRA_ITEM_CATEGORY
 import com.dhandyjoe.stockku.ui.employee.activity.ProductActivity
 import com.dhandyjoe.stockku.utils.*
@@ -37,6 +37,7 @@ class CategoryFragment : Fragment() {
     private val database = Database()
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private var currentIdCategory = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,10 +86,9 @@ class CategoryFragment : Fragment() {
 
     }
 
-    private fun getItemCategory(documentId: String) {
+    private fun getItemCategory(category: Category) {
         firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection(COLLECTION_CATEGORY)
-            .document(documentId)
+            .collection(COLLECTION_CATEGORY).document(category.id)
             .collection(COLLECTION_ITEM_CATEGORY)
             .addSnapshotListener { snapshot, _ ->
                 val itemCategoryList = ArrayList<Category>()
@@ -97,7 +97,7 @@ class CategoryFragment : Fragment() {
                     itemCategoryList.add(docItem.toObject(Category::class.java))
                 }
 
-                showListItemCategory(itemCategoryList)
+                showListItemCategory(itemCategoryList, category)
             }
 
     }
@@ -113,14 +113,14 @@ class CategoryFragment : Fragment() {
                 binding.tvStatusCategory.visibility = View.GONE
                 binding.rvItemCategory.visibility = View.VISIBLE
                 binding.tvMonitorCategory.text = data.name
-                getItemCategory(data.id)
+                getItemCategory(data)
                 currentIdCategory = data.id
 //                Toast.makeText(thisContext, data.id, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun showListItemCategory(data: ArrayList<Category>) {
+    private fun showListItemCategory(data: ArrayList<Category>, category: Category) {
         binding.rvItemCategory.layoutManager = GridLayoutManager(context, 3)
         val data = CategoryAdapter(data)
         binding.rvItemCategory.adapter = data
@@ -128,7 +128,7 @@ class CategoryFragment : Fragment() {
         data.setOnItemClickCallback(object : CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Category) {
                 val intent = Intent(requireContext(), ProductActivity::class.java)
-                intent.putExtra(EXTRA_CATEGORY_ID, currentIdCategory)
+                intent.putExtra(EXTRA_CATEGORY, category)
                 intent.putExtra(EXTRA_ITEM_CATEGORY, data)
                 startActivity(intent)
             }

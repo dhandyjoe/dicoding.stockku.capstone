@@ -11,6 +11,7 @@ import com.dhandyjoe.stockku.adapter.CartAdapter
 import com.dhandyjoe.stockku.databinding.ActivityCartBinding
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.model.Product
+import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,7 +24,7 @@ class CartActivity : AppCompatActivity() {
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    private lateinit var docs: ArrayList<Product>
+    private lateinit var docs: ArrayList<SizeStock>
     private var totalPrice: Int = 0
 
 //    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -55,26 +56,26 @@ class CartActivity : AppCompatActivity() {
         doc.addSnapshotListener { snapshot, _ ->
             docs = ArrayList()
             for (document in snapshot!!) {
-                docs.add(document.toObject(Product::class.java))
+                docs.add(document.toObject(SizeStock::class.java))
             }
 
             val data = CartAdapter(docs, this)
             showEmptyIndicator(data.isEmpty(), data)
         }
 
-        binding.btnSaveTransaction.setOnClickListener {
-            saveTransaction(docs)
-            showPrintDialog(docs)
-
-            for (i in docs.indices) {
-                database.deleteItemCart(currentUser?.uid ?: "", docs[i])
-            }
-//            finish()
-//            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
-        }
+//        binding.btnSaveTransaction.setOnClickListener {
+//            saveTransaction(docs)
+//            showPrintDialog(docs)
+//
+//            for (i in docs.indices) {
+//                database.deleteItemCart(currentUser?.uid ?: "", docs[i])
+//            }
+////            finish()
+////            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
+//        }
     }
 
-    private fun showPrintDialog(data: ArrayList<Product>) {
+    private fun showPrintDialog(data: ArrayList<SizeStock>) {
         val alert = AlertDialog.Builder(this)
         alert.setTitle("Transaksi berhasil disimpan!")
         alert.setMessage("Apakah anda ingin mencetak struk?")
@@ -97,26 +98,26 @@ class CartActivity : AppCompatActivity() {
         binding.rvListItemCart.adapter = adapter
     }
 
-    private fun saveTransaction(dataitem: ArrayList<Product>) {
-        val patternNameTransaction = "yyyyMMddHHmm"
-        val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
-        val nameTransaction: String = simpleDateFormat1.format(Date())
-
-        val patternDateTransaction = "dd MMMM yyyy hh:mm:ss"
-        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction, Locale("ID"))
-        val dateTransaction: String = simpleDateFormat2.format(Date())
-
-        // save transaction
-        val docTransaction = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection(COLLECTION_TRANSACTION).document()
-        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", convertUidToName(currentUser!!.uid), dateTransaction, totalPrice)
-        docTransaction.set(item)
-
-        for (i in dataitem.indices) {
-            database.saveTransactionItem(currentUser?.uid ?: "", dataitem[i], docTransaction.id)
-            database.updateStockItem(currentUser?.uid ?: "", dataitem[i])
-        }
-    }
+//    private fun saveTransaction(dataitem: ArrayList<SizeStock>) {
+//        val patternNameTransaction = "yyyyMMddHHmm"
+//        val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
+//        val nameTransaction: String = simpleDateFormat1.format(Date())
+//
+//        val patternDateTransaction = "dd MMMM yyyy hh:mm:ss"
+//        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction, Locale("ID"))
+//        val dateTransaction: String = simpleDateFormat2.format(Date())
+//
+//        // save transaction
+//        val docTransaction = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+//            .collection(COLLECTION_TRANSACTION).document()
+//        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", convertUidToName(currentUser!!.uid), dateTransaction, totalPrice)
+//        docTransaction.set(item)
+//
+//        for (i in dataitem.indices) {
+//            database.saveTransactionItem(currentUser?.uid ?: "", dataitem[i], docTransaction.id)
+//            database.updateStockItem(currentUser?.uid ?: "", dataitem[i])
+//        }
+//    }
 
     private fun showEmptyIndicator(isEmpty: Boolean, adapter: CartAdapter) {
         if (isEmpty) {

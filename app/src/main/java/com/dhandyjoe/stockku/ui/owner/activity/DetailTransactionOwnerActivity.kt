@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhandyjoe.stockku.adapter.DetailTransactionAdapter
 import com.dhandyjoe.stockku.databinding.ActivityDetailTransactionBinding
 import com.dhandyjoe.stockku.model.Product
+import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.model.Transaction
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION
 import com.dhandyjoe.stockku.utils.COLLECTION_TRANSACTION_ITEM
@@ -39,9 +40,9 @@ class DetailTransactionOwnerActivity : AppCompatActivity() {
             .collection(COLLECTION_TRANSACTION_ITEM)
         doc.get()
             .addOnSuccessListener {
-                val user = ArrayList<Product>()
+                val user = ArrayList<SizeStock>()
                 for(docItem in it) {
-                    user.add(docItem.toObject(Product::class.java))
+                    user.add(docItem.toObject(SizeStock::class.java))
                 }
 
                 val data = DetailTransactionAdapter(user, this)

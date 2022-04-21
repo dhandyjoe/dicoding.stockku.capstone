@@ -14,7 +14,7 @@ import com.dhandyjoe.stockku.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-const val EXTRA_CATEGORY_ID = "extra_category_id"
+const val EXTRA_CATEGORY = "extra_category"
 const val EXTRA_ITEM_CATEGORY = "extra_item_category"
 
 class ProductActivity : AppCompatActivity() {
@@ -28,26 +28,26 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val categoryId = intent.getStringExtra(EXTRA_CATEGORY_ID)
+        val category = intent.getParcelableExtra<Category>(EXTRA_CATEGORY)
         val itemCategory = intent.getParcelableExtra<Category>(EXTRA_ITEM_CATEGORY)
 
         binding.toolbar.title = itemCategory?.name
 
-        if (categoryId != null && itemCategory != null) {
-            getBarangList(categoryId, itemCategory)
+        if (category != null && itemCategory != null) {
+            getBarangList(category, itemCategory)
         }
 
         binding.favAddTransaction.setOnClickListener {
             val intent = Intent(this, AddItemActivity::class.java)
-            intent.putExtra(EXTRA_ITEM_qwe, categoryId)
+            intent.putExtra(EXTRA_ITEM_qwe, category)
             intent.putExtra(EXTRA_ITEM_asd, itemCategory)
             startActivity(intent)
         }
     }
 
-    private fun getBarangList(categoryId: String, itemCategory: Category) {
+    private fun getBarangList(category: Category, itemCategory: Category) {
         firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection(COLLECTION_CATEGORY).document(categoryId)
+            .collection(COLLECTION_CATEGORY).document(category.id)
             .collection(COLLECTION_ITEM_CATEGORY).document(itemCategory.id)
             .collection(COLLECTION_PRODUCT)
             .addSnapshotListener { snapshot, _ ->
@@ -58,18 +58,18 @@ class ProductActivity : AppCompatActivity() {
                 }
 
                 if (user.size > 0) {
-                    showRecycleView(user, categoryId, itemCategory.id)
+                    showRecycleView(user, category, itemCategory)
                 } else {
                     binding.animationView.visibility = View.VISIBLE
                     binding.rvListItem.visibility = View.GONE
                 }
 
-                searchItem(user, categoryId, itemCategory.id)
+                searchItem(user, category, itemCategory)
 
             }
     }
 
-    private fun showRecycleView(data: ArrayList<Product>, categoryId: String, itemCategory: String) {
+    private fun showRecycleView(data: ArrayList<Product>, category: Category, itemCategory: Category) {
         binding.animationView.visibility = View.GONE
         binding.rvListItem.layoutManager = GridLayoutManager(this, 2)
         val adapter = ProductAdapter(data, this)
@@ -80,23 +80,23 @@ class ProductActivity : AppCompatActivity() {
             override fun onItemClicked(data: Product) {
                 val intent = Intent(this@ProductActivity, EditProductActivity::class.java)
                 intent.putExtra(EditProductActivity.EXTRA_BARANG, data)
-                intent.putExtra(EditProductActivity.EXTRA_ITEM_iop, categoryId)
+                intent.putExtra(EditProductActivity.EXTRA_ITEM_iop, category)
                 intent.putExtra(EditProductActivity.EXTRA_ITEM_jkl, itemCategory)
                 startActivity(intent)
             }
         })
     }
 
-    private fun searchItem(data: ArrayList<Product>, categoryId: String, itemCategory: String) {
+    private fun searchItem(data: ArrayList<Product>, category: Category, itemCategory: Category) {
         binding.svItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 listItemSearch.clear()
                 data.forEach {
                     if (it.name.lowercase().contains(query!!.lowercase())) {
                         listItemSearch.add(it)
-                        showRecycleView(listItemSearch, categoryId, itemCategory)
+                        showRecycleView(listItemSearch, category, itemCategory)
                     } else if (listItemSearch.isEmpty()) {
-                        showRecycleView(listItemSearch, categoryId, itemCategory)
+                        showRecycleView(listItemSearch, category, itemCategory)
                         binding.animationView.visibility = View.VISIBLE
                     }
                 }
@@ -108,9 +108,9 @@ class ProductActivity : AppCompatActivity() {
                 data.forEach {
                     if (it.name.lowercase().contains(newText!!.lowercase())) {
                         listItemSearch.add(it)
-                        showRecycleView(listItemSearch, categoryId, itemCategory)
+                        showRecycleView(listItemSearch, category, itemCategory)
                     } else if (listItemSearch.isEmpty()) {
-                        showRecycleView(listItemSearch, categoryId, itemCategory)
+                        showRecycleView(listItemSearch, category, itemCategory)
                         binding.animationView.visibility = View.VISIBLE
                     }
                 }

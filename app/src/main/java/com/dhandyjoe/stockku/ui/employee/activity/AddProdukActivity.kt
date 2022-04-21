@@ -48,30 +48,25 @@ class AddItemActivity : AppCompatActivity() {
 
         binding.toolbar.title = "Tambah produk"
 
-        val categoryId = intent.getStringExtra(EXTRA_ITEM_qwe)
+        val category = intent.getParcelableExtra<Category>(EXTRA_ITEM_qwe)
         val itemCategory = intent.getParcelableExtra<Category>(EXTRA_ITEM_asd)
 
         binding.btnAddProduct.setOnClickListener {
             val product = Product(
                 "",
-                "",
                 binding.etNameProduct.text.toString(),
-                "",
-                0,
                 imageUrl,
-                0,
-                0
             )
 
             database.addProduct(
                 currentUser?.uid ?: "",
-                categoryId ?: "",
+                category?.id ?: "",
                 itemCategory!!.id,
                 product
             )
 
-            Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show()
-//            onBackPressed()
+            Toast.makeText(this, "Berhasil menyimpan produk", Toast.LENGTH_SHORT).show()
+            onBackPressed()
         }
 
         binding.ivAddImageItem.setOnClickListener {

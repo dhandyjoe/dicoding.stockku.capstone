@@ -87,35 +87,35 @@ class PrintActivity : AppCompatActivity() {
                 .build()
         )
 
-        cart.forEach {
-            printables.add(
-                TextPrintable.Builder()
-                    .setText(it.name)
-                    .setNewLinesAfter(1)
-                    .build(),
-            )
-            printables.add(
-                TextPrintable.Builder()
-                    .setText("x${it.totalTransaction}")
-                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
-                    .setNewLinesAfter(1)
-                    .build(),
-            )
-            printables.add(
-                TextPrintable.Builder()
-                    .setText("${it.price.toInt()*it.totalTransaction}")
-                    .setAlignment(DefaultPrinter.ALIGNMENT_RIGHT)
-                    .setNewLinesAfter(1)
-                    .build(),
-            )
-            printables.add(
-                TextPrintable.Builder()
-                    .setText("Ukuran : ${it.size}")
-                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
-                    .setNewLinesAfter(2)
-                    .build(),
-            )
-        }
+//        cart.forEach {
+//            printables.add(
+//                TextPrintable.Builder()
+//                    .setText(it.name)
+//                    .setNewLinesAfter(1)
+//                    .build(),
+//            )
+//            printables.add(
+//                TextPrintable.Builder()
+//                    .setText("x${it.totalTransaction}")
+//                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
+//                    .setNewLinesAfter(1)
+//                    .build(),
+//            )
+//            printables.add(
+//                TextPrintable.Builder()
+//                    .setText("${it.price.toInt()*it.totalTransaction}")
+//                    .setAlignment(DefaultPrinter.ALIGNMENT_RIGHT)
+//                    .setNewLinesAfter(1)
+//                    .build(),
+//            )
+//            printables.add(
+//                TextPrintable.Builder()
+//                    .setText("Ukuran : ${it.size}")
+//                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
+//                    .setNewLinesAfter(2)
+//                    .build(),
+//            )
+//        }
 
         printables.add(
             TextPrintable.Builder()

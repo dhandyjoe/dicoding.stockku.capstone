@@ -17,6 +17,7 @@ import com.dhandyjoe.stockku.adapter.CategoryAdapter
 import com.dhandyjoe.stockku.adapter.SizeStockAdapter
 import com.dhandyjoe.stockku.databinding.ActivityEditItemBinding
 import com.dhandyjoe.stockku.model.Category
+import com.dhandyjoe.stockku.model.ColorProduct
 import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.utils.*
@@ -30,7 +31,7 @@ class EditProductActivity : AppCompatActivity() {
     private val database = Database()
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    private var currentColorId = ""
+    private var currentColor = Category()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,37 +39,39 @@ class EditProductActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val product = intent.getParcelableExtra<Product>(EXTRA_BARANG)
-        val categoryId = intent.getStringExtra(EXTRA_ITEM_iop)
-        val itemCategory = intent.getStringExtra(EXTRA_ITEM_jkl)
+        val category = intent.getParcelableExtra<Category>(EXTRA_ITEM_iop)
+        val itemCategory = intent.getParcelableExtra<Category>(EXTRA_ITEM_jkl)
 
         binding.toolbar.title = product?.name
 
         binding.tvAddColorProcut.setOnClickListener {
             dialogAddColorProduct(
-                categoryId ?: "",
-                itemCategory ?: "",
-                product?.id ?: ""
+                category!!,
+                itemCategory!!,
+                product!!
             )
         }
 
         binding.tvAddSizeStockProduct.setOnClickListener {
 //            Toast.makeText(this, currentColorId, Toast.LENGTH_SHORT).show()
             dialogAddSizeStockProduct(
-                categoryId ?: "",
-                itemCategory ?: "",
-                product?.id ?: "",
-                currentColorId
+                category!!,
+                itemCategory!!,
+                product!!,
+                currentColor
             )
         }
 
-        getColorProduct(categoryId ?: "", itemCategory ?: "", product?.id ?: "")
+        if (category != null && itemCategory != null) {
+            getColorProduct(category, itemCategory, product!!)
+        }
     }
 
-    private fun getColorProduct(categoryId: String, itemCategory: String, productId: String) {
+    private fun getColorProduct(category: Category, itemCategory: Category, product: Product) {
         firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection(COLLECTION_CATEGORY).document(categoryId)
-            .collection(COLLECTION_ITEM_CATEGORY).document(itemCategory)
-            .collection(COLLECTION_PRODUCT).document(productId)
+            .collection(COLLECTION_CATEGORY).document(category.id)
+            .collection(COLLECTION_ITEM_CATEGORY).document(itemCategory.id)
+            .collection(COLLECTION_PRODUCT).document(product.id)
             .collection(COLLECTION_COLOR_PRODUCT)
             .addSnapshotListener { snapshot, _ ->
                 val colorProductList = ArrayList<Category>()
@@ -77,7 +80,7 @@ class EditProductActivity : AppCompatActivity() {
                     colorProductList.add(docItem.toObject(Category::class.java))
                 }
 
-                showColorProduct(colorProductList, categoryId, itemCategory, productId)
+                showColorProduct(colorProductList, category, itemCategory, product)
             }
 
     }
@@ -85,9 +88,9 @@ class EditProductActivity : AppCompatActivity() {
 
     private fun showColorProduct(
         data: ArrayList<Category>,
-        categoryId: String,
-        itemCategory: String,
-        productId: String
+        category: Category,
+        itemCategory: Category,
+        product: Product
     ) {
         binding.rvColorProduct.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val data = CategoryAdapter(data)
@@ -97,17 +100,18 @@ class EditProductActivity : AppCompatActivity() {
             override fun onItemClicked(data: Category) {
                 binding.llShowSizeStock.visibility = View.VISIBLE
                 binding.tvChooseColor.visibility = View.GONE
-                currentColorId = data.id
-                getSizeStockProduct(categoryId, itemCategory, productId, data.id)
+                currentColor = Category(data.id, data.name)
+
+                getSizeStockProduct(category, itemCategory, product, data.id)
             }
         })
     }
 
-    private fun getSizeStockProduct(categoryId: String, itemCategory: String, productId: String, colorId: String) {
+    private fun getSizeStockProduct(category: Category, itemCategory: Category, product: Product, colorId: String) {
         firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-            .collection(COLLECTION_CATEGORY).document(categoryId)
-            .collection(COLLECTION_ITEM_CATEGORY).document(itemCategory)
-            .collection(COLLECTION_PRODUCT).document(productId)
+            .collection(COLLECTION_CATEGORY).document(category.id)
+            .collection(COLLECTION_ITEM_CATEGORY).document(itemCategory.id)
+            .collection(COLLECTION_PRODUCT).document(product.id)
             .collection(COLLECTION_COLOR_PRODUCT).document(colorId)
             .collection(COLLECTION_SIZE_STOCK_PRODUCT)
             .orderBy("size", Query.Direction.ASCENDING)
@@ -118,15 +122,15 @@ class EditProductActivity : AppCompatActivity() {
                     sizeStockProductList.add(docItem.toObject(SizeStock::class.java))
                 }
 
-                showSizeStockProduct(sizeStockProductList, categoryId, itemCategory, productId)
+                showSizeStockProduct(sizeStockProductList, category, itemCategory, product)
             }
     }
 
     private fun showSizeStockProduct(
         data: ArrayList<SizeStock>,
-        categoryId: String,
-        itemCategory: String,
-        productId: String
+        category: Category,
+        itemCategory: Category,
+        product: Product
     ) {
         binding.rvSizeProdut.layoutManager = LinearLayoutManager(this)
         val data = SizeStockAdapter(data)
@@ -136,10 +140,10 @@ class EditProductActivity : AppCompatActivity() {
             override fun onItemClicked(data: SizeStock) {
 //                Toast.makeText(thisContext, data.id, Toast.LENGTH_SHORT).show()
                 dialogEditSizeStockProduct(
-                    categoryId,
+                    category,
                     itemCategory,
-                    productId,
-                    currentColorId,
+                    product,
+                    currentColor,
                     data
                 )
             }
@@ -173,7 +177,7 @@ class EditProductActivity : AppCompatActivity() {
 //        database.editItem(currentUser?.uid ?: "", item.id, nameItem, priceItem.toInt(), sizeItem, indicatorAddStock)
 //    }
 
-    private fun dialogAddColorProduct(categoryId: String, itemCategory: String, productId: String) {
+    private fun dialogAddColorProduct(category: Category, itemCategory: Category, product: Product) {
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_add_color, null)
         val dialog = Dialog(this, R.style.CustomDialog)
         dialog.apply {
@@ -184,9 +188,9 @@ class EditProductActivity : AppCompatActivity() {
         cartDialog.findViewById<Button>(R.id.btn_addColorProduct).setOnClickListener {
             database.addColorProduct(
                 currentUser?.uid ?: "",
-                categoryId,
-                itemCategory,
-                productId,
+                category.id,
+                itemCategory.id,
+                product.id,
                 cartDialog.findViewById<EditText>(R.id.et_inputColorProdut).text.toString()
             )
             dialog.cancel()
@@ -196,7 +200,7 @@ class EditProductActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun dialogAddSizeStockProduct(categoryId: String, itemCategory: String, productId: String, colorId: String) {
+    private fun dialogAddSizeStockProduct(category: Category, itemCategory: Category, product: Product, color: Category) {
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_add_size_stock, null)
         val dialog = Dialog(this, R.style.CustomDialog)
         dialog.apply {
@@ -208,16 +212,21 @@ class EditProductActivity : AppCompatActivity() {
         cartDialog.findViewById<Button>(R.id.btn_addSizeStockProduct).setOnClickListener {
             database.addSizeStockProduct(
                 currentUser?.uid ?: "",
-                categoryId,
-                itemCategory,
-                productId,
-                colorId,
+                category.id,
+                itemCategory.id,
+                product.id,
+                color.id,
                 SizeStock(
                     "",
                     "",
+                    category.name,
+                    itemCategory.name,
+                    product.name,
+                    color.name,
                     cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
                     cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
                     cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
+                    product.imageUrl,
                     0
                 )
             )
@@ -229,10 +238,10 @@ class EditProductActivity : AppCompatActivity() {
     }
 
     private fun dialogEditSizeStockProduct(
-        categoryId: String,
-        itemCategory: String,
-        productId: String,
-        colorId: String,
+        category: Category,
+        itemCategory: Category,
+        product: Product,
+        color: Category,
         sizeStock: SizeStock
     ) {
         val cartDialog =  layoutInflater.inflate(R.layout.dialog_add_size_stock, null)
@@ -250,16 +259,21 @@ class EditProductActivity : AppCompatActivity() {
         cartDialog.findViewById<Button>(R.id.btn_addSizeStockProduct).setOnClickListener {
             database.editSizeStockProduct(
                 currentUser?.uid ?: "",
-                categoryId,
-                itemCategory,
-                productId,
-                colorId,
+                category.id,
+                itemCategory.id,
+                product.id,
+                color.id,
                 SizeStock(
                     "",
                     "",
+                    category.name,
+                    itemCategory.name,
+                    product.name,
+                    color.name,
                     cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
                     cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
                     cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
+                    product.imageUrl,
                     0
                 )
             )

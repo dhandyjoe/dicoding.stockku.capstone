@@ -44,13 +44,19 @@ class Database {
         docItemCategory.set(Category(docItemCategory.id, nameItemCategory))
     }
 
+
+
+
+
+
+
     // add product
     fun addProduct(userId: String, categoryId: String, itemCategoryId: String, product: Product) {
         val doc = firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_CATEGORY).document(categoryId)
             .collection(COLLECTION_ITEM_CATEGORY).document(itemCategoryId)
             .collection(COLLECTION_PRODUCT).document()
-        doc.set(Product(doc.id, "", product.name, product.size, product.price, product.imageUrl, product.stock, 0))
+        doc.set(Product(doc.id, product.name, product.imageUrl))
     }
 
     // add color product
@@ -70,7 +76,21 @@ class Database {
             .collection(COLLECTION_PRODUCT).document(productId)
             .collection(COLLECTION_COLOR_PRODUCT).document(colorId)
             .collection(COLLECTION_SIZE_STOCK_PRODUCT).document()
-        doc.set(SizeStock(doc.id, "", sizeStock.size, sizeStock.price, sizeStock.stock))
+        doc.set(
+            SizeStock(
+                doc.id,
+                "",
+                sizeStock.nameCategory,
+                sizeStock.nameItemCategory,
+                sizeStock.nameProduct,
+                sizeStock.color,
+                sizeStock.size,
+                sizeStock.price,
+                sizeStock.stock,
+                sizeStock.imageUrl,
+                sizeStock.totalTransaction
+            )
+        )
     }
 
     fun editSizeStockProduct(userId: String, categoryId: String, itemCategoryId: String, productId: String, colorId: String, sizeStock: SizeStock) {
@@ -93,16 +113,6 @@ class Database {
 
 
 
-
-
-    // add item to firebase
-    fun addItem(userId: String, nameItem: String, sizeItem: String, priceItem: Int, imageUrl: String, stockItem: Int) {
-        val docBarang = firebaseDB.collection(COLLECTION_USERS).document(userId).collection(COLLECTION_PRODUCT).document()
-        val item = Product(docBarang.id,"",nameItem, sizeItem, priceItem, imageUrl, stockItem)
-
-        docBarang.set(item)
-    }
-
     // edit item firebase
     fun editItem(userId: String, itemId: String, nameItem: String, priceItem: Int, sizeItem: String, stockItem: Int) {
         val map = HashMap<String, Any>()
@@ -123,12 +133,12 @@ class Database {
             .delete()
     }
 
-    // update stock item after transaction
-    fun updateStockItem(userId: String, item: Product) {
-        firebaseDB.collection(COLLECTION_USERS).document(userId)
-            .collection(COLLECTION_PRODUCT).document(item.id)
-            .update("stock", item.stock - item.totalTransaction)
-    }
+//    // update stock item after transaction
+//    fun updateStockItem(userId: String, item: Product) {
+//        firebaseDB.collection(COLLECTION_USERS).document(userId)
+//            .collection(COLLECTION_PRODUCT).document(item.id)
+//            .update("stock", item.stock - item.totalTransaction)
+//    }
 
     // add transaction item to firebase
     fun saveTransactionItem(userId: String, data: Product, docTransaction: String) {
@@ -145,11 +155,24 @@ class Database {
 
 
     // add item to cart
-    fun addItemCart(userId: String, data: SizeStock, totalTransaction: Int) {
+    fun addItemCart(userId: String, sizeStock: SizeStock, totalTransaction: Int) {
         val docItemCart = firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_CART).document()
-        val item = SizeStock(data.id, docItemCart.id, data.size, data.price, data.stock, totalTransaction)
-        docItemCart.set(item)
+        docItemCart.set(
+            SizeStock(
+                sizeStock.id,
+                docItemCart.id,
+                sizeStock.nameCategory,
+                sizeStock.nameItemCategory,
+                sizeStock.nameProduct,
+                sizeStock.color,
+                sizeStock.size,
+                sizeStock.price,
+                sizeStock.stock,
+                sizeStock.imageUrl,
+                totalTransaction
+            )
+        )
     }
 
     // update totalTransaction item in cart
@@ -160,7 +183,7 @@ class Database {
     }
 
     // delete item in cart
-    fun deleteItemCart(userId: String, data: Product) {
+    fun deleteItemCart(userId: String, data: SizeStock) {
         firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_CART).document(data.idCart)
             .delete()

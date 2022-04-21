@@ -10,12 +10,13 @@ import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
 import com.dhandyjoe.stockku.model.Product
+import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
 import com.google.firebase.auth.FirebaseAuth
 
-class CartAdapter(private val data: ArrayList<Product>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CartAdapter(private val data: ArrayList<SizeStock>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val database = Database()
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
@@ -54,7 +55,7 @@ class CartAdapter(private val data: ArrayList<Product>, private val context: Con
         val model = data[position]
 
         if (holder is MyViewHolder) {
-            holder.binding.tvNameItem.text = model.name
+            holder.binding.tvNameItem.text = "${model.nameItemCategory} - ${model.nameProduct}"
             holder.binding.tvSizeItem.text = model.size
             holder.binding.tvPriceItem.text = idrFormat(model.price)
 
@@ -85,7 +86,7 @@ class CartAdapter(private val data: ArrayList<Product>, private val context: Con
 
     override fun getItemCount(): Int = data.size
 
-    private fun showPrintDialog(model: Product) {
+    private fun showPrintDialog(model: SizeStock) {
         val alert = AlertDialog.Builder(context)
         alert.setTitle("Keranjang")
         alert.setMessage("Apakah anda ingin menghapus barang ini dari keranjang?")

@@ -122,8 +122,6 @@ class ListProductTransactionAdapter(
                 .into(cartDialog.findViewById<ImageView>(R.id.iv_addcart))
         }
 
-        cartDialog.findViewById<TextView>(R.id.tv_priceItemTransaction).text = product.price.toString()
-
         getColorProduct(cartDialog, categoryId, itemCategory, product.id)
 
         dialog.show()
@@ -222,6 +220,7 @@ class ListProductTransactionAdapter(
         data.setOnItemClickCallback(object : SizeStockTransactionAdapter.OnItemClickCallback{
             override fun onItemClicked(data: SizeStock) {
 //                Toast.makeText(context, data.size, Toast.LENGTH_SHORT).show()
+                binding.findViewById<TextView>(R.id.tv_priceItemTransaction).text = data.price.toString()
                 var newItem = true
 
                 binding.findViewById<Button>(R.id.btn_cart).setOnClickListener {
@@ -242,6 +241,7 @@ class ListProductTransactionAdapter(
                                     if (data.id == doc.id) {
                                         newItem = false
                                         database.updateItemCart(currentUser?.uid ?: "", doc, statusIndicator)
+                                        Toast.makeText(context, "Berhasil menambah stok produk dari keranjang", Toast.LENGTH_SHORT).show()
                                         Log.d("update", "update")
                                         break
                                     } else {
@@ -251,8 +251,8 @@ class ListProductTransactionAdapter(
 
                                 if (newItem) {
                                     database.addItemCart(currentUser?.uid ?: "", data, statusIndicator)
+                                    Toast.makeText(context, "Berhasil memasukkan produk ke keranjang", Toast.LENGTH_SHORT).show()
                                     Log.d("update", "add")
-
                                 }
                             }
                     }
