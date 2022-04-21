@@ -6,9 +6,12 @@
         android:icon="@drawable/money_transfer"
         android:title="@string/title_transaction" />
     <item
+        android:id="@+id/navigation_retur"
+        android:icon="@drawable/retur"
+        android:title="@string/retur" />
+    <item
         android:id="@+id/navigation_category"
         android:icon="@drawable/category"
-
         android:title="@string/category" />
     <item
         android:id="@+id/navigation_profile"

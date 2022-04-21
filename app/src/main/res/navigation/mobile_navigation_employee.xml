@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_transaction" />
 
     <fragment
+        android:id="@+id/navigation_retur"
+        android:name="com.dhandyjoe.stockku.ui.employee.fragment.ReturFragment"
+        android:label="@string/retur"
+        tools:layout="@layout/fragment_retur" />
+
+    <fragment
         android:id="@+id/navigation_category"
         android:name="com.dhandyjoe.stockku.ui.employee.fragment.CategoryFragment"
         android:label= "@string/category"
