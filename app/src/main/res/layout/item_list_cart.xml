@@ -22,86 +22,20 @@
             android:id="@+id/tv_name_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_alignTop="@+id/iv_productTransaction"
             android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/iv_productTransaction"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="Converse" />
 
-        <LinearLayout
-            android:id="@+id/ll_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name_item"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_ukuran" />
-
-            <TextView
-                android:id="@+id/tv_size_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                tools:text="40"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_stock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_size"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_stock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_stok" />
-
-            <TextView
-                android:id="@+id/tv_stock_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                tools:text="0"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="8dp"
-            android:layout_below="@id/ll_stock"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingVertical="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@color/primary"
-                android:textSize="16sp"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/tv_price_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="20000"
-                android:textSize="16sp"
-                android:textStyle="bold|italic"
-                android:textColor="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_stock" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_productTransaction"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/empty_image" />
 
         <Button
             android:id="@+id/btn_addItemCart"
@@ -109,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentBottom="true"
             android:text="+ keranjang"
             android:textColor="@color/second"
             android:textSize="8sp" />

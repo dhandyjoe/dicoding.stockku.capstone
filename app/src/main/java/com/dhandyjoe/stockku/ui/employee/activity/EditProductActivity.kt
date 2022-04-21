@@ -219,14 +219,15 @@ class EditProductActivity : AppCompatActivity() {
                 SizeStock(
                     "",
                     "",
-                    category.name,
-                    itemCategory.name,
-                    product.name,
-                    color.name,
+                    Category(category.id, category.name),
+                    Category(itemCategory.id, itemCategory.name),
+                    Product(product.id, product.name, product.imageUrl),
+                    Category(color.id, color.name),
                     cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
                     cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
                     cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
                     product.imageUrl,
+                    0,
                     0
                 )
             )
@@ -264,16 +265,17 @@ class EditProductActivity : AppCompatActivity() {
                 product.id,
                 color.id,
                 SizeStock(
+                    sizeStock.id,
                     "",
-                    "",
-                    category.name,
-                    itemCategory.name,
-                    product.name,
-                    color.name,
+                    Category(category.id, category.name),
+                    Category(itemCategory.id, itemCategory.name),
+                    Product(product.id, product.name, product.imageUrl),
+                    Category(color.id, color.name),
                     cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
                     cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
                     cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
                     product.imageUrl,
+                    0,
                     0
                 )
             )

@@ -42,6 +42,7 @@
         <entry key="app/src/main/res/layout/dialog_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_category.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_choose_item_cart.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_discount.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_year.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chart.xml" value="0.25" />
@@ -57,7 +58,7 @@
         <entry key="app/src/main/res/layout/item_detail_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_detail_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_list_cart.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_list_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_category.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_color_size_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_color_transaction.xml" value="0.25" />

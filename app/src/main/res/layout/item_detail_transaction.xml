@@ -41,14 +41,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginBottom="10dp"
                 tools:layout_editor_absoluteY="15dp"
                 tools:text="Adidas Superstars Whie" />
 
             <TextView
+                android:id="@+id/tv_color_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                tools:text="Warna : Putih"/>
+
+            <TextView
+                android:id="@+id/tv_size_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Ukuran : 40"/>
+
+            <TextView
                 android:id="@+id/tv_total_detail_transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:textSize="17sp"
                 android:textColor="@color/second"
                 tools:text="x3" />

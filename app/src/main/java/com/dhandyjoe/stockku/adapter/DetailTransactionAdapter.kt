@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemDetailTransactionBinding
-import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.utils.idrFormat
 
@@ -32,7 +31,9 @@ class DetailTransactionAdapter(private val data: ArrayList<SizeStock>, private v
                     .into(holder.binding.ivImageTransaction)
             }
 
-            holder.binding.tvNameDetailTransaction.text = "${model.nameItemCategory} - ${model.nameProduct}"
+            holder.binding.tvNameDetailTransaction.text = "${model.itemCategory.name} - ${model.product.name}"
+            holder.binding.tvColorTransaction.text = "Warna : ${model.color.name}"
+            holder.binding.tvSizeTransaction.text = "Ukuran : ${model.size}"
             holder.binding.tvTotalDetailTransaction.text = "x${model.totalTransaction}"
             holder.binding.tvTotalPriceTransaction.text = "Rp. ${idrFormat(model.totalTransaction * model.price)} "
         }

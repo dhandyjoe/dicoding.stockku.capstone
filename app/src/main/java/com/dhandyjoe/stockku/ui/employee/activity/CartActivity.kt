@@ -63,19 +63,41 @@ class CartActivity : AppCompatActivity() {
             showEmptyIndicator(data.isEmpty(), data)
         }
 
-//        binding.btnSaveTransaction.setOnClickListener {
-//            saveTransaction(docs)
-//            showPrintDialog(docs)
-//
-//            for (i in docs.indices) {
-//                database.deleteItemCart(currentUser?.uid ?: "", docs[i])
-//            }
-////            finish()
-////            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
-//        }
+        binding.btnSaveTransaction.setOnClickListener {
+            saveTransaction(docs)
+
+            for (i in docs.indices) {
+                database.deleteItemCart(currentUser?.uid ?: "", docs[i])
+            }
+//            finish()
+//            Toast.makeText(this, "Transaksi berhasil disimpan.", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun showPrintDialog(data: ArrayList<SizeStock>) {
+    private fun saveTransaction(dataitem: ArrayList<SizeStock>) {
+        val patternNameTransaction = "yyyyMMddHHmmss"
+        val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
+        val nameTransaction: String = simpleDateFormat1.format(Date())
+
+        val patternDateTransaction = "dd MMMM yyyy hh:mm:ss"
+        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction, Locale("ID"))
+        val dateTransaction: String = simpleDateFormat2.format(Date())
+
+        // save transaction
+        val docTransaction = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+            .collection(COLLECTION_TRANSACTION).document()
+        val item = Transaction(docTransaction.id, "SKK$nameTransaction", convertUidToName(currentUser!!.uid), dateTransaction, totalPrice)
+        docTransaction.set(item)
+
+        for (i in dataitem.indices) {
+            database.saveTransactionItem(currentUser.uid, dataitem[i], docTransaction.id)
+            database.updateStockItem(currentUser.uid, dataitem[i])
+        }
+
+        showPrintDialog(docs, nameTransaction)
+    }
+
+    private fun showPrintDialog(data: ArrayList<SizeStock>, nameTransaction: String) {
         val alert = AlertDialog.Builder(this)
         alert.setTitle("Transaksi berhasil disimpan!")
         alert.setMessage("Apakah anda ingin mencetak struk?")
@@ -83,6 +105,7 @@ class CartActivity : AppCompatActivity() {
             val intent = Intent(this, PrintActivity::class.java)
             intent.putExtra("intent_cart", data)
             intent.putExtra("intent_totalPrice", totalPrice)
+            intent.putExtra("intent_name_transaction", nameTransaction)
             startActivity(intent)
         })
 
@@ -97,27 +120,6 @@ class CartActivity : AppCompatActivity() {
         binding.rvListItemCart.layoutManager = LinearLayoutManager(this)
         binding.rvListItemCart.adapter = adapter
     }
-
-//    private fun saveTransaction(dataitem: ArrayList<SizeStock>) {
-//        val patternNameTransaction = "yyyyMMddHHmm"
-//        val simpleDateFormat1 = SimpleDateFormat(patternNameTransaction)
-//        val nameTransaction: String = simpleDateFormat1.format(Date())
-//
-//        val patternDateTransaction = "dd MMMM yyyy hh:mm:ss"
-//        val simpleDateFormat2 = SimpleDateFormat(patternDateTransaction, Locale("ID"))
-//        val dateTransaction: String = simpleDateFormat2.format(Date())
-//
-//        // save transaction
-//        val docTransaction = firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
-//            .collection(COLLECTION_TRANSACTION).document()
-//        val item = Transaction(docTransaction.id, "transaksi-$nameTransaction", convertUidToName(currentUser!!.uid), dateTransaction, totalPrice)
-//        docTransaction.set(item)
-//
-//        for (i in dataitem.indices) {
-//            database.saveTransactionItem(currentUser?.uid ?: "", dataitem[i], docTransaction.id)
-//            database.updateStockItem(currentUser?.uid ?: "", dataitem[i])
-//        }
-//    }
 
     private fun showEmptyIndicator(isEmpty: Boolean, adapter: CartAdapter) {
         if (isEmpty) {
@@ -146,7 +148,11 @@ class CartActivity : AppCompatActivity() {
     fun liveTotal() {
         var total = 0
         for (item in docs) {
-            total += item.price * item.totalTransaction
+            if (item.discount > 0) {
+                total += resultDiscount(item.discount, item.price) * item.totalTransaction
+            } else {
+                total += item.price * item.totalTransaction
+            }
         }
 
         binding.tvLiveTotal.text = "Rp. ${idrFormat(total)}"

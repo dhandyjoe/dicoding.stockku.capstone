@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import com.dhandyjoe.stockku.databinding.ActivityPrintBinding
 import com.dhandyjoe.stockku.model.Product
+import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.model.Users
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
@@ -27,10 +28,13 @@ class PrintActivity : AppCompatActivity() {
     private var nameBranch = ""
 
     private val cart by lazy {
-        intent.getParcelableArrayListExtra<Product>("intent_cart") as ArrayList<Product>
+        intent.getParcelableArrayListExtra<SizeStock>("intent_cart") as ArrayList<SizeStock>
     }
     private val totalPrice by lazy {
         intent.getIntExtra("intent_totalPrice", 0)
+    }
+    private val nameTransaction by lazy {
+        intent.getStringExtra("intent_name_transaction")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,38 +88,42 @@ class PrintActivity : AppCompatActivity() {
                 .setText("================================")
                 .setAlignment(DefaultPrinter.ALIGNMENT_CENTER)
                 .setNewLinesAfter(3)
+                .build(),
+            TextPrintable.Builder()
+                .setText("No.nota : $nameTransaction")
+                .setNewLinesAfter(3)
                 .build()
         )
 
-//        cart.forEach {
-//            printables.add(
-//                TextPrintable.Builder()
-//                    .setText(it.name)
-//                    .setNewLinesAfter(1)
-//                    .build(),
-//            )
-//            printables.add(
-//                TextPrintable.Builder()
-//                    .setText("x${it.totalTransaction}")
-//                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
-//                    .setNewLinesAfter(1)
-//                    .build(),
-//            )
-//            printables.add(
-//                TextPrintable.Builder()
-//                    .setText("${it.price.toInt()*it.totalTransaction}")
-//                    .setAlignment(DefaultPrinter.ALIGNMENT_RIGHT)
-//                    .setNewLinesAfter(1)
-//                    .build(),
-//            )
-//            printables.add(
-//                TextPrintable.Builder()
-//                    .setText("Ukuran : ${it.size}")
-//                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
-//                    .setNewLinesAfter(2)
-//                    .build(),
-//            )
-//        }
+        cart.forEach {
+            printables.add(
+                TextPrintable.Builder()
+                    .setText("${it.itemCategory.name} - ${it.product.name}")
+                    .setNewLinesAfter(1)
+                    .build(),
+            )
+            printables.add(
+                TextPrintable.Builder()
+                    .setText("x${it.totalTransaction}")
+                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
+                    .setNewLinesAfter(1)
+                    .build(),
+            )
+            printables.add(
+                TextPrintable.Builder()
+                    .setText("${it.price.toInt()*it.totalTransaction}")
+                    .setAlignment(DefaultPrinter.ALIGNMENT_RIGHT)
+                    .setNewLinesAfter(1)
+                    .build(),
+            )
+            printables.add(
+                TextPrintable.Builder()
+                    .setText("Ukuran : ${it.size}")
+                    .setAlignment(DefaultPrinter.ALIGNMENT_LEFT)
+                    .setNewLinesAfter(2)
+                    .build(),
+            )
+        }
 
         printables.add(
             TextPrintable.Builder()

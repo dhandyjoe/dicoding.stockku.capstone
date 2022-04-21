@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -45,6 +46,15 @@ class ListProductTransactionAdapter(
 
         if (holder is MyViewHolder) {
             holder.binding.tvNameItem.text = model.name
+            if (model.imageUrl.isEmpty()) {
+                Glide.with(context)
+                    .load(R.drawable.empty_image)
+                    .into(holder.binding.ivProductTransaction)
+            } else {
+                Glide.with(context)
+                    .load(model.imageUrl)
+                    .into(holder.binding.ivProductTransaction)
+            }
 
             holder.binding.btnAddItemCart.setOnClickListener {
                 cartDialogAddCategory(model)
@@ -200,7 +210,7 @@ class ListProductTransactionAdapter(
         itemCategory: String,
         productId: String
     ) {
-        var statusIndicator = 0
+        var statusIndicator = 1
 
         binding.findViewById<RecyclerView>(R.id.rv_sizeTransaction).layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         val data = SizeStockTransactionAdapter(listSize)
@@ -220,7 +230,10 @@ class ListProductTransactionAdapter(
         data.setOnItemClickCallback(object : SizeStockTransactionAdapter.OnItemClickCallback{
             override fun onItemClicked(data: SizeStock) {
 //                Toast.makeText(context, data.size, Toast.LENGTH_SHORT).show()
-                binding.findViewById<TextView>(R.id.tv_priceItemTransaction).text = data.price.toString()
+                binding.findViewById<ConstraintLayout>(R.id.linearLayout5).visibility = View.VISIBLE
+                binding.findViewById<TextView>(R.id.tv_priceItemTransaction).text = "Rp. ${idrFormat(data.price)}"
+                binding.findViewById<TextView>(R.id.tv_stockTransaction).text = "Stok : ${data.stock}"
+
                 var newItem = true
 
                 binding.findViewById<Button>(R.id.btn_cart).setOnClickListener {

@@ -1,9 +1,16 @@
 package com.dhandyjoe.stockku.adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,6 +21,7 @@ import com.dhandyjoe.stockku.model.SizeStock
 import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
+import com.dhandyjoe.stockku.utils.resultDiscount
 import com.google.firebase.auth.FirebaseAuth
 
 class CartAdapter(private val data: ArrayList<SizeStock>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -55,8 +63,13 @@ class CartAdapter(private val data: ArrayList<SizeStock>, private val context: C
         val model = data[position]
 
         if (holder is MyViewHolder) {
-            holder.binding.tvNameItem.text = "${model.nameItemCategory} - ${model.nameProduct}"
+            if (model.discount > 0) {
+                showResultDiscount(model, holder.binding)
+            }
+
+            holder.binding.tvNameItem.text = "${model.itemCategory.name} - ${model.product.name}"
             holder.binding.tvSizeItem.text = model.size
+            holder.binding.tvStockItem.text = model.color.name
             holder.binding.tvPriceItem.text = idrFormat(model.price)
 
             if (model.imageUrl.isEmpty()) {
@@ -70,16 +83,21 @@ class CartAdapter(private val data: ArrayList<SizeStock>, private val context: C
             }
 
             (context as CartActivity).liveTotal()
+
             holder.binding.ivMinusCart.setOnClickListener {
                 if (model.totalTransaction > 1) {
-//                    database.updateItemCart(currentUser?.uid ?: "", model, -1)
+                    database.updateItemCart(currentUser?.uid ?: "", model, -1)
                 } else {
                     showPrintDialog(model)
                 }
             }
             holder.binding.tvIndicatorItem.text = model.totalTransaction.toString()
             holder.binding.ivPlusCart.setOnClickListener {
-//                database.updateItemCart(currentUser?.uid ?: "", model, 1)
+                database.updateItemCart(currentUser?.uid ?: "", model, 1)
+            }
+
+            holder.binding.btnDiscount.setOnClickListener {
+                dialogDiscount(model, holder.binding)
             }
         }
     }
@@ -98,6 +116,43 @@ class CartAdapter(private val data: ArrayList<SizeStock>, private val context: C
 
         }
         alert.show()
+    }
+
+    private fun dialogDiscount(sizeStock: SizeStock, binding: ItemDetailCartBinding) {
+        val cartDialog =  LayoutInflater.from(context).inflate(R.layout.dialog_discount, null)
+        val dialog = Dialog(context, R.style.CustomDialog)
+        dialog.apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(cartDialog)
+            setTitle("Tambah diskon")
+        }
+
+        cartDialog.findViewById<Button>(R.id.btn_addDiscount).setOnClickListener {
+            val discount = cartDialog.findViewById<EditText>(R.id.et_inputDiscount).text.toString()
+
+            database.addDiscount(
+                currentUser?.uid ?: "",
+                sizeStock.idCart,
+                discount.toInt()
+            )
+
+            (context as CartActivity).liveTotal()
+
+            Toast.makeText(context, "Berhasil menambahkan diskon", Toast.LENGTH_SHORT).show()
+            dialog.cancel()
+        }
+
+        dialog.show()
+    }
+
+    private fun showResultDiscount(sizeStock: SizeStock, binding: ItemDetailCartBinding) {
+        binding.tvPriceItem.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+
+        binding.tvMonitorDiscount.visibility = View.VISIBLE
+        binding.tvMonitorDiscount.text = "x ${sizeStock.discount}%"
+
+        binding.tvResultDiscount.visibility = View.VISIBLE
+        binding.tvResultDiscount.text = idrFormat(resultDiscount(sizeStock.discount, sizeStock.price))
     }
 }
 
