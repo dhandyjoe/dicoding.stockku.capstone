@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class SizeStock(
     val id: String = "",
     val idCart: String = "",
+    val idRetur: String = "",
     val category: Category = Category("", ""),
     val itemCategory: Category = Category("", ""),
     val product: Product = Product("", "", ""),

@@ -80,6 +80,7 @@ class Database {
             SizeStock(
                 doc.id,
                 "",
+                "",
                 sizeStock.category,
                 sizeStock.itemCategory,
                 sizeStock.product,
@@ -161,6 +162,7 @@ class Database {
             SizeStock(
                 sizeStock.id,
                 docItemCart.id,
+                sizeStock.idRetur,
                 Category(sizeStock.category.id, sizeStock.category.name),
                 Category(sizeStock.itemCategory.id, sizeStock.itemCategory.name),
                 Product(sizeStock.product.id, sizeStock.product.name, sizeStock.product.imageUrl),
@@ -188,4 +190,79 @@ class Database {
             .collection(COLLECTION_CART).document(data.idCart)
             .delete()
     }
+
+
+
+
+    // add return product
+    fun addReturnProduct(currentUser: String, sizeStock: SizeStock) {
+        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser)
+            .collection(COLLECTION_RETURN_PRODUCT).document()
+        doc.set(SizeStock(
+            sizeStock.id,
+            sizeStock.idCart,
+            doc.id,
+            sizeStock.category,
+            sizeStock.itemCategory,
+            sizeStock.product,
+            sizeStock.color,
+            sizeStock.size,
+            sizeStock.price,
+            sizeStock.stock,
+            sizeStock.imageUrl,
+            sizeStock.totalTransaction,
+            sizeStock.discount
+        ))
+    }
+
+    // add change product
+    fun addChangeProduct(currentUser: String, sizeStock: SizeStock) {
+        val doc = firebaseDB.collection(COLLECTION_USERS).document(currentUser)
+            .collection(COLLECTION_CHANGE_PRODUCT).document()
+        doc.set(SizeStock(
+            sizeStock.id,
+            sizeStock.idCart,
+            doc.id,
+            sizeStock.category,
+            sizeStock.itemCategory,
+            sizeStock.product,
+            sizeStock.color,
+            sizeStock.size,
+            sizeStock.price,
+            sizeStock.stock,
+            sizeStock.imageUrl,
+            sizeStock.totalTransaction,
+            sizeStock.discount
+        ))
+    }
+
+    // update totalTransaction item in retur
+    fun updateReturnDetailRetur(userId: String, data: SizeStock, statusIndicator: Int) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_RETURN_PRODUCT).document(data.idRetur)
+            .update("totalTransaction", data.totalTransaction + statusIndicator)
+    }
+
+    // delete item in cart
+    fun deleteReturnDetailRetur(userId: String, data: SizeStock) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_RETURN_PRODUCT).document(data.idRetur)
+            .delete()
+    }
+
+
+    // update totalTransaction item in retur
+    fun updateChangeDetailRetur(userId: String, data: SizeStock, statusIndicator: Int) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CHANGE_PRODUCT).document(data.idRetur)
+            .update("totalTransaction", data.totalTransaction + statusIndicator)
+    }
+
+    // delete item in cart
+    fun deleteChangeDetailRetur(userId: String, data: SizeStock) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CHANGE_PRODUCT).document(data.idRetur)
+            .delete()
+    }
+
 }

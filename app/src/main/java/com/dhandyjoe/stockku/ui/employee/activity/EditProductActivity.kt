@@ -219,6 +219,7 @@ class EditProductActivity : AppCompatActivity() {
                 SizeStock(
                     "",
                     "",
+                    "",
                     Category(category.id, category.name),
                     Category(itemCategory.id, itemCategory.name),
                     Product(product.id, product.name, product.imageUrl),
@@ -266,6 +267,7 @@ class EditProductActivity : AppCompatActivity() {
                 color.id,
                 SizeStock(
                     sizeStock.id,
+                    "",
                     "",
                     Category(category.id, category.name),
                     Category(itemCategory.id, itemCategory.name),
