@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_add_item_transaction.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_detail_cart.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/activity_detail_retur.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_detail_retur.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/activity_detail_transaction_owner.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/activity_edit_item.xml" value="0.22" />
@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/dialog_category.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_choose_item_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_discount.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/dialog_search_change_product.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_search_invoice.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_search_return_product.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/dialog_year.xml" value="0.19583333333333333" />
@@ -68,6 +69,7 @@
         <entry key="app/src/main/res/layout/item_list_category.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_color_size_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_color_transaction.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_list_product_change.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/item_list_stock.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_transaction1.xml" value="0.20260416666666667" />

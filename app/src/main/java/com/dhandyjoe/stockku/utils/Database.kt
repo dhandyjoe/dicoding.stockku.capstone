@@ -231,7 +231,7 @@ class Database {
             sizeStock.price,
             sizeStock.stock,
             sizeStock.imageUrl,
-            sizeStock.totalTransaction,
+            1,
             sizeStock.discount
         ))
     }

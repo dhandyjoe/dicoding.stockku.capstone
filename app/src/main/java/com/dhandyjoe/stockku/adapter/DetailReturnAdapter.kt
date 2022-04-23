@@ -18,6 +18,8 @@ class DetailReturnAdapter(private val data: ArrayList<SizeStock>, private val co
 
     class MyViewHolder(val binding: ItemAddReturBinding): RecyclerView.ViewHolder(binding.root)
 
+    fun isEmpty(): Boolean = data.isEmpty()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(ItemAddReturBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
