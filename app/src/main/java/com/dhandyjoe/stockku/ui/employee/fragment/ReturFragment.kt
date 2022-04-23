@@ -12,6 +12,7 @@ import com.dhandyjoe.stockku.adapter.ReturAdapter
 import com.dhandyjoe.stockku.databinding.FragmentReturBinding
 import com.dhandyjoe.stockku.model.Retur
 import com.dhandyjoe.stockku.ui.employee.activity.AddItemReturActivity
+import com.dhandyjoe.stockku.ui.employee.activity.DetailReturActivity
 import com.dhandyjoe.stockku.utils.COLLECTION_RETUR
 import com.dhandyjoe.stockku.utils.COLLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
@@ -83,7 +84,9 @@ class ReturFragment : Fragment() {
 
         adapter.setOnItemClickCallback(object : ReturAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Retur) {
-
+                val intent = Intent(requireContext(), DetailReturActivity::class.java)
+                intent.putExtra(DetailReturActivity.EXTRA_RETUR, data)
+                startActivity(intent)
             }
         })
     }
