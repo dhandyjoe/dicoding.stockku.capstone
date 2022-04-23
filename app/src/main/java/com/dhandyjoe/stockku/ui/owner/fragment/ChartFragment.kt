@@ -65,7 +65,7 @@ class ChartFragment : Fragment() {
 
         binding.btnDialogYear.setOnClickListener {
             dialogYear(transaction)
-//            Toast.makeText(thisContext, "${subStringYear(transaction[0].name)}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(thisContext, "${transaction.size}", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
@@ -160,7 +160,7 @@ class ChartFragment : Fragment() {
         btnPickYear.setOnClickListener {
             dataFromYear.clear()
             data.forEach {
-                if (subStringDate(it.name, 10, 14) == year.toString()) {
+                if (subStringDate(it.name, 3, 7) == year.toString()) {
                     dataFromYear.add(it)
                 }
             }

@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_transaction_owner" />
 
     <fragment
+        android:id="@+id/navigation_retur_owner"
+        android:name="com.dhandyjoe.stockku.ui.owner.fragment.ReturOwnerFragment"
+        android:label="Daftar Retur"
+        tools:layout="@layout/fragment_retur_owner" />
+
+    <fragment
         android:id="@+id/navigation_chart_owner"
         android:name="com.dhandyjoe.stockku.ui.owner.fragment.ChartFragment"
         android:label="Grafik Penjualan"

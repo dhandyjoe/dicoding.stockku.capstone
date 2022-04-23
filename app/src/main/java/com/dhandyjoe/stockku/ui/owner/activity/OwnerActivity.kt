@@ -20,7 +20,7 @@ class OwnerActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_controller_owner)
 
         val appBarConfiguration = AppBarConfiguration.Builder(
-            R.id.navigation_transaction_owner, R.id.navigation_chart_owner, R.id.navigation_profile
+            R.id.navigation_transaction_owner, R.id.navigation_retur_owner, R.id.navigation_chart_owner, R.id.navigation_profile
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)

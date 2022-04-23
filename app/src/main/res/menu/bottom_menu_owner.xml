@@ -7,6 +7,11 @@
         android:title="Laporan" />
 
     <item
+        android:id="@+id/navigation_retur_owner"
+        android:icon="@drawable/retur"
+        android:title="Daftar Retur" />
+
+    <item
         android:id="@+id/navigation_chart_owner"
         android:icon="@drawable/chart"
         android:title="Grafik Penjualan" />

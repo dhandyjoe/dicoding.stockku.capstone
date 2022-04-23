@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">stockku</string>
-    <string name="title_transaction">Daftar transaksi</string>
+    <string name="title_transaction">Transaksi</string>
     <string name="category">Kategori</string>
     <string name="title_profile">Profile</string>
     <string name="imageitem">imageItem</string>
