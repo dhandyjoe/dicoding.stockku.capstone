@@ -1,9 +1,6 @@
 package com.dhandyjoe.stockku.utils
 
-import com.dhandyjoe.stockku.model.Category
-import com.dhandyjoe.stockku.model.ColorProduct
-import com.dhandyjoe.stockku.model.Product
-import com.dhandyjoe.stockku.model.SizeStock
+import com.dhandyjoe.stockku.model.*
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -192,6 +189,24 @@ class Database {
     }
 
 
+    // add transaction item to firebase
+    fun saveReturItemReturn(userId: String, data: SizeStock, returId: String) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_RETUR).document(returId)
+            .collection(COLLECTION_RETURN_PRODUCT).document()
+            .set(data)
+    }
+
+    // add transaction item to firebase
+    fun saveReturItemChange(userId: String, data: SizeStock, returId: String) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_RETUR).document(returId)
+            .collection(COLLECTION_CHANGE_PRODUCT).document()
+            .set(data)
+    }
+
+
+
 
 
     // add return product
@@ -236,10 +251,27 @@ class Database {
         ))
     }
 
+    // update discount cchange
+    fun addDiscountChange(userId: String, idRetur: String, discount: Int) {
+        val map = HashMap<String, Any>()
+        map["discount"] = discount
+
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CHANGE_PRODUCT).document(idRetur)
+            .update(map)
+    }
+
     // update totalTransaction item in retur
     fun updateReturnDetailRetur(userId: String, data: SizeStock, statusIndicator: Int) {
         firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_RETURN_PRODUCT).document(data.idRetur)
+            .update("totalTransaction", data.totalTransaction + statusIndicator)
+    }
+
+    // update totalTransaction item in retur
+    fun updateChangeDetailRetur(userId: String, data: SizeStock, statusIndicator: Int) {
+        firebaseDB.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_CHANGE_PRODUCT).document(data.idRetur)
             .update("totalTransaction", data.totalTransaction + statusIndicator)
     }
 
@@ -248,14 +280,6 @@ class Database {
         firebaseDB.collection(COLLECTION_USERS).document(userId)
             .collection(COLLECTION_RETURN_PRODUCT).document(data.idRetur)
             .delete()
-    }
-
-
-    // update totalTransaction item in retur
-    fun updateChangeDetailRetur(userId: String, data: SizeStock, statusIndicator: Int) {
-        firebaseDB.collection(COLLECTION_USERS).document(userId)
-            .collection(COLLECTION_CHANGE_PRODUCT).document(data.idRetur)
-            .update("totalTransaction", data.totalTransaction + statusIndicator)
     }
 
     // delete item in cart

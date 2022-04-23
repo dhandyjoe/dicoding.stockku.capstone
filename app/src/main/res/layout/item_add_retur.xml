@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="13dp">
+    android:padding="10dp">
 
     <View
         android:id="@+id/view2"
@@ -19,7 +19,7 @@
         android:id="@+id/tv_nameProductRetur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2"
@@ -29,7 +29,7 @@
         android:id="@+id/tv_colorRetur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nameProductRetur"
         tools:text="Warna : Putih" />
@@ -38,7 +38,7 @@
         android:id="@+id/tv_sizeRetur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintStart_toStartOf="@+id/tv_nameProductRetur"
         app:layout_constraintTop_toBottomOf="@+id/tv_colorRetur"
         tools:text="Ukuran : 40" />
@@ -78,5 +78,41 @@
             android:src="@drawable/ic_plus" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_totalPriceReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/primary"
+        android:textSize="17sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tv_sizeRetur"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sizeRetur"
+        tools:text="Rp. 300.000" />
+
+    <TextView
+        android:id="@+id/tv_monitorDiscountReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_totalPriceReturn"
+        app:layout_constraintStart_toEndOf="@+id/tv_totalPriceReturn"
+        tools:text="x 20%" />
+
+    <TextView
+        android:id="@+id/tv_resultDiscountReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/tv_totalPriceReturn"
+        app:layout_constraintTop_toBottomOf="@+id/tv_totalPriceReturn"
+        tools:text="Rp. 10000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

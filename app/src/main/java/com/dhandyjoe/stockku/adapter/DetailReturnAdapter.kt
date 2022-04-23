@@ -2,14 +2,18 @@ package com.dhandyjoe.stockku.adapter
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.dhandyjoe.stockku.databinding.ItemAddReturBinding
 import com.dhandyjoe.stockku.model.SizeStock
-import com.dhandyjoe.stockku.ui.employee.activity.DetailReturActivity
+import com.dhandyjoe.stockku.ui.employee.activity.AddItemReturActivity
 import com.dhandyjoe.stockku.utils.Database
+import com.dhandyjoe.stockku.utils.idrFormat
+import com.dhandyjoe.stockku.utils.resultDiscount
 import com.google.firebase.auth.FirebaseAuth
 
 class DetailReturnAdapter(private val data: ArrayList<SizeStock>, private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,6 +36,11 @@ class DetailReturnAdapter(private val data: ArrayList<SizeStock>, private val co
             holder.binding.tvColorRetur.text = model.color.name
             holder.binding.tvSizeRetur.text = model.size
             holder.binding.tvIndicatorItem.text = model.totalTransaction.toString()
+            holder.binding.tvTotalPriceReturn.text = idrFormat(model.price)
+
+            if (model.discount > 0) {
+                showResultDiscount(model, holder.binding)
+            }
 
             holder.binding.ivMinusCart.setOnClickListener {
                 if (model.totalTransaction > 1) {
@@ -41,7 +50,7 @@ class DetailReturnAdapter(private val data: ArrayList<SizeStock>, private val co
                 }
             }
 
-            (context as DetailReturActivity).liveTotalReturn()
+            (context as AddItemReturActivity).liveTotalReturn()
 
             holder.binding.tvIndicatorItem.text = model.totalTransaction.toString()
             holder.binding.ivPlusCart.setOnClickListener {
@@ -55,6 +64,16 @@ class DetailReturnAdapter(private val data: ArrayList<SizeStock>, private val co
     }
 
     override fun getItemCount(): Int = data.size
+
+    private fun showResultDiscount(sizeStock: SizeStock, binding: ItemAddReturBinding) {
+        binding.tvTotalPriceReturn.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+
+        binding.tvMonitorDiscountReturn.visibility = View.VISIBLE
+        binding.tvMonitorDiscountReturn.text = "x ${sizeStock.discount}%"
+
+        binding.tvResultDiscountReturn.visibility = View.VISIBLE
+        binding.tvResultDiscountReturn.text = idrFormat(resultDiscount(sizeStock.discount, sizeStock.price))
+    }
 
     private fun showPrintDialog(model: SizeStock) {
         val alert = AlertDialog.Builder(context)

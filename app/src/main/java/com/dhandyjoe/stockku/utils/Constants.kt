@@ -11,7 +11,6 @@ const val COLLECTION_SIZE_STOCK_PRODUCT = "sizeStockProduct"
 
 // Retur
 const val COLLECTION_RETUR = "retur"
-const val COLLECTION_ITEM_RETUR = "itemRetur"
 
 const val COLLECTION_RETURN_PRODUCT = "returnProduct"
 const val COLLECTION_CHANGE_PRODUCT = "changeProduct"

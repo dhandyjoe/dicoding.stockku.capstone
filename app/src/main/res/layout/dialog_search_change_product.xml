@@ -64,10 +64,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <SearchView
-            android:id="@+id/sv_item"
+            android:id="@+id/sv_itemChange"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/btn_searchProductChange"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/til_itemCategoryChange" />
@@ -78,9 +79,10 @@
             android:layout_height="wrap_content"
             android:text="Cari"
             android:textColor="@color/primary"
-            app:layout_constraintBottom_toBottomOf="@+id/sv_item"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/sv_itemChange"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-            app:layout_constraintTop_toTopOf="@+id/sv_item" />
+            app:layout_constraintTop_toTopOf="@+id/sv_itemChange" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_changeProduct"
@@ -90,7 +92,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sv_item"
+            app:layout_constraintTop_toBottomOf="@+id/sv_itemChange"
             tools:listitem="@layout/item_list_cart" />
 
         <LinearLayout
@@ -178,43 +180,20 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ll_btnAddChangeProduct"
+        <Button
+            android:id="@+id/btn_addChangeProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_button_app"
+            android:text="Pilih produk"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
             android:visibility="gone"
-            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_sizeChange">
-
-            <TextView
-                android:id="@+id/tv_item_addcart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:text="Jumlah"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btn_addChangeProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/custom_button_app"
-                android:text="Pilih produk"
-                android:textColor="@color/primary"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/ll_sizeChange" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

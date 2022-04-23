@@ -98,10 +98,15 @@ class AddItemTransactionActivity : AppCompatActivity() {
         val getValueItemCategory = findViewById<AutoCompleteTextView>(R.id.act_listItemCategoryTransaction)
         getValueItemCategory.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_1, listNameItemCategory))
 
+        getValueItemCategory.doOnTextChanged { text, start, before, count ->
+            findViewById<SearchView>(R.id.sv_item).visibility = View.VISIBLE
+            findViewById<Button>(R.id.btn_searchProductTransaction).visibility = View.VISIBLE
 
-        binding.button.setOnClickListener {
-            getProductList(categoryId, convertNameToId(getValueItemCategory.text.toString(), itemCategoryList))
+            binding.btnSearchProductTransaction.setOnClickListener {
+                getProductList(categoryId, convertNameToId(text.toString(), itemCategoryList))
+            }
         }
+
     }
 
     private fun getProductList(categoryId: String, itemCategoryId: String) {

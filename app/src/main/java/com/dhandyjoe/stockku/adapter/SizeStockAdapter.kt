@@ -1,8 +1,11 @@
 package com.dhandyjoe.stockku.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemListCategoryBinding
 import com.dhandyjoe.stockku.databinding.ItemListTransactionBinding
 import com.dhandyjoe.stockku.databinding.ItemSizeStockBinding
@@ -23,6 +26,10 @@ class SizeStockAdapter(private val data: ArrayList<SizeStock>): RecyclerView.Ada
 
         if (holder is MyViewHolder) {
             holder.binding.tvSizeProduct.text = model.size
+            if (model.stock <= 5) {
+                holder.binding.tvSizeProduct.setTextColor(Color.parseColor("#DC3E3E"))
+            }
+
             holder.binding.etPrice.setText(model.price.toString())
             holder.binding.etStock.setText(model.stock.toString())
             holder.itemView.setOnClickListener {

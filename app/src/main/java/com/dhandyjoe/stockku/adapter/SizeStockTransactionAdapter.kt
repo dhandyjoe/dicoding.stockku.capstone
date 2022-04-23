@@ -28,6 +28,9 @@ class SizeStockTransactionAdapter(private val data: ArrayList<SizeStock>): Recyc
 
         if (holder is MyViewHolder) {
             holder.binding.tvMonitor.text = model.size
+            if (model.stock <= 5) {
+                holder.binding.tvMonitor.setTextColor(Color.parseColor("#DC3E3E"))
+            }
 
             holder.itemView.setOnClickListener {
                 rowIndex = position

@@ -16,10 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dhandyjoe.stockku.R
 import com.dhandyjoe.stockku.databinding.ItemDetailCartBinding
-import com.dhandyjoe.stockku.model.Product
 import com.dhandyjoe.stockku.model.SizeStock
-import com.dhandyjoe.stockku.ui.employee.activity.CartActivity
-import com.dhandyjoe.stockku.ui.employee.activity.DetailReturActivity
+import com.dhandyjoe.stockku.ui.employee.activity.AddItemReturActivity
 import com.dhandyjoe.stockku.utils.Database
 import com.dhandyjoe.stockku.utils.idrFormat
 import com.dhandyjoe.stockku.utils.resultDiscount
@@ -60,7 +58,7 @@ class DetailChangeAdapter(private val data: ArrayList<SizeStock>, private val co
                     .into(holder.binding.ivCart)
             }
 
-            (context as DetailReturActivity).liveTotalChange()
+            (context as AddItemReturActivity).liveTotalChange()
             context.liveTotalReturn()
 
             holder.binding.ivMinusCart.setOnClickListener {
@@ -76,7 +74,7 @@ class DetailChangeAdapter(private val data: ArrayList<SizeStock>, private val co
             }
 
             holder.binding.btnDiscount.setOnClickListener {
-                dialogDiscount(model, holder.binding)
+                dialogDiscountChange(model, holder.binding)
             }
         }
     }
@@ -89,8 +87,9 @@ class DetailChangeAdapter(private val data: ArrayList<SizeStock>, private val co
         alert.setMessage("Apakah anda ingin menghapus barang ini dari retur?")
         alert.setPositiveButton("Iya", DialogInterface.OnClickListener { dialog, which ->
             database.deleteChangeDetailRetur(currentUser?.uid ?: "", model)
-            (context as DetailReturActivity).totalPriceChange -= model.price
-            (context as DetailReturActivity).liveTotalReturn()
+            (context as AddItemReturActivity).totalPriceChange = 0
+            (context as AddItemReturActivity).liveTotalReturn()
+
         })
 
         alert.setNegativeButton("Tidak") { dialog, which ->
@@ -99,7 +98,7 @@ class DetailChangeAdapter(private val data: ArrayList<SizeStock>, private val co
         alert.show()
     }
 
-    private fun dialogDiscount(sizeStock: SizeStock, binding: ItemDetailCartBinding) {
+    private fun dialogDiscountChange(sizeStock: SizeStock, binding: ItemDetailCartBinding) {
         val cartDialog =  LayoutInflater.from(context).inflate(R.layout.dialog_discount, null)
         val dialog = Dialog(context, R.style.CustomDialog)
         dialog.apply {
@@ -111,13 +110,11 @@ class DetailChangeAdapter(private val data: ArrayList<SizeStock>, private val co
         cartDialog.findViewById<Button>(R.id.btn_addDiscount).setOnClickListener {
             val discount = cartDialog.findViewById<EditText>(R.id.et_inputDiscount).text.toString()
 
-            database.addDiscount(
+            database.addDiscountChange(
                 currentUser?.uid ?: "",
-                sizeStock.idCart,
+                sizeStock.idRetur,
                 discount.toInt()
             )
-
-//            (context as CartActivity).liveTotal()
 
             Toast.makeText(context, "Berhasil menambahkan diskon", Toast.LENGTH_SHORT).show()
             dialog.cancel()

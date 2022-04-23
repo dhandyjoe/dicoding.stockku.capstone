@@ -27,6 +27,9 @@
             android:name=".ui.employee.activity.DetailReturActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.employee.activity.AddItemReturActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.employee.activity.ProductActivity"
             android:exported="false" />
         <activity
