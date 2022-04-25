@@ -1,7 +1,9 @@
 package com.dhandyjoe.stockku.ui.employee.fragment
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -60,14 +62,6 @@ class CategoryFragment : Fragment() {
             cartDialogCategory()
         }
 
-        binding.ivDeleteCategory.setOnClickListener {
-            database.deleteCategory(currentUser?.uid ?: "", currentIdCategory)
-            database.deleteItemCategory(currentUser?.uid ?: "", currentIdCategory)
-            binding.tvMonitorCategory.text = ""
-            binding.ivDeleteCategory.visibility = View.GONE
-            binding.tvStatusCategory.visibility = View.VISIBLE
-        }
-
         return binding.root
     }
 
@@ -79,6 +73,12 @@ class CategoryFragment : Fragment() {
 
                 for(docItem in snapshot!!) {
                     categoryList.add(docItem.toObject(Category::class.java))
+                }
+
+                if (categoryList.size > 0) {
+                    binding.tvStatusCategory.setText("Pilih kategori")
+                } else {
+                    binding.tvStatusCategory.setText("Buat kategori")
                 }
 
                 showListCategory(categoryList)
@@ -115,7 +115,24 @@ class CategoryFragment : Fragment() {
                 binding.tvMonitorCategory.text = data.name
                 getItemCategory(data)
                 currentIdCategory = data.id
-//                Toast.makeText(thisContext, data.id, Toast.LENGTH_SHORT).show()
+
+                binding.ivDeleteCategory.setOnClickListener {
+                    val alert = AlertDialog.Builder(requireContext())
+                    alert.setTitle("Hapus kategori")
+                    alert.setMessage("Apakah anda yakin ingin menghapus kategori ${data.name}?")
+                    alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                        database.deleteCategory(currentUser?.uid ?: "", currentIdCategory)
+                        database.deleteItemCategory(currentUser?.uid ?: "", currentIdCategory)
+                        binding.tvMonitorCategory.text = ""
+                        binding.ivDeleteCategory.visibility = View.GONE
+                        binding.tvStatusCategory.visibility = View.VISIBLE
+                    })
+
+                    alert.setNegativeButton("No") { dialog, which ->
+
+                    }
+                    alert.show()
+                }
             }
         })
     }
@@ -163,13 +180,16 @@ class CategoryFragment : Fragment() {
             setTitle("Tambah kategori")
         }
         cartDialog.findViewById<Button>(R.id.btn_addCategory).setOnClickListener {
-            database.addCategory(
-                currentUser?.uid ?: "",
-                cartDialog.findViewById<EditText>(R.id.et_inputCategory).text.toString()
-            )
+            if (cartDialog.findViewById<EditText>(R.id.et_inputCategory).text.isNullOrEmpty()) {
+                cartDialog.findViewById<EditText>(R.id.et_inputCategory).error = "Masukan nama kategori terlebih dahulu!"
+            } else {
+                database.addCategory(
+                    currentUser?.uid ?: "",
+                    cartDialog.findViewById<EditText>(R.id.et_inputCategory).text.toString()
+                )
 
-            dialog.cancel()
-//            categoryList.clear()
+                dialog.cancel()
+            }
         }
 
         dialog.show()
@@ -204,16 +224,19 @@ class CategoryFragment : Fragment() {
         getValue.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listNameCategory))
 
         cartDialog.findViewById<Button>(R.id.btn_addCategory).setOnClickListener {
-            database.addItemCategory(
-                currentUser?.uid ?: "",
-                convertNameToId(getValue.text.toString(), categoryList),
-                cartDialog.findViewById<EditText>(R.id.et_inputItemCategory).text.toString()
-            )
+            if (cartDialog.findViewById<AutoCompleteTextView>(R.id.act_listCategory).text.isNullOrEmpty()) {
+                cartDialog.findViewById<AutoCompleteTextView>(R.id.act_listCategory).error = "Pilih kategori terlebih dahulu"
+            } else if (cartDialog.findViewById<EditText>(R.id.et_inputItemCategory).text.isNullOrEmpty()) {
+                cartDialog.findViewById<EditText>(R.id.et_inputItemCategory).error = "Masukan nama item kategori terlebih dahulu!"
+            } else {
+                database.addItemCategory(
+                    currentUser?.uid ?: "",
+                    convertNameToId(getValue.text.toString(), categoryList),
+                    cartDialog.findViewById<EditText>(R.id.et_inputItemCategory).text.toString()
+                )
 
-            dialog.cancel()
-
-//            itemCategoryList.clear()
-//            Toast.makeText(requireContext(), currentItemCategory, Toast.LENGTH_SHORT).show()
+                dialog.cancel()
+            }
         }
 
         dialog.show()

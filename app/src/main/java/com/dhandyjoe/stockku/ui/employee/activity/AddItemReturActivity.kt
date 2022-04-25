@@ -48,7 +48,7 @@ class AddItemReturActivity : AppCompatActivity() {
         binding = ActivityAddItemReturBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbarMain.title = "Detail retur"
+        binding.toolbarMain.title = "Buat retur"
         setSupportActionBar(binding.toolbarMain)
 
         getReturnProductList()

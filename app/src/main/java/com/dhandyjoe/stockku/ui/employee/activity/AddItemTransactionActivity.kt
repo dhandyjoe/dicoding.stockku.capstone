@@ -34,7 +34,7 @@ class AddItemTransactionActivity : AppCompatActivity() {
         binding = ActivityAddItemTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbarMain.title = "Pilih item"
+        binding.toolbarMain.title = "Buat transaksi"
         setSupportActionBar(binding.toolbarMain)
 
 

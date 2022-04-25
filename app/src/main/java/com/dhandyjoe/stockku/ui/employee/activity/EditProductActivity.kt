@@ -80,6 +80,12 @@ class EditProductActivity : AppCompatActivity() {
                     colorProductList.add(docItem.toObject(Category::class.java))
                 }
 
+                if (colorProductList.size > 0) {
+                    binding.tvChooseColor.setText("Pilih warna")
+                } else {
+                    binding.tvChooseColor.setText("Tambah warna")
+                }
+
                 showColorProduct(colorProductList, category, itemCategory, product)
             }
 
@@ -186,15 +192,18 @@ class EditProductActivity : AppCompatActivity() {
             setTitle("Tambah warna produk")
         }
         cartDialog.findViewById<Button>(R.id.btn_addColorProduct).setOnClickListener {
-            database.addColorProduct(
-                currentUser?.uid ?: "",
-                category.id,
-                itemCategory.id,
-                product.id,
-                cartDialog.findViewById<EditText>(R.id.et_inputColorProdut).text.toString()
-            )
-            dialog.cancel()
-//            categoryList.clear()
+            if (cartDialog.findViewById<EditText>(R.id.et_inputColorProdut).text.isNullOrEmpty()) {
+                cartDialog.findViewById<EditText>(R.id.et_inputColorProdut).error = "Masukan warna terlebih dahulu!"
+            } else {
+                database.addColorProduct(
+                    currentUser?.uid ?: "",
+                    category.id,
+                    itemCategory.id,
+                    product.id,
+                    cartDialog.findViewById<EditText>(R.id.et_inputColorProdut).text.toString()
+                )
+                dialog.cancel()
+            }
         }
 
         dialog.show()
@@ -210,30 +219,37 @@ class EditProductActivity : AppCompatActivity() {
         }
 
         cartDialog.findViewById<Button>(R.id.btn_addSizeStockProduct).setOnClickListener {
-            database.addSizeStockProduct(
-                currentUser?.uid ?: "",
-                category.id,
-                itemCategory.id,
-                product.id,
-                color.id,
-                SizeStock(
-                    "",
-                    "",
-                    "",
-                    Category(category.id, category.name),
-                    Category(itemCategory.id, itemCategory.name),
-                    Product(product.id, product.name, product.imageUrl),
-                    Category(color.id, color.name),
-                    cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
-                    cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
-                    cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
-                    product.imageUrl,
-                    0,
-                    0
+            if (cartDialog.findViewById<EditText>(R.id.et_inputSize).text.isNullOrEmpty()) {
+                cartDialog.findViewById<EditText>(R.id.et_inputSize).error = "Masukan ukuran terlebih dahulu!"
+            } else if (cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.isNullOrEmpty()) {
+                cartDialog.findViewById<EditText>(R.id.et_inputPrice).error = "Masukan harga terlebih dahulu!"
+            } else if (cartDialog.findViewById<EditText>(R.id.et_inputStock).text.isNullOrEmpty()) {
+                cartDialog.findViewById<EditText>(R.id.et_inputStock).error = "Masukan stock terlebih dahulu!"
+            } else {
+                database.addSizeStockProduct(
+                    currentUser?.uid ?: "",
+                    category.id,
+                    itemCategory.id,
+                    product.id,
+                    color.id,
+                    SizeStock(
+                        "",
+                        "",
+                        "",
+                        Category(category.id, category.name),
+                        Category(itemCategory.id, itemCategory.name),
+                        Product(product.id, product.name, product.imageUrl),
+                        Category(color.id, color.name),
+                        cartDialog.findViewById<EditText>(R.id.et_inputSize).text.toString(),
+                        cartDialog.findViewById<EditText>(R.id.et_inputPrice).text.toString().toInt(),
+                        cartDialog.findViewById<EditText>(R.id.et_inputStock).text.toString().toInt(),
+                        product.imageUrl,
+                        0,
+                        0
+                    )
                 )
-            )
-            dialog.cancel()
-//            categoryList.clear()
+                dialog.cancel()
+            }
         }
 
         dialog.show()

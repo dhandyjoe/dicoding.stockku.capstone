@@ -52,21 +52,21 @@ class AddItemActivity : AppCompatActivity() {
         val itemCategory = intent.getParcelableExtra<Category>(EXTRA_ITEM_asd)
 
         binding.btnAddProduct.setOnClickListener {
-            val product = Product(
-                "",
-                binding.etNameProduct.text.toString(),
-                imageUrl,
-            )
+            if (binding.etNameProduct.text.isNullOrEmpty()) {
+                binding.etNameProduct.error = "Masukan nama produk terlebih dahulu"
+            } else {
+                val product = Product("", binding.etNameProduct.text.toString(), imageUrl)
 
-            database.addProduct(
-                currentUser?.uid ?: "",
-                category?.id ?: "",
-                itemCategory!!.id,
-                product
-            )
+                database.addProduct(
+                    currentUser?.uid ?: "",
+                    category?.id ?: "",
+                    itemCategory!!.id,
+                    product
+                )
 
-            Toast.makeText(this, "Berhasil menyimpan produk", Toast.LENGTH_SHORT).show()
-            onBackPressed()
+                Toast.makeText(this, "Berhasil menyimpan produk", Toast.LENGTH_SHORT).show()
+                onBackPressed()
+            }
         }
 
         binding.ivAddImageItem.setOnClickListener {
