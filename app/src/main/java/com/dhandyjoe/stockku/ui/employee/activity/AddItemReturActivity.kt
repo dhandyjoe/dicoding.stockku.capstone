@@ -62,6 +62,7 @@ class AddItemReturActivity : AppCompatActivity() {
             dialogSearchChangeProduct()
         }
 
+
         binding.btnSaveRetur.setOnClickListener {
 //            Toast.makeText(this, note, Toast.LENGTH_SHORT).show()
             if (docsReturn.size > 0 && docsChange.size > 0) {
@@ -137,6 +138,27 @@ class AddItemReturActivity : AppCompatActivity() {
         }
         for (i in dataChange.indices) {
             database.deleteChangeDetailRetur(currentUser?.uid ?: "", dataChange[i])
+        }
+
+        // Update stock after retur
+        for (i in dataReturn.indices) {
+            firebaseDB.collection(COLLECTION_USERS).document(currentUser?.uid ?: "")
+                .collection(COLLECTION_CATEGORY).document(dataReturn[i].category.id)
+                .collection(COLLECTION_ITEM_CATEGORY).document(dataReturn[i].itemCategory.id)
+                .collection(COLLECTION_PRODUCT).document(dataReturn[i].product.id)
+                .collection(COLLECTION_COLOR_PRODUCT).document(dataReturn[i].color.id)
+                .collection(COLLECTION_SIZE_STOCK_PRODUCT).document(dataReturn[i].id)
+                .get()
+                .addOnSuccessListener {
+                    if (it != null) {
+                        val data = it.toObject(SizeStock::class.java)!!
+
+                        database.updateStockAfterReturReturn(currentUser?.uid ?: "", data.stock, dataReturn[i])
+                    }
+                }
+        }
+        for (i in dataChange.indices) {
+            database.updateStockAfterReturChange(currentUser?.uid ?: "", dataChange[i])
         }
 
         onBackPressed()
